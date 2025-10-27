@@ -1,0 +1,17 @@
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\frontend.csproj.AssemblyReference.cache
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\App.g.cs
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\frontend_MarkupCompile.cache
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\bin\Debug\frontend.exe.config
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\bin\Debug\frontend.exe
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\bin\Debug\frontend.pdb
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\MainWindow.g.cs
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\frontend_MarkupCompile.lref
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\MainWindow.baml
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\frontend.g.resources
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\frontend.Properties.Resources.resources
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\frontend.csproj.GenerateResource.cache
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\frontend.csproj.CoreCompileInputs.cache
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\frontend.exe
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\frontend.pdb
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\LoginPage.g.cs
+C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\obj\Debug\LoginPage.baml

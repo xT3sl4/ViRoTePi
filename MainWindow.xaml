@@ -1,0 +1,183 @@
+﻿<Window x:Class="frontend.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:frontend"
+        mc:Ignorable="d"
+        Title="InPost Desktop" Height="700" Width="1200">
+    <Grid>
+        <Grid ShowGridLines="True">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
+                <Grid Height="128">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                   
+                    <Image Source="C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\Images\inpost_logo.png" Height="100" Grid.Column="0" HorizontalAlignment="Left"></Image>
+                    <Button BorderBrush="Transparent"  Background="Transparent" Height="64" Grid.Column="2" HorizontalAlignment="right" x:Name="User" Click="User_Click"> 
+                    <Image Source="C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\Images\user.png" Height="64" Grid.Column="2" HorizontalAlignment="right" ></Image>
+                    </Button>
+                </Grid>
+
+            </StackPanel>
+            <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Content="Moje paczki" Grid.Row="0" Width="350px" FontSize="18" Background="Transparent">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="Transparent" CornerRadius="15">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#fad02a"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Content="Wyślij paczke" Grid.Row="1" FontSize="18" Background="Transparent" Width="350px">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="Transparent" CornerRadius="15">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#fad02a"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Content="Mapa puktów" Grid.Row="2" Width="350px" FontSize="18" Background="Transparent">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="Transparent" CornerRadius="15">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#fad02a"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Content="Pomoc" Grid.Row="3" Width="350px" FontSize="18" Background="Transparent">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="Transparent" CornerRadius="15">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#fad02a"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Content="Ostatni odbiorcy" Grid.Row="4" Width="350px" FontSize="18" Background="Transparent" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="Transparent" CornerRadius="15">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#fad02a"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1"  Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Twoje Paczki" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Margin="15,10,0,0"></TextBlock>
+                <Border Width="770"
+                    Height="450"
+                    Background="White"
+                    CornerRadius="6"
+                    Grid.Row="0"
+                    Grid.RowSpan="5"
+                        >
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="15"
+                              Direction ="-90" 
+                              RenderingBias ="Quality" 
+                              ShadowDepth ="2" 
+                              Color ="Black" />
+                    </Border.Effect>
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width ="*"></ColumnDefinition>
+                            
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="1"> 
+                            <TextBlock Text="Numer paczki" FontWeight="Bold" FontSize="16" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="1">
+                            <TextBlock Text="Status" FontWeight="Bold" FontSize="16" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="1" >
+                                <TextBlock Text="Nazwa paczkomatu" FontWeight="Bold" FontSize="16" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                         </Border>
+                        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="1">
+                            <ListView>
+                                <ListViewItem>
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="1234567890" Grid.Column="0"/>
+                                        <TextBlock Text="W drodze" Grid.Column="1"/>
+                                        <TextBlock Text="KRA01A" Grid.Column="2"/>
+                                    </Grid>
+                                </ListViewItem>
+                            </ListView>
+                        </Border>
+
+                    </Grid>
+                </Border>
+
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
