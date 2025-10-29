@@ -74,6 +74,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+	  <Page Include="SendPackage.xaml">
+		  <SubType>Designer</SubType>
+		  <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Compile Include="SendPackage.xaml.cs">
+		  <DependentUpon>SendPackage.xaml</DependentUpon>
+	  </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -102,4 +109,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+	<ItemGroup>
+		<Resource Include="Images/inpost_logo.png" />
+		<Resource Include="Images/user.png" />
+		<Resource Include="Images/menu.png" />
+	</ItemGroup>
+
 </Project>

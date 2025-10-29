@@ -26,9 +26,9 @@
                         <ColumnDefinition Width="200"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                    
-                    <Image Source="C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\Images\inpost_logo.png" Height="100" Grid.Column="0" HorizontalAlignment="Left"></Image>
+                    <Image Source="Images/inpost_logo.png" Height="100" Grid.Column="0" HorizontalAlignment="Left"></Image>
                     <Button BorderBrush="Transparent"  Background="Transparent" Height="64" Grid.Column="2" HorizontalAlignment="right" x:Name="User" Click="User_Click"> 
-                    <Image Source="C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\Images\user.png" Height="64" Grid.Column="2" HorizontalAlignment="right" ></Image>
+                    <Image Source="Images/user.png" Height="64" Grid.Column="2" HorizontalAlignment="right" ></Image>
                     </Button>
                 </Grid>
 
@@ -41,7 +41,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Content="Moje paczki" Grid.Row="0" Width="350px" FontSize="18" Background="Transparent">
+                <Button Content="Moje paczki" Grid.Row="0" Width="350px" FontSize="18" Background="Transparent" Click="Packages_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="border" Background="Transparent" CornerRadius="15">
@@ -55,7 +55,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Content="Wyślij paczke" Grid.Row="1" FontSize="18" Background="Transparent" Width="350px">
+                <Button Content="Wyślij paczke" Grid.Row="1" FontSize="18" Background="Transparent" Width="350px" x:Name="SendPackage" Click="SendPackage_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="border" Background="Transparent" CornerRadius="15">
@@ -112,71 +112,69 @@
                     </Button.Template>
                 </Button>
             </Grid>
-            <Grid Grid.Row="1"  Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Twoje Paczki" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Margin="15,10,0,0"></TextBlock>
-                <Border Width="770"
-                    Height="450"
-                    Background="White"
-                    CornerRadius="6"
-                    Grid.Row="0"
-                    Grid.RowSpan="5"
-                        >
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="15"
-                              Direction ="-90" 
-                              RenderingBias ="Quality" 
-                              ShadowDepth ="2" 
-                              Color ="Black" />
-                    </Border.Effect>
-                    <Grid ShowGridLines="False">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="5*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width ="*"></ColumnDefinition>
-                            
-                        </Grid.ColumnDefinitions>
-                        <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="1"> 
-                            <TextBlock Text="Numer paczki" FontWeight="Bold" FontSize="16" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </Border>
-                        <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="1">
-                            <TextBlock Text="Status" FontWeight="Bold" FontSize="16" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </Border>
-                        <Border Grid.Row="0" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="1" >
-                                <TextBlock Text="Nazwa paczkomatu" FontWeight="Bold" FontSize="16" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                         </Border>
-                        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="1">
-                            <ListView>
-                                <ListViewItem>
-                                    <Grid >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Text="1234567890" Grid.Column="0"/>
-                                        <TextBlock Text="W drodze" Grid.Column="1"/>
-                                        <TextBlock Text="KRA01A" Grid.Column="2"/>
-                                    </Grid>
-                                </ListViewItem>
-                            </ListView>
-                        </Border>
-
-                    </Grid>
-                </Border>
 
 
-            </Grid>
+			<Grid Grid.Row="1" Grid.Column="1">
+				<!-- Panel z paczkami -->
+				<StackPanel x:Name="PackagesPanel" Visibility="Visible">
+					<TextBlock Text="Twoje Paczki" FontSize="24" FontWeight="Bold" Margin="15,10,0,0"/>
+					<Border Width="770" Height="450" Background="White" CornerRadius="6">
+						<Border.Effect>
+							<DropShadowEffect BlurRadius="15" Direction ="-90" RenderingBias ="Quality" ShadowDepth ="2" Color ="Black" />
+						</Border.Effect>
+						<Grid ShowGridLines="False">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1">
+								<TextBlock Text="Numer paczki" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							</Border>
+							<Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1">
+								<TextBlock Text="Status" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							</Border>
+							<Border Grid.Row="0" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1">
+								<TextBlock Text="Nazwa paczkomatu" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							</Border>
+							<Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1">
+								<TextBlock Text="1234567890" Padding="8"/>
+							</Border>
+							<Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1">
+								<TextBlock Text="W drodze" Padding="8"/>
+							</Border>
+							<Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1">
+								<TextBlock Text="KRA01A" Padding="8"/>
+							</Border>
+							<Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1">
+								<TextBlock Text="9876543210" Padding="8"/>
+							</Border>
+							<Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1">
+								<TextBlock Text="Doręczona" Padding="8"/>
+							</Border>
+							<Border Grid.Row="2" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1">
+								<TextBlock Text="WAW12B" Padding="8"/>
+							</Border>
+						</Grid>
+					</Border>
+				</StackPanel>
+
+				<!-- Panel z formularzem nadania paczki -->
+				<StackPanel x:Name="SendPackagePanel" Visibility="Collapsed">
+					<TextBlock Text="Wyślij paczkę" FontSize="24" FontWeight="Bold" Margin="15,10,0,0"/>
+					<TextBox x:Name="PackageNumberTextBox" Margin="0,10,0,0" />
+					<TextBox x:Name="LockerNameTextBox" Margin="0,10,0,0" />
+					<Button Content="Wyślij" Margin="0,10,0,0"/>
+				</StackPanel>
+			</Grid>
+			
+			
+			
         </Grid>
 
     </Grid>

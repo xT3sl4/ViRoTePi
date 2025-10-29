@@ -31,6 +31,19 @@ namespace frontend
             userWindow.Show();
             this.Close();
         }
+        public void SendPackage_Click(object sender, RoutedEventArgs e)
+        {
+            PackagesPanel.Visibility = Visibility.Collapsed;
+            SendPackagePanel.Visibility = Visibility.Visible;
+        }
+
+        public void Packages_Click(object sender, RoutedEventArgs e)
+        {
+            PackagesPanel.Visibility = Visibility.Visible;
+            SendPackagePanel.Visibility = Visibility.Collapsed;
+        }
+
+
         public class Paczka
         {
             public string NumerPaczki { get; set; }

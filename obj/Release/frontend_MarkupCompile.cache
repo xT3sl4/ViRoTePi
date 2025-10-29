@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\pitsz\source\repos\ViRoTePi\obj\Debug\
+C:\Users\pitsz\source\repos\ViRoTePi\obj\Release\
 frontend
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\pitsz\source\repos\ViRoTePi\App.xaml
 3-2119257571
 
@@ -16,5 +16,5 @@ C:\Users\pitsz\source\repos\ViRoTePi\App.xaml
 13-1310406943
 LoginPage.xaml;MainWindow.xaml;SendPackage.xaml;
 
-False
+True
 
