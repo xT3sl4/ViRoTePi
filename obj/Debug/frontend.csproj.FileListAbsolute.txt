@@ -32,5 +32,3 @@ C:\Users\pitsz\Source\Repos\ViRoTePi\obj\Debug\frontend.csproj.GenerateResource.
 C:\Users\pitsz\Source\Repos\ViRoTePi\obj\Debug\frontend.csproj.CoreCompileInputs.cache
 C:\Users\pitsz\Source\Repos\ViRoTePi\obj\Debug\frontend.exe
 C:\Users\pitsz\Source\Repos\ViRoTePi\obj\Debug\frontend.pdb
-C:\Users\pitsz\Source\Repos\ViRoTePi\obj\Debug\SendPackage.g.cs
-C:\Users\pitsz\Source\Repos\ViRoTePi\obj\Debug\SendPackage.baml

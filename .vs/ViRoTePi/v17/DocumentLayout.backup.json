@@ -52,7 +52,7 @@
               "RelativeDocumentMoniker": ".gitignore",
               "ToolTip": "C:\\Users\\pitsz\\source\\repos\\ViRoTePi\\.gitignore",
               "RelativeToolTip": ".gitignore",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-10-29T21:14:27.296Z",
               "EditorCaption": ""
@@ -67,8 +67,7 @@
               "RelativeToolTip": "frontend.csproj",
               "ViewState": "AgIAABgAAAAAAAAAAAAAAEYAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-29T17:26:29.003Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T17:26:29.003Z"
             },
             {
               "$type": "Document",
@@ -80,8 +79,7 @@
               "RelativeToolTip": "LoginPage.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-29T17:12:35.539Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T17:12:35.539Z"
             },
             {
               "$type": "Document",
@@ -93,8 +91,7 @@
               "RelativeToolTip": "SendPackage.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T17:10:38.137Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T17:10:38.137Z"
             },
             {
               "$type": "Document",
@@ -106,8 +103,7 @@
               "RelativeToolTip": "MainWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T12:23:46.247Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T12:23:46.247Z"
             },
             {
               "$type": "Document",
@@ -119,8 +115,7 @@
               "RelativeToolTip": "LoginPage.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T17:06:11.439Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T17:06:11.439Z"
             },
             {
               "$type": "Document",
@@ -132,8 +127,7 @@
               "RelativeToolTip": "SendPackage.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-29T17:10:23.269Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T17:10:23.269Z"
             },
             {
               "$type": "Document",
@@ -145,8 +139,7 @@
               "RelativeToolTip": "MainWindow.xaml",
               "ViewState": "AgIAABsAAAAAAAAAAAAgwCsAAACFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-29T11:43:07.663Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T11:43:07.663Z"
             }
           ]
         }

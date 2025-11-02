@@ -43,6 +43,17 @@ namespace frontend
             SendPackagePanel.Visibility = Visibility.Collapsed;
         }
 
+        private void CourierButton_Click(object sender, RoutedEventArgs e)
+        {
+            RecipientPanel.Visibility = Visibility.Visible;
+            LockerPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void LockerButton_Click(object sender, RoutedEventArgs e)
+        {
+            RecipientPanel.Visibility = Visibility.Collapsed;
+            LockerPanel.Visibility = Visibility.Visible;
+        }
 
         public class Paczka
         {
