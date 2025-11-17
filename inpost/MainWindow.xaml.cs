@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using inpost.classes;
+
 
 namespace inpost
 {
@@ -23,6 +25,18 @@ namespace inpost
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Database _database_menager = new Database();
+            IEnumerable<User> users = _database_menager.GetUsers();
+
+            foreach (var user in users)
+            {
+                MessageBox.Show($"ID: {user.Name}");
+            }
+
         }
     }
 }
