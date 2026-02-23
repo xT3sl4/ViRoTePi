@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using paczkomat.Models;
-using System.Xml.Serialization;
 
 namespace paczkomat.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class PacksController : ControllerBase
     {
         private readonly inpostContext _context;
@@ -16,90 +15,107 @@ namespace paczkomat.Controllers
             _context = context;
         }
 
-        // GET: api/packs?delivered=false&klientId=5&sortBy=date&sortDesc=true
+        // GET: api/packs?size=M&delivered=false&sort=date_desc
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] bool? delivered, [FromQuery] int? klientId,
-                                             [FromQuery] string? sortBy, [FromQuery] bool sortDesc = false)
+        public async Task<ActionResult<IEnumerable<pack>>> GetPacks(
+            [FromQuery] string? size,
+            [FromQuery] bool? delivered,
+            [FromQuery] int? klientId,
+            [FromQuery] string? sort)
         {
-            IQueryable<pack> query = _context.packs.Include(p => p.klient)
-                                                   .Include(p => p.boxes);
+            var query = _context.packs
+                .Include(p => p.klient)
+                .AsQueryable();
 
+            // Filtrowanie
+            if (!string.IsNullOrEmpty(size))
+                query = query.Where(p => p.size == size);
             if (delivered.HasValue)
                 query = query.Where(p => p.delivered == delivered);
-
             if (klientId.HasValue)
                 query = query.Where(p => p.klient_id == klientId);
 
-            // sortowanie
-            if (!string.IsNullOrEmpty(sortBy))
+            // Sortowanie
+            query = sort switch
             {
-                query = (sortBy.ToLower(), sortDesc) switch
-                {
-                    ("date", false) => query.OrderBy(p => p.date),
-                    ("date", true) => query.OrderByDescending(p => p.date),
-                    ("to_when", false) => query.OrderBy(p => p.to_when),
-                    ("to_when", true) => query.OrderByDescending(p => p.to_when),
-                    ("size", false) => query.OrderBy(p => p.size),
-                    ("size", true) => query.OrderByDescending(p => p.size),
-                    _ => query
-                };
-            }
+                "date_asc" => query.OrderBy(p => p.date),
+                "date_desc" => query.OrderByDescending(p => p.date),
+                "size_asc" => query.OrderBy(p => p.size),
+                "size_desc" => query.OrderByDescending(p => p.size),
+                _ => query.OrderBy(p => p.pack_id)
+            };
 
-            var packs = await query.ToListAsync();
-            return Ok(packs);
+            return await query.ToListAsync();
         }
 
         // GET: api/packs/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<ActionResult<pack>> GetPack(int id)
         {
-            var pack = await _context.packs.Include(p => p.klient)
-                                           .Include(p => p.boxes)
-                                           .FirstOrDefaultAsync(p => p.pack_id == id);
-            if (pack == null) return NotFound();
-            return Ok(pack);
+            var pack = await _context.packs
+                .Include(p => p.klient)
+                .FirstOrDefaultAsync(p => p.pack_id == id);
+
+            if (pack == null)
+                return NotFound();
+
+            return pack;
         }
 
         // POST: api/packs
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] pack pack)
+        public async Task<ActionResult<pack>> CreatePack([FromBody] pack newPack)
         {
-            if (pack == null) return BadRequest();
+            if (newPack.klient_id.HasValue)
+            {
+                var klient = await _context.klients.FindAsync(newPack.klient_id);
+                if (klient == null)
+                    return BadRequest($"Klient o id {newPack.klient_id} nie istnieje.");
 
-            _context.packs.Add(pack);
+                newPack.klient = klient;
+            }
+
+            _context.packs.Add(newPack);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = pack.pack_id }, pack);
+
+            return CreatedAtAction(nameof(GetPack), new { id = newPack.pack_id }, newPack);
         }
 
         // PUT: api/packs/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] pack pack)
+        public async Task<IActionResult> UpdatePack(int id, [FromBody] pack updatedPack)
         {
-            if (id != pack.pack_id) return BadRequest("ID nie pasuje do paczki.");
+            if (id != updatedPack.pack_id)
+                return BadRequest("ID paczki nie zgadza się z ID w URL");
 
-            var existingPack = await _context.packs.FindAsync(id);
-            if (existingPack == null) return NotFound();
+            _context.Entry(updatedPack).State = EntityState.Modified;
 
-            // aktualizacja pól
-            existingPack.size = pack.size;
-            existingPack.klient_id = pack.klient_id;
-            existingPack.delivered = pack.delivered;
-            existingPack.date = pack.date;
-            existingPack.to_when = pack.to_when;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.packs.Any(p => p.pack_id == id))
+                    return NotFound();
+                else
+                    throw;
+            }
 
-            await _context.SaveChangesAsync();
             return NoContent();
         }
 
         // DELETE: api/packs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeletePack(int id)
         {
             var pack = await _context.packs.FindAsync(id);
-            if (pack == null) return NotFound();
+            if (pack == null)
+                return NotFound();
 
             _context.packs.Remove(pack);
             await _context.SaveChangesAsync();
+
             return NoContent();
         }
     }
