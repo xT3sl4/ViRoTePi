@@ -26,7 +26,6 @@ namespace frontend
 
                 MapWebView.CoreWebView2.WebMessageReceived += OnMapMessageReceived;
 
-                // Tutaj wklej ścieżkę do swojego pliku mapy lub użyj NavigateToString
                 string htmlPath = @"C:\Users\jachu\Music\Assets\map.html"; // Upewnij się, że ścieżka jest poprawna
                 if (File.Exists(htmlPath))
                     MapWebView.CoreWebView2.Navigate(new Uri(htmlPath).AbsoluteUri);
