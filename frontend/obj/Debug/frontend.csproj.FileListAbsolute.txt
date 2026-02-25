@@ -109,7 +109,6 @@ C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\frontend\obj\Debug\frontend
 C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\frontend\obj\Debug\frontend.pdb
 C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\frontend\obj\Debug\CourierPanel.g.cs
 C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\frontend\obj\Debug\CourierPanel.baml
-C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\frontend\bin\Debug\client_secret.json
 C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\frontend\bin\Debug\Google.Apis.Auth.dll
 C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\frontend\bin\Debug\Google.Apis.Core.dll
 C:\Users\jachu\OneDrive\Desktop\07230506139\frontend\frontend\bin\Debug\Google.Apis.dll
