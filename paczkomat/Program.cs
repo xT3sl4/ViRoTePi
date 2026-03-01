@@ -3,6 +3,7 @@ using paczkomat.Models;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<inpostContext>();
 
 // Add services to the container.
 

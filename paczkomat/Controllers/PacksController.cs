@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using paczkomat.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace paczkomat.Controllers
 {
@@ -15,19 +18,32 @@ namespace paczkomat.Controllers
             _context = context;
         }
 
-        // GET: api/packs?size=M&delivered=false&sort=date_desc
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<pack>>> GetPacks(
-            [FromQuery] string? size,
-            [FromQuery] bool? delivered,
-            [FromQuery] int? klientId,
-            [FromQuery] string? sort)
+        public class PackDto
         {
-            var query = _context.packs
-                .Include(p => p.klient)
-                .AsQueryable();
+            public int PackId { get; set; }
+            public string? Size { get; set; }
+            public string Delivered { get; set; } = "";
+            public string? Date { get; set; }
+            public string KlientName { get; set; } = "";
+        }
 
-            // Filtrowanie
+        [HttpGet]
+        public async Task<IEnumerable<PackDto>> GetPacks(
+    [FromQuery] string? size,
+    [FromQuery] bool? delivered,
+    [FromQuery] int? klientId,
+    [FromQuery] int? userId,
+    [FromQuery] string? sort)
+        {
+            if (!klientId.HasValue && userId.HasValue)
+            {
+                var klient = await _context.klients.FirstOrDefaultAsync(k => k.user_id == userId.Value);
+                if (klient != null)
+                    klientId = klient.klient_id;
+            }
+
+            var query = _context.packs.AsQueryable();
+
             if (!string.IsNullOrEmpty(size))
                 query = query.Where(p => p.size == size);
             if (delivered.HasValue)
@@ -35,7 +51,6 @@ namespace paczkomat.Controllers
             if (klientId.HasValue)
                 query = query.Where(p => p.klient_id == klientId);
 
-            // Sortowanie
             query = sort switch
             {
                 "date_asc" => query.OrderBy(p => p.date),
@@ -45,30 +60,72 @@ namespace paczkomat.Controllers
                 _ => query.OrderBy(p => p.pack_id)
             };
 
-            return await query.ToListAsync();
+            var list = await query.ToListAsync();
+
+            var packDtos = new List<PackDto>();
+
+            foreach (var pack in list)
+            {
+                var paczkomatAddress = await (from pd in _context.paczkomat_data
+                                              join pac in _context.paczkomats on pd.paczkomat_id equals pac.paczkomat_id
+                                              join b in _context.boxs on pd.box_id equals b.box_id
+                                              where b.pack_id == pack.pack_id
+                                              select pac.address)
+                                             .FirstOrDefaultAsync();
+
+                packDtos.Add(new PackDto
+                {
+                    PackId = pack.pack_id,
+                    Size = pack.size,
+                    Delivered = pack.delivered.HasValue
+                        ? (pack.delivered.Value ? "Doręczona" : "W drodze")
+                        : "Nieznany",
+                    Date = pack.date?.ToString("yyyy-MM-dd"),
+                    KlientName = paczkomatAddress ?? "Brak paczkomatu"
+                });
+            }
+
+            return packDtos;
         }
 
-        // GET: api/packs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<pack>> GetPack(int id)
+        public async Task<ActionResult<PackDto>> GetPack(int id)
         {
             var pack = await _context.packs
-                .Include(p => p.klient)
+                .Include(p => p.boxes)
                 .FirstOrDefaultAsync(p => p.pack_id == id);
 
             if (pack == null)
                 return NotFound();
 
-            return pack;
+            var paczkomatAddress = await (from pd in _context.paczkomat_data
+                                          join pac in _context.paczkomats on pd.paczkomat_id equals pac.paczkomat_id
+                                          join b in _context.boxs on pd.box_id equals b.box_id
+                                          where b.pack_id == id
+                                          select pac.address)
+                                         .FirstOrDefaultAsync();
+
+            return new PackDto
+            {
+                PackId = pack.pack_id,
+                Size = pack.size,
+                Delivered = pack.delivered.HasValue
+                    ? (pack.delivered.Value ? "Doręczona" : "W drodze")
+                    : "Nieznany",
+                Date = pack.date?.ToString("yyyy-MM-dd"),
+                KlientName = paczkomatAddress ?? "Brak paczkomatu"
+            };
         }
 
-        // POST: api/packs
         [HttpPost]
         public async Task<ActionResult<pack>> CreatePack([FromBody] pack newPack)
         {
             if (newPack.klient_id.HasValue)
             {
-                var klient = await _context.klients.FindAsync(newPack.klient_id);
+                var klient = await _context.klients
+                    .Include(k => k.user)
+                    .FirstOrDefaultAsync(k => k.klient_id == newPack.klient_id);
+
                 if (klient == null)
                     return BadRequest($"Klient o id {newPack.klient_id} nie istnieje.");
 
@@ -81,7 +138,6 @@ namespace paczkomat.Controllers
             return CreatedAtAction(nameof(GetPack), new { id = newPack.pack_id }, newPack);
         }
 
-        // PUT: api/packs/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePack(int id, [FromBody] pack updatedPack)
         {
@@ -105,7 +161,6 @@ namespace paczkomat.Controllers
             return NoContent();
         }
 
-        // DELETE: api/packs/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePack(int id)
         {
@@ -115,7 +170,7 @@ namespace paczkomat.Controllers
 
             _context.packs.Remove(pack);
             await _context.SaveChangesAsync();
-
+            
             return NoContent();
         }
     }

@@ -15,7 +15,6 @@ namespace paczkomat.Controllers
             _context = context;
         }
 
-        // GET: api/clients
         [HttpGet]
         public async Task<ActionResult<IEnumerable<klient>>> GetClients()
         {
@@ -25,7 +24,6 @@ namespace paczkomat.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/clients/5
         [HttpGet("{id}")]
         public async Task<ActionResult<klient>> GetClient(int id)
         {
@@ -40,7 +38,6 @@ namespace paczkomat.Controllers
             return klient;
         }
 
-        // POST: api/clients
         [HttpPost]
         public async Task<ActionResult<klient>> CreateClient([FromBody] klient newClient)
         {
@@ -50,7 +47,6 @@ namespace paczkomat.Controllers
             return CreatedAtAction(nameof(GetClient), new { id = newClient.klient_id }, newClient);
         }
 
-        // PUT: api/clients/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateClient(int id, [FromBody] klient updatedClient)
         {
@@ -74,7 +70,6 @@ namespace paczkomat.Controllers
             return NoContent();
         }
 
-        // DELETE: api/clients/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteClient(int id)
         {
