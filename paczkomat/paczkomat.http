@@ -1,0 +1,6 @@
+@paczkomat_HostAddress = http://localhost:5165
+
+GET {{paczkomat_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
