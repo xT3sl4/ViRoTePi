@@ -157,7 +157,6 @@ namespace frontend
                     return;
                 }
 
-                // Pobierz email z Google
                 string email = await GetGoogleEmailAsync(credential.Token.AccessToken);
                 if (string.IsNullOrEmpty(email))
                 {
@@ -165,7 +164,7 @@ namespace frontend
                     return;
                 }
 
-                // Sprawdź email w swoim API
+  
                 var result = await LoginGoogleApiAsync(email);
 
 
@@ -195,7 +194,6 @@ namespace frontend
             }
         }
 
-        // Pobiera email z Google UserInfo API
         private async Task<string> GetGoogleEmailAsync(string accessToken)
         {
             using (var http = new HttpClient())
@@ -251,6 +249,14 @@ namespace frontend
         {
             public string Email { get; set; }
             public string Name { get; set; }
+        }
+
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
+
+            this.Close();
         }
     }
 }

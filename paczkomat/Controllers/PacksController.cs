@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using paczkomat.Models;
 using System.Collections.Generic;
@@ -227,33 +227,48 @@ namespace paczkomat.Controllers
 
             return NoContent();
         }
+
         [HttpPost("send")]
         public async Task<IActionResult> SendPack([FromBody] SendPackRequest request)
         {
-            var wszystkie = await _context.paczkomats.Select(p => p.paczkomat_name).ToListAsync();
-
             if (request.Size != "S" && request.Size != "M" && request.Size != "L")
-                return BadRequest("Nieprawidłowy rozmiar paczki. Wybierz S, M lub L.");
+                return BadRequest(new { message = "Nieprawidłowy rozmiar paczki. Wybierz S, M lub L." });
 
-            var receiverUser = await _context.users 
-                .FirstOrDefaultAsync(u => u.email == request.ReceiverEmail
-                                       && u.phone_number.ToString() == request.ReceiverPhone);
+            if (string.IsNullOrWhiteSpace(request.ReceiverPhone))
+                return BadRequest(new { message = "Numer telefonu odbiorcy jest wymagany." });
+
+            int receiverPhone;
+            if (!int.TryParse(request.ReceiverPhone.Replace(" ", ""), out receiverPhone))
+                return BadRequest(new { message = "Nieprawidłowy format numeru telefonu odbiorcy." });
+
+            var receiverUser = await _context.users
+                .FirstOrDefaultAsync(u => u.phone_number == receiverPhone);
 
             if (receiverUser == null)
-                return BadRequest("Nie znaleziono użytkownika o podanym emailu i numerze telefonu.");
+                return BadRequest(new { message = "Nie znaleziono użytkownika o podanym numerze telefonu odbiorcy." });
 
             var receiverKlient = await _context.klients
                 .FirstOrDefaultAsync(k => k.user_id == receiverUser.id);
 
             if (receiverKlient == null)
-                return BadRequest("Odbiorca nie jest klientem.");
+                return BadRequest(new { message = "Odbiorca nie jest klientem." });
+
+            if (string.IsNullOrWhiteSpace(request.PaczkomatName))
+                return BadRequest(new { message = "Nazwa paczkomatu jest wymagana." });
 
             var paczkomat = await _context.paczkomats
                 .FirstOrDefaultAsync(p => p.paczkomat_name == request.PaczkomatName);
 
             if (paczkomat == null)
-                return BadRequest("Wybrany paczkomat nie istnieje.");
+                return BadRequest(new { message = "Wybrany paczkomat nie istnieje." });
+            if (string.IsNullOrWhiteSpace(request.PaczkomatName))
+                return BadRequest(new { message = "Email jest wymagany" });
 
+            var email = await _context.users
+                .FirstOrDefaultAsync(u => u.email == request.ReceiverEmail);
+
+            if (email == null)
+                return BadRequest(new { message = "Taki email nie istnieje." });
             var newPack = new pack
             {
                 size = request.Size,
@@ -265,7 +280,6 @@ namespace paczkomat.Controllers
 
             _context.packs.Add(newPack);
             await _context.SaveChangesAsync();
-
             var newBox = new box
             {
                 pack_id = newPack.pack_id,
@@ -279,7 +293,15 @@ namespace paczkomat.Controllers
                 "INSERT INTO paczkomat_data (paczkomat_id, box_id) VALUES ({0}, {1})",
                 paczkomat.paczkomat_id, newBox.box_id);
 
-            return Ok(new { message = "Paczka została wysłana.", packId = newPack.pack_id });
+            // TODO: Opcjonalnie - przypisz paczkę do kuriera
+            // TODO: Opcjonalnie - wyślij email/SMS do odbiorcy
+
+            return Ok(new { 
+                message = "Paczka została wysłana pomyślnie.",
+                packId = newPack.pack_id,
+                receiverName = $"{receiverUser.name} {receiverUser.surname}",
+                locker = paczkomat.paczkomat_name
+            });
         }
     }
 }

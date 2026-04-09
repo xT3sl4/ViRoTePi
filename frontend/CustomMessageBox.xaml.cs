@@ -26,7 +26,7 @@ namespace frontend
 
                 MapWebView.CoreWebView2.WebMessageReceived += OnMapMessageReceived;
 
-                string htmlPath = @"C:\Users\jachu\Music\Assets\map.html";
+                string htmlPath = @"C:\Users\wjane\Desktop\szkola\projekt\map.html";
                 if (File.Exists(htmlPath))
                     MapWebView.CoreWebView2.Navigate(new Uri(htmlPath).AbsoluteUri);
             }

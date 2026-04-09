@@ -1,45 +1,53 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\",
+  "WorkspaceRootPath": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\jachu\\onedrive\\desktop\\07230506139\\frontend\\frontend\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\courierpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:courierpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\models\\loginmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\models\\loginmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:models\\loginmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\frontend\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\RegisterWindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RegisterWindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\RegisterWindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:RegisterWindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\courierpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:courierpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\courierpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\courierpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:courierpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\custommessagebox.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\custommessagebox.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:custommessagebox.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -49,99 +57,133 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 240,
-          "SelectedChildIndex": 2,
+          "DockedWidth": 1211,
+          "SelectedChildIndex": 8,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
+              "Title": "RegisterWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\RegisterWindow.xaml",
+              "RelativeDocumentMoniker": "RegisterWindow.xaml",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\RegisterWindow.xaml",
+              "RelativeToolTip": "RegisterWindow.xaml",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAEwAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-09T17:15:57.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RegisterWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\RegisterWindow.xaml.cs",
+              "RelativeDocumentMoniker": "RegisterWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\RegisterWindow.xaml.cs",
+              "RelativeToolTip": "RegisterWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T17:16:13.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-02-23T06:29:42.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "LoginPage.xaml",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\LoginPage.xaml",
               "RelativeDocumentMoniker": "LoginPage.xaml",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\LoginPage.xaml",
               "RelativeToolTip": "LoginPage.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-02-24T22:22:10.398Z",
-              "IsPinned": true
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\MainWindow.xaml",
-              "RelativeToolTip": "MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-02-23T06:29:42.061Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAKQAAAAAAAAAAAAywKsAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-23T06:31:03.549Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LoginPage.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml.cs",
-              "RelativeDocumentMoniker": "LoginPage.xaml.cs",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml.cs",
-              "RelativeToolTip": "LoginPage.xaml.cs",
-              "ViewState": "AgIAAMMAAAAAAAAAAAAgwMsAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T22:22:22.369Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "CustomMessageBox.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CustomMessageBox.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\CustomMessageBox.xaml.cs",
               "RelativeDocumentMoniker": "CustomMessageBox.xaml.cs",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CustomMessageBox.xaml.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\CustomMessageBox.xaml.cs",
               "RelativeToolTip": "CustomMessageBox.xaml.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAEwBwAAABKAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAwwB4AAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-02T08:29:59.64Z"
+              "WhenOpened": "2026-03-02T08:29:59.64Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
+              "Title": "LoginPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\LoginPage.xaml.cs",
+              "RelativeDocumentMoniker": "LoginPage.xaml.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\LoginPage.xaml.cs",
+              "RelativeToolTip": "LoginPage.xaml.cs",
+              "ViewState": "AgIAAOwAAAAAAAAAAAAqwMMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T22:22:22.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "LoginModels.cs",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\Models\\LoginModels.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\Models\\LoginModels.cs",
               "RelativeDocumentMoniker": "Models\\LoginModels.cs",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\Models\\LoginModels.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\Models\\LoginModels.cs",
               "RelativeToolTip": "Models\\LoginModels.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-01T15:16:12.67Z"
+              "WhenOpened": "2026-03-01T15:16:12.67Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "CourierPanel.xaml",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CourierPanel.xaml",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\CourierPanel.xaml",
               "RelativeDocumentMoniker": "CourierPanel.xaml",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CourierPanel.xaml",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\CourierPanel.xaml",
               "RelativeToolTip": "CourierPanel.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-02-24T22:24:26.572Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "CourierPanel.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CourierPanel.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\CourierPanel.xaml.cs",
               "RelativeDocumentMoniker": "CourierPanel.xaml.cs",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CourierPanel.xaml.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\CourierPanel.xaml.cs",
               "RelativeToolTip": "CourierPanel.xaml.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAIwDcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -149,11 +191,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "ApiService.cs",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\Services\\ApiService.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\Services\\ApiService.cs",
               "RelativeDocumentMoniker": "Services\\ApiService.cs",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\Services\\ApiService.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\Services\\ApiService.cs",
               "RelativeToolTip": "Services\\ApiService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -161,11 +203,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "CustomMessageBox.xaml",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CustomMessageBox.xaml",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\CustomMessageBox.xaml",
               "RelativeDocumentMoniker": "CustomMessageBox.xaml",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CustomMessageBox.xaml",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\frontend\\CustomMessageBox.xaml",
               "RelativeToolTip": "CustomMessageBox.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-02-23T06:29:32.364Z"

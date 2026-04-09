@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using frontend;
 
 namespace frontend
 {
@@ -18,18 +19,33 @@ namespace frontend
         public MainWindow()
         {
             InitializeComponent();
+            ConfigureUIForGuest();
         }
 
         public MainWindow(int? klientId)
         {
             InitializeComponent();
             this.klientId = klientId;
-               
-            Loaded += async (s, e) =>
+
+            if (klientId.HasValue)
             {
-                List<Pack> packs = await GetPacksAsync(this.klientId);
-                PacksDataGrid.ItemsSource = packs;
-            };
+                Loaded += async (s, e) =>
+                {
+                    List<Pack> packs = await GetPacksAsync(this.klientId);
+                    PacksDataGrid.ItemsSource = packs;
+                };
+            }
+            else
+            {
+
+                ConfigureUIForGuest();
+            }
+        }
+
+        private void ConfigureUIForGuest()
+        {
+            PackagesPanel.Visibility = Visibility.Collapsed;
+            SendPackagePanel.Visibility = Visibility.Visible;
         }
 
         #region Modele
@@ -55,6 +71,11 @@ namespace frontend
             public string name { get; set; }
             public double lat { get; set; }
             public double lon { get; set; }
+        }
+
+        public class CheckResponse
+        {
+            public bool Exists { get; set; }
         }
         #endregion
 
@@ -96,12 +117,68 @@ namespace frontend
             }
         }
 
+        private async Task<bool> CheckEmailExistsAsync(string email)
+        {
+            using (HttpClient client = CreateHttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync($"api/auth/check-email?email={Uri.EscapeDataString(email)}");
+                    
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+                        var result = JsonSerializer.Deserialize<CheckResponse>(json,
+                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        return result?.Exists ?? false;
+                    }
+                    return false;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+        private async Task<bool> CheckPhoneExistsAsync(string phone)
+        {
+            using (HttpClient client = CreateHttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync($"api/auth/check-phone?phone={Uri.EscapeDataString(phone)}");
+                    
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+                        var result = JsonSerializer.Deserialize<CheckResponse>(json,
+                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        return result?.Exists ?? false;
+                    }
+                    return false;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
         #endregion
 
         #region Menu i panele
 
         public async void Packages_Click(object sender, RoutedEventArgs e)
         {
+
+            if (!klientId.HasValue)
+            {
+                MessageBox.Show("Musisz być zalogowany, aby zobaczyć swoje paczki.", 
+                    "Wymagane logowanie", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             PackagesPanel.Visibility = Visibility.Visible;
             SendPackagePanel.Visibility = Visibility.Collapsed;
 
@@ -117,8 +194,6 @@ namespace frontend
 
         private void MapButton_Click(object sender, RoutedEventArgs e) => OtworzMape();
         private void LockerButton_Click(object sender, RoutedEventArgs e) => OtworzMape();
-
-
 
         public void User_Click(object sender, RoutedEventArgs e)
         {
@@ -181,17 +256,21 @@ namespace frontend
 
         private async void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (string.IsNullOrWhiteSpace(EmailAdres_TextBox.Text))
+  
+            string senderEmail = EmailAdres_TextBox.Text.Trim();
+            if (string.IsNullOrWhiteSpace(senderEmail))
             {
-                MessageBox.Show("Podaj email odbiorcy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Podaj email nadawcy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            if (string.IsNullOrWhiteSpace(PhoneValueText.Text))
+
+            string receiverPhone = PhoneValueText.Text.Replace(" ", "").Trim();
+            if (string.IsNullOrWhiteSpace(receiverPhone))
             {
                 MessageBox.Show("Podaj numer telefonu odbiorcy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+
             if (string.IsNullOrEmpty(_selectedPaczkomatName))
             {
                 MessageBox.Show("Wybierz paczkomat z mapy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -209,10 +288,52 @@ namespace frontend
                 return;
             }
 
+            bool receiverExists = await CheckPhoneExistsAsync(receiverPhone);
+            if (!receiverExists)
+            {
+                MessageBox.Show("Brak konta powiązanego z tym numerem telefonu odbiorcy.\n\n" +
+                    "Odbiorca musi posiadać konto w systemie, aby otrzymać paczkę.",
+                    "Odbiorca nieznaleziony", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!klientId.HasValue)
+            {
+                bool senderExists = await CheckEmailExistsAsync(senderEmail);
+                if (!senderExists)
+                {
+                    var result = MessageBox.Show(
+                        $"Nie znaleziono konta powiązanego z adresem email: {senderEmail}\n\n" +
+
+                        "Czy chcesz utworzyć nowe konto?",
+                        "Brak konta nadawcy",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        RegisterWindow registerWindow = new RegisterWindow(senderEmail);
+                        registerWindow.ShowDialog();
+
+                        bool nowExists = await CheckEmailExistsAsync(senderEmail);
+                        if (!nowExists)
+                        {
+                            MessageBox.Show("Rejestracja nie została ukończona. Spróbuj ponownie.",
+                                "Błąd", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+
             var request = new SendPackRequest
             {
-                ReceiverEmail = EmailAdres_TextBox.Text.Trim(),
-                ReceiverPhone = PhoneValueText.Text.Replace(" ", "").Trim(),
+                ReceiverEmail = "",
+                ReceiverPhone = receiverPhone,
                 Size = size,
                 PaczkomatName = _selectedPaczkomatName,
                 SenderKlientId = klientId ?? 0
@@ -221,7 +342,7 @@ namespace frontend
             using (var client = CreateHttpClient())
             {
                 string json = System.Text.Json.JsonSerializer.Serialize(request);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");   
                 HttpResponseMessage response = await client.PostAsync("api/packs/send", content);
                 string responseBody = await response.Content.ReadAsStringAsync();
 

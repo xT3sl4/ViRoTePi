@@ -5,9 +5,6 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<inpostContext>();
 
-// Add services to the container.
-
-// Rejestracja DbContext dla MariaDB
 builder.Services.AddDbContext<inpostContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -15,22 +12,19 @@ builder.Services.AddDbContext<inpostContext>(options =>
     )
 );
 
-// Rejestracja kontrolerów z obs³ug¹ cykli JSON
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-        options.JsonSerializerOptions.WriteIndented = true; // dla czytelnego JSON
+        options.JsonSerializerOptions.WriteIndented = true; 
     });
 
-// Swagger / OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Build aplikacji
 var app = builder.Build();
 
-// Middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

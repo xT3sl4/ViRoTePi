@@ -133,13 +133,20 @@
                         </Style>
                     </Button.Style>
                 </Button>
-
+                <Button
+                    Click="Register_Click" 
+                    BorderThickness="0"
+                    Background="Transparent"
+                    > 
                 <TextBlock Text="Sign Up"
                            Margin="0,15"
                            Foreground="Gray"
                            VerticalAlignment="Bottom"
                            HorizontalAlignment="Center"
-                           Cursor="Hand"/>
+                           Cursor="Hand"
+                           />
+                    
+                        </Button>
             </StackPanel>
         </Border>
     </Grid>
