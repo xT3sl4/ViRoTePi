@@ -73,18 +73,19 @@
                         </Border.Effect>
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <StackPanel Margin="20">
-                                <TextBlock Text="Imie" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                                <TextBlock Text="Imię" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
                                 <TextBox x:Name="Firstname_TextBox" Margin="0,5"/>
                                 <TextBlock Text="Nazwisko" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
                                 <TextBox x:Name="Surname_TextBox" Margin="0,5"/>
-                                <TextBlock Text="Email" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                                <TextBlock Text="Email odbiorcy" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
                                 <TextBox x:Name="EmailAdres_TextBox" Margin="0,5"/>
-                                <TextBlock Text="Numer telefonu" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <TextBlock Text="Numer telefonu odbiorcy" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
                                 <StackPanel Orientation="Horizontal">
                                     <Slider x:Name="PhoneSlider" Minimum="500000000" Maximum="899999999" TickFrequency="1" IsSnapToTickEnabled="True" Width="590" KeyDown="PhoneSlider_KeyDown" ValueChanged="PhoneSlider_ValueChanged"/>
                                     <TextBlock x:Name="PhoneValueText" Text="500 000 000" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Margin="15,0,0,0"/>
                                 </StackPanel>
-                                <ListBox x:Name="parcel_size_ListBox" Height="350" Background="Transparent" BorderThickness="0">
+                                <TextBlock Text="Rozmiar paczki" FontWeight="Bold" FontSize="16" Margin="0,10,0,10"/>
+                                <ListBox x:Name="parcel_size_ListBox" Height="230" Background="Transparent" BorderThickness="0">
                                     <ListBox.Resources>
                                         <Style TargetType="ListBoxItem">
                                             <Setter Property="Margin" Value="0,0,0,12"/>
@@ -113,27 +114,27 @@
                                     </ListBox.Resources>
                                     <ListBoxItem x:Name="small_parcel" Selected="small_parcel_Selected">
                                         <StackPanel>
-                                            <TextBlock Text="MAŁA" FontSize="17" FontWeight="Bold"/>
+                                            <TextBlock Text="S — MAŁA" FontSize="17" FontWeight="Bold"/>
                                             <TextBlock Text="8 × 38 × 64 cm" FontSize="13" Foreground="Gray" Margin="0,2,0,0"/>
                                             <TextBlock Text="14,99 zł" FontSize="15" FontWeight="Bold" Foreground="#F57F17" Margin="0,6,0,0"/>
                                         </StackPanel>
                                     </ListBoxItem>
                                     <ListBoxItem x:Name="medium_parcel" Selected="medium_parcel_Selected">
                                         <StackPanel>
-                                            <TextBlock Text="ŚREDNIA" FontSize="17" FontWeight="Bold"/>
+                                            <TextBlock Text="M — ŚREDNIA" FontSize="17" FontWeight="Bold"/>
                                             <TextBlock Text="19 × 38 × 64 cm" FontSize="13" Foreground="Gray" Margin="0,2,0,0"/>
                                             <TextBlock Text="16,99 zł" FontSize="15" FontWeight="Bold" Foreground="#F57F17" Margin="0,6,0,0"/>
                                         </StackPanel>
                                     </ListBoxItem>
                                     <ListBoxItem x:Name="big_parcel" Selected="big_parcel_Selected">
                                         <StackPanel>
-                                            <TextBlock Text="DUŻA" FontSize="17" FontWeight="Bold"/>
+                                            <TextBlock Text="L — DUŻA" FontSize="17" FontWeight="Bold"/>
                                             <TextBlock Text="41 × 38 × 64 cm" FontSize="13" Foreground="Gray" Margin="0,2,0,0"/>
                                             <TextBlock Text="19,99 zł" FontSize="15" FontWeight="Bold" Foreground="#F57F17" Margin="0,6,0,0"/>
                                         </StackPanel>
                                     </ListBoxItem>
                                 </ListBox>
-                                <TextBlock x:Name="price_to_pay" Text="Do zapłaty: 14.99" Foreground="Gray" FontStyle="Italic"/>
+                                <TextBlock x:Name="price_to_pay" Text="" Foreground="Gray" FontStyle="Italic"/>
                                 <Button Content="Wybierz Paczkomat z Mapy" Click="LockerButton_Click" Background="#FAD02A" Height="40" Margin="0,10"/>
                                 <TextBlock x:Name="SelectedLockerInfo" Text="Nie wybrano paczkomatu" Foreground="Gray" FontStyle="Italic"/>
                                 <Button Content="Wyślij" Click="SendButton_Click" Background="#FAD02A" Height="40" Margin="0,10"/>
@@ -141,7 +142,7 @@
                         </ScrollViewer>
                     </Border>
                 </StackPanel>
-            </Grid>
-        </Grid>
+                </Grid>
+           </Grid>
     </Grid>
 </Window>

@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Google.Apis.Auth.OAuth2;
+using Google.Apis.Util.Store;
 
 namespace frontend
 {
@@ -28,17 +29,17 @@ namespace frontend
         {
             public bool IsAuthenticated { get; set; }
             public string Role { get; set; }
-
             public int? KlientId { get; set; }
+            public int? KurierId { get; set; }
         }
 
         private static HttpClient CreateHttpClient()
         {
             var handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true; 
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
             var client = new HttpClient(handler)
             {
-                BaseAddress = new Uri("https://localhost:7272/") 
+                BaseAddress = new Uri("https://localhost:7272/")
             };
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -82,13 +83,13 @@ namespace frontend
             try
             {
                 var result = await LoginApiAsync(email, password);
-
+               
                 if (result != null && result.IsAuthenticated)
                 {
                     switch (result.Role)
                     {
                         case "kurier":
-                            new CourierPanel().Show();
+                            new CourierPanel(result.KurierId).Show();
                             break;
                         case "klient":
                             MainWindow main = new MainWindow(result.KlientId);
@@ -115,6 +116,14 @@ namespace frontend
         {
             try
             {
+                string credentialPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    "frontend"
+                );
+
+                if (Directory.Exists(credentialPath))
+                    Directory.Delete(credentialPath, recursive: true);
+
                 UserCredential credential;
                 using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
                 {
@@ -122,21 +131,126 @@ namespace frontend
                         GoogleClientSecrets.FromStream(stream).Secrets,
                         new[] { "profile", "email" },
                         "user",
-                        CancellationToken.None
+                        CancellationToken.None,
+                        new FileDataStore(credentialPath, fullPath: true)
                     );
                 }
 
-                if (credential != null && !string.IsNullOrEmpty(credential.Token.AccessToken))
+                await credential.RevokeTokenAsync(CancellationToken.None);
+
+                using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
                 {
-                    CourierPanel panel = new CourierPanel();
-                    panel.Show();
-                    this.Close();
+                    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.FromStream(stream).Secrets,
+                        new[] { "profile", "email" },
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credentialPath, fullPath: true)
+                    );
                 }
+
+                if (credential == null || string.IsNullOrEmpty(credential.Token.AccessToken))
+                {
+                    string email2 = await GetGoogleEmailAsync(credential.Token.AccessToken);
+                    MessageBox.Show("Email z Google: '" + email2 + "'");
+                    MessageBox.Show("Nie udało się pobrać tokena Google.");
+                    return;
+                }
+
+                // Pobierz email z Google
+                string email = await GetGoogleEmailAsync(credential.Token.AccessToken);
+                if (string.IsNullOrEmpty(email))
+                {
+                    MessageBox.Show("Nie udało się pobrać adresu email z konta Google.");
+                    return;
+                }
+
+                // Sprawdź email w swoim API
+                var result = await LoginGoogleApiAsync(email);
+
+
+                if (result == null || !result.IsAuthenticated)
+                {
+                    MessageBox.Show("Brak konta powiązanego z tym adresem Google.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                switch (result.Role)
+                {
+                    case "kurier":
+                        new CourierPanel(result.KurierId).Show(); break;
+                    case "klient":
+                        new MainWindow(result.KlientId).Show();
+                        break;
+                    default:
+                        MessageBox.Show("Nieznana rola użytkownika.");
+                        return;
+                }
+
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Wystąpił błąd podczas logowania: " + ex.Message);
             }
+        }
+
+        // Pobiera email z Google UserInfo API
+        private async Task<string> GetGoogleEmailAsync(string accessToken)
+        {
+            using (var http = new HttpClient())
+            {
+                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                var response = await http.GetAsync("https://www.googleapis.com/oauth2/v2/userinfo");
+
+               
+                string raw = await response.Content.ReadAsStringAsync();
+                
+
+                if (!response.IsSuccessStatusCode)
+                    return null;
+
+                var userInfo = JsonSerializer.Deserialize<GoogleUserInfo>(raw,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                return userInfo?.Email;
+            }
+        }
+
+
+        private async Task<LoginResponse> LoginGoogleApiAsync(string email)
+        {
+            using (var client = CreateHttpClient())
+            {
+                var request = new { Email = email };
+                string json = JsonSerializer.Serialize(request);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync("api/auth/login-google", content);
+
+                
+                string rawResponse = await response.Content.ReadAsStringAsync();
+                
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonSerializer.Deserialize<LoginResponse>(rawResponse,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    return new LoginResponse { IsAuthenticated = false };
+                }
+
+                MessageBox.Show($"Błąd serwera: {response.StatusCode}");
+                return new LoginResponse { IsAuthenticated = false };
+            }
+        }
+
+        private class GoogleUserInfo
+        {
+            public string Email { get; set; }
+            public string Name { get; set; }
         }
     }
 }

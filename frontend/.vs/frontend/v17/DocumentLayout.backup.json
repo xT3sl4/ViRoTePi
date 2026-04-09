@@ -11,28 +11,32 @@
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\courierpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:courierpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\jachu\\onedrive\\desktop\\07230506139\\frontend\\frontend\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\jachu\\onedrive\\desktop\\07230506139\\frontend\\frontend\\models\\loginmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:models\\loginmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\courierpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:courierpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\models\\loginmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:models\\loginmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\courierpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:courierpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\custommessagebox.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -46,33 +50,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 240,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\MainWindow.xaml.cs*",
-              "RelativeToolTip": "MainWindow.xaml.cs*",
-              "ViewState": "AgIAABAAAAAAAAAAAAAzwCkAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-23T06:31:03.549Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "LoginPage.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml.cs",
-              "RelativeDocumentMoniker": "LoginPage.xaml.cs",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml.cs",
-              "RelativeToolTip": "LoginPage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T22:22:22.369Z",
-              "EditorCaption": ""
+              "Title": "LoginPage.xaml",
+              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml",
+              "RelativeDocumentMoniker": "LoginPage.xaml",
+              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml",
+              "RelativeToolTip": "LoginPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-02-24T22:22:10.398Z",
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -83,82 +73,102 @@
               "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-02-23T06:29:42.061Z",
+              "WhenOpened": "2026-02-23T06:29:42.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\MainWindow.xaml.cs*",
+              "RelativeToolTip": "MainWindow.xaml.cs*",
+              "ViewState": "AgIAAKQAAAAAAAAAAAAywKsAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T06:31:03.549Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml.cs",
+              "RelativeDocumentMoniker": "LoginPage.xaml.cs",
+              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml.cs",
+              "RelativeToolTip": "LoginPage.xaml.cs",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAgwMsAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T22:22:22.369Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "CustomMessageBox.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CustomMessageBox.xaml.cs",
+              "RelativeDocumentMoniker": "CustomMessageBox.xaml.cs",
+              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CustomMessageBox.xaml.cs",
+              "RelativeToolTip": "CustomMessageBox.xaml.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAEwBwAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-02T08:29:59.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "LoginModels.cs",
               "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\Models\\LoginModels.cs",
               "RelativeDocumentMoniker": "Models\\LoginModels.cs",
               "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\Models\\LoginModels.cs",
               "RelativeToolTip": "Models\\LoginModels.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-01T15:16:12.67Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-01T15:16:12.67Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "CourierPanel.xaml",
               "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CourierPanel.xaml",
               "RelativeDocumentMoniker": "CourierPanel.xaml",
               "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CourierPanel.xaml",
               "RelativeToolTip": "CourierPanel.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-02-24T22:24:26.572Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T22:24:26.572Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LoginPage.xaml",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml",
-              "RelativeDocumentMoniker": "LoginPage.xaml",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\LoginPage.xaml",
-              "RelativeToolTip": "LoginPage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-02-24T22:22:10.398Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ApiService.cs",
-              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\Services\\ApiService.cs",
-              "RelativeDocumentMoniker": "Services\\ApiService.cs",
-              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\Services\\ApiService.cs",
-              "RelativeToolTip": "Services\\ApiService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-01T15:17:49.128Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "CourierPanel.xaml.cs",
               "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CourierPanel.xaml.cs",
               "RelativeDocumentMoniker": "CourierPanel.xaml.cs",
               "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CourierPanel.xaml.cs",
               "RelativeToolTip": "CourierPanel.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAIwDcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-24T22:32:38.401Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
+              "Title": "ApiService.cs",
+              "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\Services\\ApiService.cs",
+              "RelativeDocumentMoniker": "Services\\ApiService.cs",
+              "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\Services\\ApiService.cs",
+              "RelativeToolTip": "Services\\ApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T15:17:49.128Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "CustomMessageBox.xaml",
               "DocumentMoniker": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CustomMessageBox.xaml",
               "RelativeDocumentMoniker": "CustomMessageBox.xaml",
               "ToolTip": "C:\\Users\\jachu\\OneDrive\\Desktop\\07230506139\\frontend\\frontend\\CustomMessageBox.xaml",
               "RelativeToolTip": "CustomMessageBox.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-02-23T06:29:32.364Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-23T06:29:32.364Z"
             }
           ]
         }

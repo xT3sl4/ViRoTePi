@@ -12,7 +12,8 @@ namespace frontend
 {
     public partial class MainWindow : Window
     {
-        private int? klientId; 
+        private int? klientId;
+        private string _selectedPaczkomatName = null;
 
         public MainWindow()
         {
@@ -50,11 +51,11 @@ namespace frontend
 
         public class PaczkomatMapaData
         {
+            public int id { get; set; }     
             public string name { get; set; }
             public double lat { get; set; }
             public double lon { get; set; }
         }
-
         #endregion
 
         #region HttpClient
@@ -117,21 +118,7 @@ namespace frontend
         private void MapButton_Click(object sender, RoutedEventArgs e) => OtworzMape();
         private void LockerButton_Click(object sender, RoutedEventArgs e) => OtworzMape();
 
-        private void OtworzMape()
-        {
-            CustomMessageBox mapaWindow = new CustomMessageBox { Owner = this };
-            if (mapaWindow.ShowDialog() == true)
-            {
-                var wybrany = mapaWindow.WybranyPaczkomat;
-                if (wybrany != null)
-                {
-                    SelectedLockerInfo.Text = $"Wybrany punkt: {wybrany.name}";
-                    SelectedLockerInfo.FontStyle = FontStyles.Normal;
-                    SelectedLockerInfo.FontWeight = FontWeights.Bold;
-                    SendPackage_Click(null, null);
-                }
-            }
-        }
+
 
         public void User_Click(object sender, RoutedEventArgs e)
         {
@@ -164,15 +151,106 @@ namespace frontend
 
         #region Wysyłanie paczki
 
-        private void SendButton_Click(object sender, RoutedEventArgs e)
+        public class SendPackRequest
         {
-            MessageBox.Show("Imie: " + Firstname_TextBox.Text + "\n" +
-                            "Nazwisko: " + Surname_TextBox.Text + "\n" +
-                            "Email: " + EmailAdres_TextBox.Text + "\n" +
-                            "Numer Telefonu: " + PhoneValueText.Text + "\n" +
-                            SelectedLockerInfo.Text);
+            public string ReceiverEmail { get; set; }
+            public string ReceiverPhone { get; set; }
+            public string Size { get; set; }
+            public string PaczkomatName { get; set; }
+            public int SenderKlientId { get; set; }
         }
 
+        private int? _selectedPaczkomatId = null;
+
+        private void OtworzMape()
+        {
+            CustomMessageBox mapaWindow = new CustomMessageBox { Owner = this };
+            if (mapaWindow.ShowDialog() == true)
+            {
+                var wybrany = mapaWindow.WybranyPaczkomat;
+                if (wybrany != null)
+                {   
+                    _selectedPaczkomatName = wybrany.name;
+                    SelectedLockerInfo.Text = $"Wybrany punkt: {wybrany.name}";
+                    SelectedLockerInfo.FontStyle = FontStyles.Normal;
+                    SelectedLockerInfo.FontWeight = FontWeights.Bold;
+                    SendPackage_Click(null, null);
+                }
+            }
+        }
+
+        private async void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (string.IsNullOrWhiteSpace(EmailAdres_TextBox.Text))
+            {
+                MessageBox.Show("Podaj email odbiorcy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(PhoneValueText.Text))
+            {
+                MessageBox.Show("Podaj numer telefonu odbiorcy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (string.IsNullOrEmpty(_selectedPaczkomatName))
+            {
+                MessageBox.Show("Wybierz paczkomat z mapy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            string size = null;
+            if (small_parcel.IsSelected) size = "S";
+            else if (medium_parcel.IsSelected) size = "M";
+            else if (big_parcel.IsSelected) size = "L";
+
+            if (size == null)
+            {
+                MessageBox.Show("Wybierz rozmiar paczki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var request = new SendPackRequest
+            {
+                ReceiverEmail = EmailAdres_TextBox.Text.Trim(),
+                ReceiverPhone = PhoneValueText.Text.Replace(" ", "").Trim(),
+                Size = size,
+                PaczkomatName = _selectedPaczkomatName,
+                SenderKlientId = klientId ?? 0
+            };
+
+            using (var client = CreateHttpClient())
+            {
+                string json = System.Text.Json.JsonSerializer.Serialize(request);
+                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("api/packs/send", content);
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Paczka została wysłana pomyślnie!", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+                    EmailAdres_TextBox.Text = "";
+                    PhoneValueText.Text = "500 000 000";
+                    PhoneSlider.Value = 500000000;
+                    SelectedLockerInfo.Text = "Nie wybrano paczkomatu";
+                    SelectedLockerInfo.FontStyle = FontStyles.Italic;
+                    SelectedLockerInfo.FontWeight = FontWeights.Normal;
+                    _selectedPaczkomatName = null;
+                }
+                else
+                {
+                    try
+                    {
+                        var error = System.Text.Json.JsonDocument.Parse(responseBody);
+                        string msg = error.RootElement.GetProperty("message").GetString() ?? responseBody;
+                        MessageBox.Show(msg, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    catch
+                    {
+                        MessageBox.Show($"Błąd: {responseBody}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+        }
         #endregion
     }
 }

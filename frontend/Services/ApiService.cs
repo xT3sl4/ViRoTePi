@@ -13,7 +13,7 @@ namespace frontend.Services
     {
         private static readonly HttpClient client = new HttpClient
         {
-            BaseAddress = new Uri("http://localhost:7272/") // adres Twojego API
+            BaseAddress = new Uri("http://localhost:7272/") 
         };
 
         public static async Task<LoginResponse> LoginAsync(string email, string password)

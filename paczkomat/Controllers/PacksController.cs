@@ -29,11 +29,11 @@ namespace paczkomat.Controllers
 
         [HttpGet]
         public async Task<IEnumerable<PackDto>> GetPacks(
-    [FromQuery] string? size,
-    [FromQuery] bool? delivered,
-    [FromQuery] int? klientId,
-    [FromQuery] int? userId,
-    [FromQuery] string? sort)
+            [FromQuery] string? size,
+            [FromQuery] bool? delivered,
+            [FromQuery] int? klientId,
+            [FromQuery] int? userId,
+            [FromQuery] string? sort)
         {
             if (!klientId.HasValue && userId.HasValue)
             {
@@ -61,7 +61,6 @@ namespace paczkomat.Controllers
             };
 
             var list = await query.ToListAsync();
-
             var packDtos = new List<PackDto>();
 
             foreach (var pack in list)
@@ -117,6 +116,61 @@ namespace paczkomat.Controllers
             };
         }
 
+        [HttpGet("kurier/{kurierId}")]
+        public async Task<IEnumerable<PackDto>> GetPacksByKurier(int kurierId, [FromQuery] bool? delivered)
+        {
+            var packIds = await _context.kuriers_data
+                .Where(kd => kd.kurier_id == kurierId)
+                .Select(kd => kd.pack_id)
+                .ToListAsync();
+
+            var query = _context.packs
+                .Where(p => packIds.Contains(p.pack_id))
+                .AsQueryable();
+
+            if (delivered.HasValue)
+                query = query.Where(p => p.delivered == delivered);
+
+            var packs = await query.ToListAsync();
+            var packDtos = new List<PackDto>();
+
+            foreach (var pack in packs)
+            {
+                var paczkomatAddress = await (from pd in _context.paczkomat_data
+                                              join pac in _context.paczkomats on pd.paczkomat_id equals pac.paczkomat_id
+                                              join b in _context.boxs on pd.box_id equals b.box_id
+                                              where b.pack_id == pack.pack_id
+                                              select pac.address)
+                                             .FirstOrDefaultAsync();
+
+                packDtos.Add(new PackDto
+                {
+                    PackId = pack.pack_id,
+                    Size = pack.size,
+                    Delivered = pack.delivered.HasValue
+                        ? (pack.delivered.Value ? "Doręczona" : "W drodze")
+                        : "Nieznany",
+                    Date = pack.date?.ToString("yyyy-MM-dd"),
+                    KlientName = paczkomatAddress ?? "Brak paczkomatu"
+                });
+            }
+
+            return packDtos;
+        }
+
+        [HttpPut("{id}/deliver")]
+        public async Task<IActionResult> DeliverPack(int id)
+        {
+            var pack = await _context.packs.FindAsync(id);
+            if (pack == null)
+                return NotFound();
+
+            pack.delivered = true;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         [HttpPost]
         public async Task<ActionResult<pack>> CreatePack([FromBody] pack newPack)
         {
@@ -170,8 +224,62 @@ namespace paczkomat.Controllers
 
             _context.packs.Remove(pack);
             await _context.SaveChangesAsync();
-            
+
             return NoContent();
+        }
+        [HttpPost("send")]
+        public async Task<IActionResult> SendPack([FromBody] SendPackRequest request)
+        {
+            var wszystkie = await _context.paczkomats.Select(p => p.paczkomat_name).ToListAsync();
+
+            if (request.Size != "S" && request.Size != "M" && request.Size != "L")
+                return BadRequest("Nieprawidłowy rozmiar paczki. Wybierz S, M lub L.");
+
+            var receiverUser = await _context.users 
+                .FirstOrDefaultAsync(u => u.email == request.ReceiverEmail
+                                       && u.phone_number.ToString() == request.ReceiverPhone);
+
+            if (receiverUser == null)
+                return BadRequest("Nie znaleziono użytkownika o podanym emailu i numerze telefonu.");
+
+            var receiverKlient = await _context.klients
+                .FirstOrDefaultAsync(k => k.user_id == receiverUser.id);
+
+            if (receiverKlient == null)
+                return BadRequest("Odbiorca nie jest klientem.");
+
+            var paczkomat = await _context.paczkomats
+                .FirstOrDefaultAsync(p => p.paczkomat_name == request.PaczkomatName);
+
+            if (paczkomat == null)
+                return BadRequest("Wybrany paczkomat nie istnieje.");
+
+            var newPack = new pack
+            {
+                size = request.Size,
+                klient_id = receiverKlient.klient_id,
+                delivered = false,
+                date = DateOnly.FromDateTime(DateTime.Today),
+                to_when = DateOnly.FromDateTime(DateTime.Today.AddDays(3))
+            };
+
+            _context.packs.Add(newPack);
+            await _context.SaveChangesAsync();
+
+            var newBox = new box
+            {
+                pack_id = newPack.pack_id,
+                size = request.Size
+            };
+
+            _context.boxs.Add(newBox);
+            await _context.SaveChangesAsync();
+
+            await _context.Database.ExecuteSqlRawAsync(
+                "INSERT INTO paczkomat_data (paczkomat_id, box_id) VALUES ({0}, {1})",
+                paczkomat.paczkomat_id, newBox.box_id);
+
+            return Ok(new { message = "Paczka została wysłana.", packId = newPack.pack_id });
         }
     }
 }
