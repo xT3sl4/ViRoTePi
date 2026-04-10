@@ -1,0 +1,309 @@
+<Window x:Class="frontend.AdminPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="InPost - Panel Administratora" 
+        Height="900" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5"
+        xmlns:local="clr-namespace:frontend">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#FFCD00" BorderBrush="#FF6200" BorderThickness="0,0,0,4">
+            <Grid Margin="20,0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="InPost" 
+                               FontSize="32" 
+                               FontWeight="Bold" 
+                               Foreground="#FF6200"
+                               Margin="0,0,20,0"/>
+                    <TextBlock Text="Panel Administratora" 
+                               FontSize="28" 
+                               FontWeight="SemiBold" 
+                               Foreground="#333333"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <Button Content="Wyloguj" 
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Background="#FF6200"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Padding="20,10"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="LogoutBtn_Click"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Background="White" Padding="20" Margin="20,20,20,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="#FFF8E1" Padding="15" Margin="0,0,10,0" CornerRadius="8">
+                    <StackPanel>
+                        <TextBlock Text="Nieprzypisane" FontSize="12" Foreground="#666666" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="UnassignedCountText" Text="0" FontSize="32" Foreground="#FF6200" FontWeight="Bold" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Background="#E3F2FD" Padding="15" Margin="0,0,10,0" CornerRadius="8">
+                    <StackPanel>
+                        <TextBlock Text="W dostawie" FontSize="12" Foreground="#666666" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="InTransitCountText" Text="0" FontSize="32" Foreground="#2196F3" FontWeight="Bold" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Background="#E8F5E9" Padding="15" Margin="0,0,10,0" CornerRadius="8">
+                    <StackPanel>
+                        <TextBlock Text="Dostarczone" FontSize="12" Foreground="#666666" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="DeliveredCountText" Text="0" FontSize="32" Foreground="#4CAF50" FontWeight="Bold" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="3" Background="#F3E5F5" Padding="15" Margin="0,0,10,0" CornerRadius="8">
+                    <StackPanel>
+                        <TextBlock Text="Aktywni kurierzy" FontSize="12" Foreground="#666666" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="ActiveKuriersText" Text="0" FontSize="32" Foreground="#9C27B0" FontWeight="Bold" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="4" Background="#FCE4EC" Padding="15" CornerRadius="8">
+                    <StackPanel>
+                        <TextBlock Text="Oczekują na wydanie" FontSize="12" Foreground="#666666" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="PendingCountText" Text="0" FontSize="32" Foreground="#E91E63" FontWeight="Bold" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2" Margin="20,0,20,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="White" CornerRadius="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="#FF6200" Padding="15" CornerRadius="8,8,0,0">
+                        <Grid>
+                            <TextBlock Text="Paczki do przypisania" FontSize="18" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+                            <Button Content="Odśwież" HorizontalAlignment="Right" Background="White" Foreground="#FF6200" FontWeight="Bold" Padding="15,8" BorderThickness="0" Cursor="Hand" Click="RefreshBtn_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <DataGrid x:Name="PacksDataGrid" 
+                              Grid.Row="1"
+                              AutoGenerateColumns="False" 
+                              IsReadOnly="True"
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              CanUserResizeRows="False"
+                              HeadersVisibility="Column"
+                              GridLinesVisibility="Horizontal"
+                              HorizontalGridLinesBrush="#E0E0E0"
+                              BorderThickness="0"
+                              SelectionMode="Single"
+                              SelectionChanged="PacksDataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding PackId}" Width="60"/>
+                            <DataGridTextColumn Header="Rozmiar" Binding="{Binding Size}" Width="80"/>
+                            <DataGridTextColumn Header="Odbiorca" Binding="{Binding ReceiverName}" Width="*"/>
+                            <DataGridTextColumn Header="Paczkomat" Binding="{Binding PaczkomatName}" Width="150"/>
+                            <DataGridTextColumn Header="Data" Binding="{Binding Date}" Width="120"/>
+                            <DataGridTemplateColumn Header="Status" Width="120">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border CornerRadius="4" Padding="8,4">
+                                            <TextBlock Foreground="White" FontWeight="SemiBold" FontSize="11" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Height" Value="50"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FFF8E1"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#FFE082"/>
+                                        <Setter Property="Foreground" Value="#000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+                    </DataGrid>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Background="White" CornerRadius="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="#FFCD00" Padding="15" CornerRadius="8,8,0,0">
+                        <TextBlock Text="Kurierzy" FontSize="18" FontWeight="Bold" Foreground="#333333"/>
+                    </Border>
+
+                    <Border Grid.Row="1" Background="#FFF8E1" Padding="15" BorderBrush="#FFE082" BorderThickness="0,0,0,1">
+                        <StackPanel>
+                            <TextBlock Text="Wybrana paczka:" FontSize="12" Foreground="#666666" FontWeight="SemiBold"/>
+                            <TextBlock x:Name="SelectedPackInfo" Text="Nie wybrano" FontSize="14" Foreground="#333333" FontWeight="Bold" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <ListBox x:Name="KuriersListBox" Grid.Row="2" BorderThickness="0" SelectionMode="Single">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="15,10" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Text="{Binding Name}" FontWeight="Bold" FontSize="14"/>
+                                        <TextBlock Grid.Row="1" Text="{Binding Email}" FontSize="11" Foreground="#666666" Margin="0,2,0,0"/>
+                                        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,0">
+                                            <Border Background="#E3F2FD" CornerRadius="3" Padding="6,2" Margin="0,0,5,0">
+                                                <TextBlock FontSize="10" Foreground="#2196F3" FontWeight="SemiBold">
+                                                    <Run Text="Paczek: "/>
+                                                    <Run Text="{Binding AssignedPacksCount}"/>
+                                                </TextBlock>
+                                            </Border>
+                                            <Border CornerRadius="3" Padding="6,2">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Background" Value="#E8F5E9"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding State}" Value="busy">
+                                                                <Setter Property="Background" Value="#FFEBEE"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <TextBlock FontSize="10" FontWeight="SemiBold">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Foreground" Value="#4CAF50"/>
+                                                            <Setter Property="Text" Value="Dostępny"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding State}" Value="busy">
+                                                                    <Setter Property="Foreground" Value="#F44336"/>
+                                                                    <Setter Property="Text" Value="Zajęty"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Button Grid.Row="3" Content="Przypisz do wybranego kuriera" Background="#FF6200" Foreground="White" FontSize="14" FontWeight="Bold" Padding="0,15" BorderThickness="0" Cursor="Hand" Click="AssignBtn_Click" Margin="15"/>
+                </Grid>
+            </Border>
+        </Grid>
+        <Border Grid.Row="3" Background="White" CornerRadius="8" Margin="20,0,20,20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="#E91E63" Padding="15" CornerRadius="8,8,0,0">
+                    <TextBlock Text="Paczki oczekujące na wydanie" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                </Border>
+
+                <DataGrid x:Name="PendingPacksDataGrid"
+                          Grid.Row="1"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          CanUserResizeRows="False"
+                          HeadersVisibility="Column"
+                          GridLinesVisibility="Horizontal"
+                          HorizontalGridLinesBrush="#E0E0E0"
+                          BorderThickness="0"
+                          SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding PendingId}" Width="60"/>
+                        <DataGridTextColumn Header="Rozmiar" Binding="{Binding Size}" Width="80"/>
+                        <DataGridTextColumn Header="Nadawca" Binding="{Binding SenderName}" Width="*"/>
+                        <DataGridTextColumn Header="Odbiorca" Binding="{Binding ReceiverName}" Width="*"/>
+                        <DataGridTextColumn Header="Paczkomat" Binding="{Binding PaczkomatName}" Width="150"/>
+                        <DataGridTextColumn Header="Data zgłoszenia" Binding="{Binding CreatedAt}" Width="150"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100"/>
+                    </DataGrid.Columns>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Height" Value="45"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FCE4EC"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#F48FB1"/>
+                                    <Setter Property="Foreground" Value="#000000"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="15">
+                    <Button Content="Odrzuć paczkę"
+                            Background="#9E9E9E"
+                            Foreground="White"
+                            FontSize="13"
+                            FontWeight="Bold"
+                            Padding="20,12"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Margin="0,0,10,0"
+                            Click="RejectPackBtn_Click"/>
+                    <Button Content="Wydaj paczkę"
+                            Background="#E91E63"
+                            Foreground="White"
+                            FontSize="13"
+                            FontWeight="Bold"
+                            Padding="20,12"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Click="ReleasePackBtn_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
