@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2026 at 09:51 PM
--- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.2.12
+-- Generation Time: Apr 10, 2026 at 01:38 PM
+-- Wersja serwera: 10.4.28-MariaDB
+-- Wersja PHP: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -66,7 +66,15 @@ INSERT INTO `boxs` (`box_id`, `pack_id`, `size`) VALUES
 (7, 7, 'S'),
 (8, 8, 'M'),
 (9, 9, 'L'),
-(10, 10, 'S');
+(10, 10, 'S'),
+(11, 11, 'S'),
+(12, 12, 'M'),
+(13, 13, 'L'),
+(14, 14, 'L'),
+(15, 15, 'S'),
+(16, 16, 'M'),
+(17, 17, 'S'),
+(18, 18, 'L');
 
 -- --------------------------------------------------------
 
@@ -89,7 +97,8 @@ INSERT INTO `klients` (`klient_id`, `user_id`, `pack_id`) VALUES
 (2, 6, 0),
 (3, 7, 0),
 (4, 8, 0),
-(5, 10, 0);
+(5, 10, 0),
+(6, 12, 0);
 
 -- --------------------------------------------------------
 
@@ -135,6 +144,9 @@ INSERT INTO `kuriers_data` (`kurier_id`, `pack_id`) VALUES
 (2, 3),
 (2, 4),
 (2, 8),
+(2, 16),
+(2, 17),
+(2, 18),
 (3, 5),
 (3, 6),
 (3, 9);
@@ -161,14 +173,22 @@ CREATE TABLE `packs` (
 INSERT INTO `packs` (`pack_id`, `size`, `klient_id`, `delivered`, `date`, `to_when`) VALUES
 (1, 'S', 1, 0, '2025-11-01', '2025-11-05'),
 (2, 'M', 2, 1, '2025-11-01', '2025-11-04'),
-(3, 'L', 3, 0, '2025-11-02', '2025-11-06'),
+(3, 'L', 3, 1, '2025-11-02', '2025-11-06'),
 (4, 'S', 4, 1, '2025-11-02', '2025-11-03'),
 (5, 'M', 5, 0, '2025-11-03', '2025-11-07'),
 (6, 'L', 1, 0, '2025-11-03', '2025-11-08'),
 (7, 'S', 2, 1, '2025-11-04', '2025-11-06'),
 (8, 'M', 3, 0, '2025-11-04', '2025-11-09'),
 (9, 'L', 4, 1, '2025-11-05', '2025-11-10'),
-(10, 'S', 5, 0, '2025-11-05', '2025-11-11');
+(10, 'S', 5, 0, '2025-11-05', '2025-11-11'),
+(11, 'S', 1, 0, '2026-04-09', '2026-04-12'),
+(12, 'M', 1, 0, '2026-04-09', '2026-04-12'),
+(13, 'L', 1, 0, '2026-04-09', '2026-04-12'),
+(14, 'L', 1, 0, '2026-04-09', '2026-04-12'),
+(15, 'S', 1, 0, '2026-04-09', '2026-04-12'),
+(16, 'M', 1, 1, '2026-04-10', '2026-04-13'),
+(17, 'S', 1, 1, '2026-04-10', '2026-04-13'),
+(18, 'L', 1, 1, '2026-04-10', '2026-04-13');
 
 -- --------------------------------------------------------
 
@@ -187,16 +207,16 @@ CREATE TABLE `paczkomat` (
 --
 
 INSERT INTO `paczkomat` (`paczkomat_id`, `paczkomat_name`, `address`) VALUES
-(1, 'GDA01', 'Gdańsk ul. Długa 1'),
-(2, 'GDA02', 'Gdańsk ul. Grunwaldzka 15'),
-(3, 'GDA03', 'Gdańsk ul. Kartuska 22'),
-(4, 'GDA04', 'Gdańsk ul. Marynarki Polskiej 45'),
-(5, 'GDA05', 'Gdańsk ul. Chłopska 10'),
-(6, 'GDA06', 'Gdańsk ul. Kołobrzeska 33'),
-(7, 'GDA07', 'Gdańsk ul. Piastowska 8'),
-(8, 'GDA08', 'Gdańsk ul. Świętokrzyska 50'),
-(9, 'GDA09', 'Gdańsk ul. Hallera 120'),
-(10, 'GDA10', 'Gdańsk ul. Słowackiego 90');
+(1, 'GDA001', 'Gdańsk ul. Długa 1'),
+(2, 'GDA002', 'Gdańsk ul. Grunwaldzka 15'),
+(3, 'GDA003', 'Gdańsk ul. Kartuska 22'),
+(4, 'GDA004', 'Gdańsk ul. Marynarki Polskiej 45'),
+(5, 'GDA005', 'Gdańsk ul. Chłopska 10'),
+(6, 'GDA006', 'Gdańsk ul. Kołobrzeska 33'),
+(7, 'GDA007', 'Gdańsk ul. Piastowska 8'),
+(8, 'GDA008', 'Gdańsk ul. Świętokrzyska 50'),
+(9, 'GDA009', 'Gdańsk ul. Hallera 120'),
+(10, 'GDA010', 'Gdańsk ul. Słowackiego 90');
 
 -- --------------------------------------------------------
 
@@ -215,15 +235,47 @@ CREATE TABLE `paczkomat_data` (
 
 INSERT INTO `paczkomat_data` (`paczkomat_id`, `box_id`) VALUES
 (1, 1),
+(1, 11),
 (2, 2),
+(2, 18),
 (3, 3),
 (4, 4),
+(4, 14),
 (5, 5),
 (6, 6),
 (7, 7),
+(7, 12),
+(7, 13),
+(7, 15),
+(7, 16),
+(7, 17),
 (8, 8),
 (9, 9),
 (10, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `pending_packs`
+--
+
+CREATE TABLE `pending_packs` (
+  `pending_id` int(11) NOT NULL,
+  `sender_klient_id` int(11) NOT NULL,
+  `receiver_klient_id` int(11) NOT NULL,
+  `size` text NOT NULL,
+  `paczkomat_id` int(11) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `status` varchar(20) DEFAULT 'waiting'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `pending_packs`
+--
+
+INSERT INTO `pending_packs` (`pending_id`, `sender_klient_id`, `receiver_klient_id`, `size`, `paczkomat_id`, `created_at`, `status`) VALUES
+(1, 1, 1, 'S', 7, '2026-04-10 12:24:34', 'released'),
+(2, 1, 1, 'L', 2, '2026-04-10 12:31:45', 'released');
 
 -- --------------------------------------------------------
 
@@ -249,7 +301,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `surname`, `email`, `date_of_birth`, `password`, `role`, `phone_number`, `selfie`, `sex`) VALUES
-(1, 'Natalia', 'Dąbrowska', 'natalia10@mail.pl', '1994-10-10', 'pass123', 'klient', 101010101, 'selfie10.jpg', 0),
+(1, 'Natalia', 'Dąbrowska', 'jachuwroblewski4e@gmail.com', '1994-10-10', 'pass123', 'klient', 500000000, 'selfie10.jpg', 0),
 (2, 'Jan', 'Kowalski', 'jan1@mail.pl', '1990-01-01', 'pass123', 'admin', 111111111, 'selfie1.jpg', 1),
 (3, 'Anna', 'Nowak', 'anna2@mail.pl', '1992-02-02', 'pass123', 'admin', 222222222, 'selfie2.jpg', 0),
 (4, 'Piotr', 'Wiśniewski', 'piotr3@mail.pl', '1995-03-03', 'pass123', 'kurier', 333333333, 'selfie3.jpg', 1),
@@ -258,7 +310,8 @@ INSERT INTO `users` (`id`, `name`, `surname`, `email`, `date_of_birth`, `passwor
 (7, 'Magda', 'Lewandowska', 'magda6@mail.pl', '1999-06-06', 'pass123', 'klient', 666666666, 'selfie6.jpg', 0),
 (8, 'Adam', 'Zieliński', 'adam7@mail.pl', '1991-07-07', 'pass123', 'klient', 777777777, 'selfie7.jpg', 1),
 (9, 'Ola', 'Szymańska', 'ola8@mail.pl', '1993-08-08', 'pass123', 'klient', 888888888, 'selfie8.jpg', 0),
-(10, 'Marek', 'Woźniak', 'marek9@mail.pl', '1987-09-09', 'pass123', 'kurier', 999999999, 'selfie9.jpg', 1);
+(10, 'Marek', 'Woźniak', 'marek9@mail.pl', '1987-09-09', 'pass123', 'kurier', 999999999, 'selfie9.jpg', 1),
+(12, 'Jan', 'Tesla', '1@mail.pl', NULL, 'pass123', 'klient', 698151415, NULL, NULL);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -320,6 +373,15 @@ ALTER TABLE `paczkomat_data`
   ADD KEY `box_id` (`box_id`);
 
 --
+-- Indeksy dla tabeli `pending_packs`
+--
+ALTER TABLE `pending_packs`
+  ADD PRIMARY KEY (`pending_id`),
+  ADD KEY `sender_klient_id` (`sender_klient_id`),
+  ADD KEY `receiver_klient_id` (`receiver_klient_id`),
+  ADD KEY `paczkomat_id` (`paczkomat_id`);
+
+--
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
@@ -339,13 +401,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `boxs`
 --
 ALTER TABLE `boxs`
-  MODIFY `box_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `box_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `klients`
 --
 ALTER TABLE `klients`
-  MODIFY `klient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `klient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `kuriers`
@@ -357,7 +419,7 @@ ALTER TABLE `kuriers`
 -- AUTO_INCREMENT for table `packs`
 --
 ALTER TABLE `packs`
-  MODIFY `pack_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `pack_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `paczkomat`
@@ -366,10 +428,16 @@ ALTER TABLE `paczkomat`
   MODIFY `paczkomat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `pending_packs`
+--
+ALTER TABLE `pending_packs`
+  MODIFY `pending_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -418,6 +486,14 @@ ALTER TABLE `packs`
 ALTER TABLE `paczkomat_data`
   ADD CONSTRAINT `paczkomat_data_ibfk_1` FOREIGN KEY (`paczkomat_id`) REFERENCES `paczkomat` (`paczkomat_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `paczkomat_data_ibfk_2` FOREIGN KEY (`box_id`) REFERENCES `boxs` (`box_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pending_packs`
+--
+ALTER TABLE `pending_packs`
+  ADD CONSTRAINT `pending_packs_ibfk_1` FOREIGN KEY (`sender_klient_id`) REFERENCES `klients` (`klient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pending_packs_ibfk_2` FOREIGN KEY (`receiver_klient_id`) REFERENCES `klients` (`klient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pending_packs_ibfk_3` FOREIGN KEY (`paczkomat_id`) REFERENCES `paczkomat` (`paczkomat_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

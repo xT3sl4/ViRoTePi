@@ -213,3 +213,6 @@ C:\Users\wjane\Desktop\szkola\projekt\frontend\obj\Debug\frontend.exe
 C:\Users\wjane\Desktop\szkola\projekt\frontend\obj\Debug\frontend.pdb
 C:\Users\wjane\Desktop\szkola\projekt\frontend\obj\Debug\RegisterWindow.baml
 C:\Users\wjane\Desktop\szkola\projekt\frontend\obj\Debug\RegisterWindow.g.cs
+C:\Users\wjane\Desktop\szkola\projekt\frontend\obj\Debug\AdminPanel.baml
+C:\Users\wjane\Desktop\szkola\projekt\frontend\obj\Debug\AdminPanel.g.cs
+C:\Users\wjane\Desktop\szkola\projekt\frontend\obj\Debug\GeneratedInternalTypeHelper.g.cs

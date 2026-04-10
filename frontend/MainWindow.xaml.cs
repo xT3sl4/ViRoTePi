@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -329,14 +330,12 @@ namespace frontend
                     }
                 }
             }
-
             var request = new SendPackRequest
             {
-                ReceiverEmail = "",
+                ReceiverEmail = senderEmail, 
                 ReceiverPhone = receiverPhone,
                 Size = size,
-                PaczkomatName = _selectedPaczkomatName,
-                SenderKlientId = klientId ?? 0
+                PaczkomatName = _selectedPaczkomatName
             };
 
             using (var client = CreateHttpClient())

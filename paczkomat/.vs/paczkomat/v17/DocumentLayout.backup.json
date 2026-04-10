@@ -3,60 +3,76 @@
   "WorkspaceRootPath": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\sendpackrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\sendpackrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\controllers\\packscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:controllers\\packscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\paczkomat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\paczkomat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\inpostcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\inpostcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\klient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\klient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\sendpackrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\sendpackrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\controllers\\klientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:controllers\\klientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\pending_pack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\pending_pack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\googleloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\googleloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\box.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\box.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\pack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\pack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\klient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\klient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\paczkomat_datum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\paczkomat_datum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\box.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\box.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\googleloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\googleloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\controllers\\klientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:controllers\\klientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\paczkomat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\paczkomat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\wjane\\desktop\\szkola\\projekt\\paczkomat\\models\\pack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:models\\pack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,7 +82,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1211,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,45 +90,72 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
+              "Title": "admin.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\admin.cs",
+              "RelativeDocumentMoniker": "Models\\admin.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\admin.cs",
+              "RelativeToolTip": "Models\\admin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T11:07:29.696Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "inpostContext.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\inpostContext.cs",
+              "RelativeDocumentMoniker": "Models\\inpostContext.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\inpostContext.cs",
+              "RelativeToolTip": "Models\\inpostContext.cs",
+              "ViewState": "AgIAAOgAAAAAAAAAAAAgwAkBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T10:57:03.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Controllers\\AdminController.cs",
+              "ViewState": "AgIAACkBAAAAAAAAAAAgwF0BAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T10:28:14.422Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Controllers\\AuthController.cs",
               "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAADwv0IAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAIwKAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-01T14:42:51.637Z"
+              "WhenOpened": "2026-03-01T14:42:51.637Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PacksController.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Controllers\\PacksController.cs",
               "RelativeDocumentMoniker": "Controllers\\PacksController.cs",
               "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Controllers\\PacksController.cs",
               "RelativeToolTip": "Controllers\\PacksController.cs",
-              "ViewState": "AgIAAPEAAAAAAAAAAAAmwPoAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAowAkBAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-01T14:45:22.468Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAADgvyUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-01T14:45:49.13Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 16,
               "Title": "LoginResponse.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\LoginResponse.cs",
               "RelativeDocumentMoniker": "Models\\LoginResponse.cs",
@@ -120,38 +163,36 @@
               "RelativeToolTip": "Models\\LoginResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-01T14:42:10.8Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-01T14:42:10.8Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "user.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\user.cs",
               "RelativeDocumentMoniker": "Models\\user.cs",
               "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\user.cs",
               "RelativeToolTip": "Models\\user.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-01T14:37:19.308Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-01T14:37:19.308Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "klient.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\klient.cs",
               "RelativeDocumentMoniker": "Models\\klient.cs",
               "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\klient.cs",
               "RelativeToolTip": "Models\\klient.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-01T15:58:42.042Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 15,
               "Title": "paczkomat.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\paczkomat.cs",
               "RelativeDocumentMoniker": "Models\\paczkomat.cs",
@@ -159,37 +200,49 @@
               "RelativeToolTip": "Models\\paczkomat.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-01T17:15:34.407Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-01T17:15:34.407Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "SendPackRequest.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\SendPackRequest.cs",
               "RelativeDocumentMoniker": "Models\\SendPackRequest.cs",
-              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\SendPackRequest.cs*",
-              "RelativeToolTip": "Models\\SendPackRequest.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAvAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\SendPackRequest.cs",
+              "RelativeToolTip": "Models\\SendPackRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-30T05:43:23.654Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
+              "Title": "pending_pack.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\pending_pack.cs",
+              "RelativeDocumentMoniker": "Models\\pending_pack.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\pending_pack.cs",
+              "RelativeToolTip": "Models\\pending_pack.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T10:56:50.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "KlientController.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Controllers\\KlientController.cs",
               "RelativeDocumentMoniker": "Controllers\\KlientController.cs",
               "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Controllers\\KlientController.cs",
               "RelativeToolTip": "Controllers\\KlientController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAmwEcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-01T14:59:42.849Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 8,
               "Title": "LoginRequest.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\LoginRequest.cs",
               "RelativeDocumentMoniker": "Models\\LoginRequest.cs",
@@ -197,23 +250,37 @@
               "RelativeToolTip": "Models\\LoginRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-01T14:41:32.652Z"
+              "WhenOpened": "2026-03-01T14:41:32.652Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "GoogleLoginRequest.cs",
-              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\GoogleLoginRequest.cs",
-              "RelativeDocumentMoniker": "Models\\GoogleLoginRequest.cs",
-              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\GoogleLoginRequest.cs",
-              "RelativeToolTip": "Models\\GoogleLoginRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "paczkomat_datum.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\paczkomat_datum.cs",
+              "RelativeDocumentMoniker": "Models\\paczkomat_datum.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\paczkomat_datum.cs",
+              "RelativeToolTip": "Models\\paczkomat_datum.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-16T06:43:22.398Z"
+              "WhenOpened": "2026-03-01T20:13:02.398Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T14:45:49.13Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "box.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\box.cs",
               "RelativeDocumentMoniker": "Models\\box.cs",
@@ -226,18 +293,18 @@
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "paczkomat_datum.cs",
-              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\paczkomat_datum.cs",
-              "RelativeDocumentMoniker": "Models\\paczkomat_datum.cs",
-              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\paczkomat_datum.cs",
-              "RelativeToolTip": "Models\\paczkomat_datum.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Title": "GoogleLoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\GoogleLoginRequest.cs",
+              "RelativeDocumentMoniker": "Models\\GoogleLoginRequest.cs",
+              "ToolTip": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\GoogleLoginRequest.cs",
+              "RelativeToolTip": "Models\\GoogleLoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-01T20:13:02.398Z"
+              "WhenOpened": "2026-03-16T06:43:22.398Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "pack.cs",
               "DocumentMoniker": "C:\\Users\\wjane\\Desktop\\szkola\\projekt\\paczkomat\\Models\\pack.cs",
               "RelativeDocumentMoniker": "Models\\pack.cs",

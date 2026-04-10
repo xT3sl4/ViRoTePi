@@ -227,78 +227,63 @@ namespace paczkomat.Controllers
 
             return NoContent();
         }
-
         [HttpPost("send")]
         public async Task<IActionResult> SendPack([FromBody] SendPackRequest request)
         {
             if (request.Size != "S" && request.Size != "M" && request.Size != "L")
-                return BadRequest(new { message = "Nieprawidłowy rozmiar paczki. Wybierz S, M lub L." });
+                return BadRequest(new { message = "Nieprawidłowy rozmiar paczki." });
 
             if (string.IsNullOrWhiteSpace(request.ReceiverPhone))
                 return BadRequest(new { message = "Numer telefonu odbiorcy jest wymagany." });
 
-            int receiverPhone;
-            if (!int.TryParse(request.ReceiverPhone.Replace(" ", ""), out receiverPhone))
-                return BadRequest(new { message = "Nieprawidłowy format numeru telefonu odbiorcy." });
+            if (!int.TryParse(request.ReceiverPhone.Replace(" ", ""), out int receiverPhone))
+                return BadRequest(new { message = "Nieprawidłowy format numeru telefonu." });
 
             var receiverUser = await _context.users
                 .FirstOrDefaultAsync(u => u.phone_number == receiverPhone);
-
             if (receiverUser == null)
-                return BadRequest(new { message = "Nie znaleziono użytkownika o podanym numerze telefonu odbiorcy." });
+                return BadRequest(new { message = "Nie znaleziono użytkownika o podanym numerze telefonu." });
 
             var receiverKlient = await _context.klients
                 .FirstOrDefaultAsync(k => k.user_id == receiverUser.id);
-
             if (receiverKlient == null)
                 return BadRequest(new { message = "Odbiorca nie jest klientem." });
+
+            var senderUser = await _context.users
+                .FirstOrDefaultAsync(u => u.email == request.ReceiverEmail);
+            if (senderUser == null)
+                return BadRequest(new { message = "Nie znaleziono nadawcy." });
+
+            var senderKlient = await _context.klients
+                .FirstOrDefaultAsync(k => k.user_id == senderUser.id);
+            if (senderKlient == null)
+                return BadRequest(new { message = "Nadawca nie jest klientem." });
 
             if (string.IsNullOrWhiteSpace(request.PaczkomatName))
                 return BadRequest(new { message = "Nazwa paczkomatu jest wymagana." });
 
             var paczkomat = await _context.paczkomats
                 .FirstOrDefaultAsync(p => p.paczkomat_name == request.PaczkomatName);
-
             if (paczkomat == null)
-                return BadRequest(new { message = "Wybrany paczkomat nie istnieje." });
-            if (string.IsNullOrWhiteSpace(request.PaczkomatName))
-                return BadRequest(new { message = "Email jest wymagany" });
+                return BadRequest(new { message = "Nie znaleziono paczkomatu." });
 
-            var email = await _context.users
-                .FirstOrDefaultAsync(u => u.email == request.ReceiverEmail);
-
-            if (email == null)
-                return BadRequest(new { message = "Taki email nie istnieje." });
-            var newPack = new pack
+            var pending = new pending_pack
             {
+                sender_klient_id = senderKlient.klient_id,
+                receiver_klient_id = receiverKlient.klient_id,
                 size = request.Size,
-                klient_id = receiverKlient.klient_id,
-                delivered = false,
-                date = DateOnly.FromDateTime(DateTime.Today),
-                to_when = DateOnly.FromDateTime(DateTime.Today.AddDays(3))
+                paczkomat_id = paczkomat.paczkomat_id,
+                created_at = DateTime.Now,
+                status = "waiting"
             };
 
-            _context.packs.Add(newPack);
+            _context.pending_packs.Add(pending);
             await _context.SaveChangesAsync();
-            var newBox = new box
+
+            return Ok(new
             {
-                pack_id = newPack.pack_id,
-                size = request.Size
-            };
-
-            _context.boxs.Add(newBox);
-            await _context.SaveChangesAsync();
-
-            await _context.Database.ExecuteSqlRawAsync(
-                "INSERT INTO paczkomat_data (paczkomat_id, box_id) VALUES ({0}, {1})",
-                paczkomat.paczkomat_id, newBox.box_id);
-
-            // TODO: Opcjonalnie - przypisz paczkę do kuriera
-            // TODO: Opcjonalnie - wyślij email/SMS do odbiorcy
-
-            return Ok(new { 
-                message = "Paczka została wysłana pomyślnie.",
-                packId = newPack.pack_id,
+                message = "Paczka została przyjęta i oczekuje na wydanie przez admina.",
+                pendingId = pending.pending_id,
                 receiverName = $"{receiverUser.name} {receiverUser.surname}",
                 locker = paczkomat.paczkomat_name
             });

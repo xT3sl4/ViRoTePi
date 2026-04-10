@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -95,6 +95,10 @@ namespace frontend
                             MainWindow main = new MainWindow(result.KlientId);
                             main.Show();
                             break;
+                        case "admin":
+                            AdminPanel adminPanel = new AdminPanel();
+                            adminPanel.Show();
+                            break;
                         default:
                             MessageBox.Show("Nieznana rola użytkownika.");
                             return;
@@ -156,15 +160,12 @@ namespace frontend
                     MessageBox.Show("Nie udało się pobrać tokena Google.");
                     return;
                 }
-
                 string email = await GetGoogleEmailAsync(credential.Token.AccessToken);
                 if (string.IsNullOrEmpty(email))
                 {
                     MessageBox.Show("Nie udało się pobrać adresu email z konta Google.");
                     return;
                 }
-
-  
                 var result = await LoginGoogleApiAsync(email);
 
 
@@ -177,9 +178,13 @@ namespace frontend
                 switch (result.Role)
                 {
                     case "kurier":
-                        new CourierPanel(result.KurierId).Show(); break;
+                        new CourierPanel(result.KurierId).Show(); 
+                        break;
                     case "klient":
                         new MainWindow(result.KlientId).Show();
+                        break;
+                    case "admin":
+                        new AdminPanel().Show();
                         break;
                     default:
                         MessageBox.Show("Nieznana rola użytkownika.");

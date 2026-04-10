@@ -1,5 +1,159 @@
 [
   {
+    "ContainingType": "paczkomat.Controllers.AdminController",
+    "Method": "AssignPackToKurier",
+    "RelativePath": "api/Admin/assign-pack",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "paczkomat.Controllers.AdminController\u002BAssignPackRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "paczkomat.Controllers.AdminController",
+    "Method": "GetKuriers",
+    "RelativePath": "api/Admin/kuriers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[paczkomat.Controllers.AdminController\u002BKurierDto, paczkomat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "paczkomat.Controllers.AdminController",
+    "Method": "GetAllPacks",
+    "RelativePath": "api/Admin/packs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[paczkomat.Controllers.AdminController\u002BUnassignedPackDto, paczkomat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "paczkomat.Controllers.AdminController",
+    "Method": "GetUnassignedPacks",
+    "RelativePath": "api/Admin/packs/unassigned",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[paczkomat.Controllers.AdminController\u002BUnassignedPackDto, paczkomat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "paczkomat.Controllers.AdminController",
+    "Method": "GetPendingPacks",
+    "RelativePath": "api/Admin/pending-packs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[paczkomat.Controllers.AdminController\u002BPendingPackDto, paczkomat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "paczkomat.Controllers.AdminController",
+    "Method": "RejectPack",
+    "RelativePath": "api/Admin/reject-pack/{pendingId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pendingId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "paczkomat.Controllers.AdminController",
+    "Method": "ReleasePack",
+    "RelativePath": "api/Admin/release-pack/{pendingId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pendingId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "paczkomat.Controllers.AdminController",
+    "Method": "GetStats",
+    "RelativePath": "api/Admin/stats",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "paczkomat.Controllers.AdminController",
+    "Method": "UnassignPack",
+    "RelativePath": "api/Admin/unassign-pack/{packId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "packId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "paczkomat.Controllers.AuthController",
     "Method": "CheckEmail",
     "RelativePath": "api/Auth/check-email",

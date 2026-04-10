@@ -33,6 +33,7 @@ public partial class inpostContext : DbContext
     public virtual DbSet<paczkomat_datum> paczkomat_data { get; set; }
 
     public virtual DbSet<user> users { get; set; }
+    public virtual DbSet<pending_pack> pending_packs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -125,13 +126,13 @@ public partial class inpostContext : DbContext
 
         modelBuilder.Entity<kuriers_datum>(entity =>
         {
+            entity.HasKey(e => new { e.kurier_id, e.pack_id });
+
             entity
-                .HasNoKey()
                 .HasCharSet("utf8mb4")
                 .UseCollation("utf8mb4_polish_ci");
 
             entity.HasIndex(e => new { e.kurier_id, e.pack_id }, "kurier_id");
-
             entity.HasIndex(e => e.pack_id, "pack_id");
 
             entity.Property(e => e.kurier_id).HasColumnType("int(11)");
@@ -224,7 +225,37 @@ public partial class inpostContext : DbContext
             entity.Property(e => e.selfie).HasColumnType("text");
             entity.Property(e => e.surname).HasColumnType("text");
         });
+        modelBuilder.Entity<pending_pack>(entity =>
+        {
+            entity.HasKey(e => e.pending_id).HasName("PRIMARY");
 
+            entity
+                .HasCharSet("utf8mb4")
+                .UseCollation("utf8mb4_polish_ci");
+
+            entity.Property(e => e.pending_id).HasColumnType("int(11)");
+            entity.Property(e => e.sender_klient_id).HasColumnType("int(11)");
+            entity.Property(e => e.receiver_klient_id).HasColumnType("int(11)");
+            entity.Property(e => e.paczkomat_id).HasColumnType("int(11)");
+            entity.Property(e => e.size).HasColumnType("text");
+            entity.Property(e => e.status).HasMaxLength(20).HasDefaultValue("waiting");
+            entity.Property(e => e.created_at).HasColumnType("datetime");
+
+            entity.HasOne(d => d.sender_klient).WithMany()
+                .HasForeignKey(d => d.sender_klient_id)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("pending_packs_ibfk_1");
+
+            entity.HasOne(d => d.receiver_klient).WithMany()
+                .HasForeignKey(d => d.receiver_klient_id)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("pending_packs_ibfk_2");
+
+            entity.HasOne(d => d.paczkomat).WithMany()
+                .HasForeignKey(d => d.paczkomat_id)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("pending_packs_ibfk_3");
+        });
         OnModelCreatingPartial(modelBuilder);
     }
 
