@@ -1,0 +1,262 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\pitsz\\desktop\\adminpanel\\frontend\\adminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:adminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\RegisterWindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:RegisterWindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\registerwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:registerwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\adminpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:adminpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\usereditdialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:usereditdialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\models\\loginmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:models\\loginmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\courierpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:courierpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\courierpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:courierpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\custommessagebox.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:custommessagebox.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 1211,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserEditDialog.xaml",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\UserEditDialog.xaml",
+              "RelativeDocumentMoniker": "UserEditDialog.xaml",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\UserEditDialog.xaml",
+              "RelativeToolTip": "UserEditDialog.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-10T14:18:56.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAOMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T06:31:03.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AdminPanel.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\AdminPanel.xaml.cs",
+              "RelativeDocumentMoniker": "AdminPanel.xaml.cs",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\AdminPanel.xaml.cs",
+              "RelativeToolTip": "AdminPanel.xaml.cs",
+              "ViewState": "AgIAAHgCAAAAAAAAAAAYwIIBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T09:58:47.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RegisterWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\RegisterWindow.xaml.cs",
+              "RelativeDocumentMoniker": "RegisterWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\RegisterWindow.xaml.cs",
+              "RelativeToolTip": "RegisterWindow.xaml.cs",
+              "ViewState": "AgIAAAgBAAAAAAAAAAAmwDYAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T17:16:13.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RegisterWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\RegisterWindow.xaml",
+              "RelativeDocumentMoniker": "RegisterWindow.xaml",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\RegisterWindow.xaml",
+              "RelativeToolTip": "RegisterWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-09T17:15:57.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginPage.xaml",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\LoginPage.xaml",
+              "RelativeDocumentMoniker": "LoginPage.xaml",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\LoginPage.xaml",
+              "RelativeToolTip": "LoginPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-02-24T22:22:10.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CustomMessageBox.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\CustomMessageBox.xaml.cs",
+              "RelativeDocumentMoniker": "CustomMessageBox.xaml.cs",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\CustomMessageBox.xaml.cs",
+              "RelativeToolTip": "CustomMessageBox.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-02T08:29:59.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AdminPanel.xaml",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\AdminPanel.xaml",
+              "RelativeDocumentMoniker": "AdminPanel.xaml",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\AdminPanel.xaml",
+              "RelativeToolTip": "AdminPanel.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-10T09:55:08.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-02-23T06:29:42.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LoginPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\LoginPage.xaml.cs",
+              "RelativeDocumentMoniker": "LoginPage.xaml.cs",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\LoginPage.xaml.cs",
+              "RelativeToolTip": "LoginPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T22:22:22.369Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "LoginModels.cs",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\Models\\LoginModels.cs",
+              "RelativeDocumentMoniker": "Models\\LoginModels.cs",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\Models\\LoginModels.cs",
+              "RelativeToolTip": "Models\\LoginModels.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T15:16:12.67Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CourierPanel.xaml",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\CourierPanel.xaml",
+              "RelativeDocumentMoniker": "CourierPanel.xaml",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\CourierPanel.xaml",
+              "RelativeToolTip": "CourierPanel.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-02-24T22:24:26.572Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CourierPanel.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\CourierPanel.xaml.cs",
+              "RelativeDocumentMoniker": "CourierPanel.xaml.cs",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\CourierPanel.xaml.cs",
+              "RelativeToolTip": "CourierPanel.xaml.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAIwDcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T22:32:38.401Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ApiService.cs",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\Services\\ApiService.cs",
+              "RelativeDocumentMoniker": "Services\\ApiService.cs",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\Services\\ApiService.cs",
+              "RelativeToolTip": "Services\\ApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T15:17:49.128Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CustomMessageBox.xaml",
+              "DocumentMoniker": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\CustomMessageBox.xaml",
+              "RelativeDocumentMoniker": "CustomMessageBox.xaml",
+              "ToolTip": "C:\\Users\\pitsz\\Desktop\\adminPanel\\frontend\\CustomMessageBox.xaml",
+              "RelativeToolTip": "CustomMessageBox.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-02-23T06:29:32.364Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
