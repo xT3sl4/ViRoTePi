@@ -15,6 +15,7 @@ namespace frontend
     public partial class MainWindow : Window
     {
         private int? klientId;
+        private int? _userId;
         private string _selectedPaczkomatName = null;
 
         public MainWindow()
@@ -23,14 +24,17 @@ namespace frontend
             ConfigureUIForGuest();
         }
 
-        public MainWindow(int? klientId, string selfie = null)
+        public MainWindow(int? klientId, string selfie = null, int? userId = null)
         {
             InitializeComponent();
             this.klientId = klientId;
-            LoadProfileImage(selfie);
+            this._userId = userId;
 
             if (klientId.HasValue)
             {
+                // Zalogowany — pokaż selfie i przycisk wyloguj
+                ConfigureUIForLoggedIn(selfie, userId);
+
                 Loaded += async (s, e) =>
                 {
                     List<Pack> packs = await GetPacksAsync(this.klientId);
@@ -43,30 +47,98 @@ namespace frontend
             }
         }
 
-        private void LoadProfileImage(string selfieFileName)
+        // ── UI helpers ────────────────────────────────────────────────────────
+
+        private void ConfigureUIForLoggedIn(string selfieFileName, int? userId)
+        {
+            // Pokaż panel zalogowanego, ukryj przycisk "Zaloguj się"
+            LoggedInPanel.Visibility = Visibility.Visible;
+            LoginBtn.Visibility = Visibility.Collapsed;
+
+            // Pobierz i ustaw selfie
+            LoadSelfie(selfieFileName);
+
+            // Pokaż imię jeśli uda się pobrać (async — nie blokujemy UI)
+            if (userId.HasValue)
+                _ = LoadUserNameAsync(userId.Value);
+
+            // Pokaż listę paczek jako domyślny widok
+            PackagesPanel.Visibility = Visibility.Visible;
+            SendPackagePanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void ConfigureUIForGuest()
+        {
+            // Gość — ukryj selfie i wyloguj, pokaż "Zaloguj się"
+            LoggedInPanel.Visibility = Visibility.Collapsed;
+            LoginBtn.Visibility = Visibility.Visible;
+            SelfieEllipse.Visibility = Visibility.Collapsed;
+            DefaultUserIcon.Visibility = Visibility.Visible;
+
+            PackagesPanel.Visibility = Visibility.Collapsed;
+            SendPackagePanel.Visibility = Visibility.Visible;
+        }
+
+        private void LoadSelfie(string selfieFileName)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(selfieFileName)) return;
-                string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", selfieFileName);
-                if (!System.IO.File.Exists(path)) return;
+                if (string.IsNullOrWhiteSpace(selfieFileName))
+                {
+                    // Brak selfie — zostaje domyślna ikona
+                    SelfieEllipse.Visibility = Visibility.Collapsed;
+                    DefaultUserIcon.Visibility = Visibility.Visible;
+                    return;
+                }
+
+                string path = System.IO.Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory, "Images", selfieFileName);
+
+                if (!System.IO.File.Exists(path))
+                {
+                    SelfieEllipse.Visibility = Visibility.Collapsed;
+                    DefaultUserIcon.Visibility = Visibility.Visible;
+                    return;
+                }
+
                 var bitmap = new System.Windows.Media.Imaging.BitmapImage();
                 bitmap.BeginInit();
                 bitmap.UriSource = new Uri(path, UriKind.Absolute);
                 bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
                 bitmap.EndInit();
+
                 ProfileImageBrush.ImageSource = bitmap;
+                SelfieEllipse.Visibility = Visibility.Visible;
+                DefaultUserIcon.Visibility = Visibility.Collapsed;
+            }
+            catch
+            {
+                SelfieEllipse.Visibility = Visibility.Collapsed;
+                DefaultUserIcon.Visibility = Visibility.Visible;
+            }
+        }
+
+        private async Task LoadUserNameAsync(int userId)
+        {
+            try
+            {
+                using (var client = CreateHttpClient())
+                {
+                    var response = await client.GetAsync($"api/users/{userId}");
+                    if (!response.IsSuccessStatusCode) return;
+
+                    string json = await response.Content.ReadAsStringAsync();
+                    var user = JsonSerializer.Deserialize<UserProfile>(json,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    if (user != null)
+                        UserNameText.Text = $"{user.Name} {user.Surname}";
+                }
             }
             catch { }
         }
 
-        private void ConfigureUIForGuest()
-        {
-            PackagesPanel.Visibility = Visibility.Collapsed;
-            SendPackagePanel.Visibility = Visibility.Visible;
-        }
-
-        #region Modele
+        // ── Modele ────────────────────────────────────────────────────────────
 
         public class Pack
         {
@@ -85,7 +157,7 @@ namespace frontend
 
         public class PaczkomatMapaData
         {
-            public int id { get; set; }     
+            public int id { get; set; }
             public string name { get; set; }
             public double lat { get; set; }
             public double lon { get; set; }
@@ -95,9 +167,18 @@ namespace frontend
         {
             public bool Exists { get; set; }
         }
-        #endregion
 
-        #region HttpClient
+        public class UserProfile
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Surname { get; set; }
+            public string Email { get; set; }
+            public int? PhoneNumber { get; set; }
+            public string Role { get; set; }
+        }
+
+        // ── HttpClient ────────────────────────────────────────────────────────
 
         private static HttpClient CreateHttpClient()
         {
@@ -118,8 +199,8 @@ namespace frontend
             using (HttpClient client = CreateHttpClient())
             {
                 string url = $"api/packs?klientId={klientId}";
-
                 HttpResponseMessage response = await client.GetAsync(url);
+
                 if (!response.IsSuccessStatusCode)
                 {
                     MessageBox.Show($"Błąd pobierania paczek: {response.StatusCode}");
@@ -127,7 +208,6 @@ namespace frontend
                 }
 
                 string json = await response.Content.ReadAsStringAsync();
-
                 PackResponse wrapper = JsonSerializer.Deserialize<PackResponse>(json,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
@@ -141,8 +221,9 @@ namespace frontend
             {
                 try
                 {
-                    HttpResponseMessage response = await client.GetAsync($"api/auth/check-email?email={Uri.EscapeDataString(email)}");
-                    
+                    HttpResponseMessage response = await client.GetAsync(
+                        $"api/auth/check-email?email={Uri.EscapeDataString(email)}");
+
                     if (response.IsSuccessStatusCode)
                     {
                         string json = await response.Content.ReadAsStringAsync();
@@ -152,10 +233,7 @@ namespace frontend
                     }
                     return false;
                 }
-                catch
-                {
-                    return false;
-                }
+                catch { return false; }
             }
         }
 
@@ -165,8 +243,9 @@ namespace frontend
             {
                 try
                 {
-                    HttpResponseMessage response = await client.GetAsync($"api/auth/check-phone?phone={Uri.EscapeDataString(phone)}");
-                    
+                    HttpResponseMessage response = await client.GetAsync(
+                        $"api/auth/check-phone?phone={Uri.EscapeDataString(phone)}");
+
                     if (response.IsSuccessStatusCode)
                     {
                         string json = await response.Content.ReadAsStringAsync();
@@ -176,23 +255,17 @@ namespace frontend
                     }
                     return false;
                 }
-                catch
-                {
-                    return false;
-                }
+                catch { return false; }
             }
         }
 
-        #endregion
-
-        #region Menu i panele
+        // ── Nawigacja ─────────────────────────────────────────────────────────
 
         public async void Packages_Click(object sender, RoutedEventArgs e)
         {
-
             if (!klientId.HasValue)
             {
-                MessageBox.Show("Musisz być zalogowany, aby zobaczyć swoje paczki.", 
+                MessageBox.Show("Musisz być zalogowany, aby zobaczyć swoje paczki.",
                     "Wymagane logowanie", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -213,16 +286,82 @@ namespace frontend
         private void MapButton_Click(object sender, RoutedEventArgs e) => OtworzMape();
         private void LockerButton_Click(object sender, RoutedEventArgs e) => OtworzMape();
 
+        // Kliknięcie na zdjęcie/ikonę — edycja profilu (tylko gdy zalogowany)
         public void User_Click(object sender, RoutedEventArgs e)
         {
-            LoginPage loginWindow = new LoginPage();
-            loginWindow.Show();
-            Window.GetWindow((DependencyObject)sender)?.Close();
+            if (_userId.HasValue)
+            {
+                OpenProfileEdit();
+            }
+            else
+            {
+                // Gość — wróć do logowania
+                LoginPage loginWindow = new LoginPage();
+                loginWindow.Show();
+                this.Close();
+            }
         }
 
-        #endregion
+        // Wylogowanie
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var confirm = MessageBox.Show(
+                "Czy na pewno chcesz się wylogować?",
+                "Wylogowanie",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
 
-        #region Wybór paczki i slider
+            if (confirm != MessageBoxResult.Yes)
+                return;
+
+            LoginPage loginPage = new LoginPage();
+            loginPage.Show();
+            this.Close();
+        }
+
+        private async void OpenProfileEdit()
+        {
+            using (var client = CreateHttpClient())
+            {
+                try
+                {
+                    var response = await client.GetAsync($"api/users/{_userId}");
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Nie udało się pobrać danych profilu.", "Błąd",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    string json = await response.Content.ReadAsStringAsync();
+                    var user = JsonSerializer.Deserialize<UserProfile>(json,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    if (user == null) return;
+
+                    var editWindow = new ProfileEditWindow(
+                        userId: _userId.Value,
+                        name: user.Name ?? "",
+                        surname: user.Surname ?? "",
+                        email: user.Email ?? "",
+                        phone: user.PhoneNumber?.ToString() ?? ""
+                    );
+                    editWindow.Owner = this;
+                    editWindow.ProfileUpdated += () =>
+                    {
+                        // Odśwież imię w nagłówku po zapisie
+                        _ = LoadUserNameAsync(_userId.Value);
+                    };
+                    editWindow.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Błąd: " + ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        // ── Slider i rozmiary paczki ──────────────────────────────────────────
 
         private void small_parcel_Selected(object sender, RoutedEventArgs e) => price_to_pay.Text = "Do zapłaty: 14.99 zł";
         private void medium_parcel_Selected(object sender, RoutedEventArgs e) => price_to_pay.Text = "Do zapłaty: 16.99 zł";
@@ -240,9 +379,7 @@ namespace frontend
                 PhoneValueText.Text = ((long)e.NewValue).ToString("000 000 000");
         }
 
-        #endregion
-
-        #region Wysyłanie paczki
+        // ── Wysyłanie paczki ──────────────────────────────────────────────────
 
         public class SendPackRequest
         {
@@ -262,7 +399,7 @@ namespace frontend
             {
                 var wybrany = mapaWindow.WybranyPaczkomat;
                 if (wybrany != null)
-                {   
+                {
                     _selectedPaczkomatName = wybrany.name;
                     SelectedLockerInfo.Text = $"Wybrany punkt: {wybrany.name}";
                     SelectedLockerInfo.FontStyle = FontStyles.Normal;
@@ -274,7 +411,6 @@ namespace frontend
 
         private async void SendButton_Click(object sender, RoutedEventArgs e)
         {
-  
             string senderEmail = EmailAdres_TextBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(senderEmail))
             {
@@ -322,7 +458,6 @@ namespace frontend
                 {
                     var result = MessageBox.Show(
                         $"Nie znaleziono konta powiązanego z adresem email: {senderEmail}\n\n" +
-
                         "Czy chcesz utworzyć nowe konto?",
                         "Brak konta nadawcy",
                         MessageBoxButton.YesNo,
@@ -341,15 +476,13 @@ namespace frontend
                             return;
                         }
                     }
-                    else
-                    {
-                        return;
-                    }
+                    else return;
                 }
             }
+
             var request = new SendPackRequest
             {
-                ReceiverEmail = senderEmail, 
+                ReceiverEmail = senderEmail,
                 ReceiverPhone = receiverPhone,
                 Size = size,
                 PaczkomatName = _selectedPaczkomatName
@@ -358,13 +491,14 @@ namespace frontend
             using (var client = CreateHttpClient())
             {
                 string json = System.Text.Json.JsonSerializer.Serialize(request);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");   
+                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync("api/packs/send", content);
                 string responseBody = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Paczka została wysłana pomyślnie!", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Paczka została wysłana pomyślnie!", "Sukces",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
                     EmailAdres_TextBox.Text = "";
                     PhoneValueText.Text = "500 000 000";
                     PhoneSlider.Value = 500000000;
@@ -388,6 +522,5 @@ namespace frontend
                 }
             }
         }
-        #endregion
     }
 }

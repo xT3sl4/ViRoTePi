@@ -43,6 +43,7 @@ namespace paczkomat.Controllers
             {
                 IsAuthenticated = true,
                 Role = user.role,
+                UserId = user.id,
                 KlientId = klientId,
                 KurierId = kurierId,
                 Selfie = user.selfie
@@ -80,15 +81,16 @@ namespace paczkomat.Controllers
             {
                 IsAuthenticated = true,
                 Role = user.role,
+                UserId = user.id,
                 KlientId = klientId,
                 KurierId = kurierId,
                 Selfie = user.selfie
             });
         }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-
             if (string.IsNullOrWhiteSpace(request.Email))
                 return BadRequest(new { message = "Email jest wymagany." });
 
@@ -142,7 +144,8 @@ namespace paczkomat.Controllers
             _context.klients.Add(newKlient);
             await _context.SaveChangesAsync();
 
-            return Ok(new { 
+            return Ok(new
+            {
                 message = "Konto zostało utworzone pomyślnie.",
                 userId = newUser.id,
                 klientId = newKlient.klient_id

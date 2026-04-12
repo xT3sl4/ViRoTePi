@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using paczkomat.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace paczkomat.Controllers
 {
@@ -26,24 +27,27 @@ namespace paczkomat.Controllers
             public int? PhoneNumber { get; set; }
         }
 
-        // DTO do tworzenia/edycji użytkownika
+        // DTO do tworzenia użytkownika (przez admina — rola wymagana)
         public class UserCreateRequest
         {
             public string Name { get; set; }
             public string Surname { get; set; }
             public string Email { get; set; }
             public string Password { get; set; }
+            [Required]
             public string Role { get; set; }
             public string PhoneNumber { get; set; }
         }
 
+        // DTO do edycji użytkownika — rola jest opcjonalna
+        // (klient edytuje swój profil bez podawania roli)
         public class UserUpdateRequest
         {
             public string Name { get; set; }
             public string Surname { get; set; }
             public string Email { get; set; }
             public string Password { get; set; }
-            public string Role { get; set; }
+            public string? Role { get; set; }   // nullable — nie wymagana
             public string PhoneNumber { get; set; }
         }
 
@@ -85,7 +89,7 @@ namespace paczkomat.Controllers
             });
         }
 
-        // POST api/users - dodaj nowego użytkownika
+        // POST api/users - dodaj nowego użytkownika (przez admina)
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] UserCreateRequest request)
         {
@@ -100,12 +104,10 @@ namespace paczkomat.Controllers
             if (string.IsNullOrWhiteSpace(request.Role))
                 return BadRequest(new { message = "Rola jest wymagana." });
 
-            // Sprawdź unikalność emaila
             var emailExists = await _context.users.AnyAsync(u => u.email == request.Email);
             if (emailExists)
                 return BadRequest(new { message = "Użytkownik z tym adresem email już istnieje." });
 
-            // Parsuj telefon
             int? phone = null;
             if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
             {
@@ -132,7 +134,6 @@ namespace paczkomat.Controllers
             _context.users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            // Utwórz odpowiedni rekord zależnie od roli
             if (request.Role == "klient")
             {
                 _context.klients.Add(new klient { user_id = newUser.id, pack_id = 0 });
@@ -153,6 +154,7 @@ namespace paczkomat.Controllers
         }
 
         // PUT api/users/{id} - edytuj użytkownika
+        // Rola jest opcjonalna — jeśli nie podana, pozostaje bez zmian
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserUpdateRequest request)
         {
@@ -160,7 +162,15 @@ namespace paczkomat.Controllers
             if (user == null)
                 return NotFound(new { message = "Użytkownik nie istnieje." });
 
-            // Sprawdź unikalność emaila (pomijając siebie)
+            // Imię
+            if (!string.IsNullOrWhiteSpace(request.Name))
+                user.name = request.Name.Trim();
+
+            // Nazwisko
+            if (!string.IsNullOrWhiteSpace(request.Surname))
+                user.surname = request.Surname.Trim();
+
+            // Email — sprawdź unikalność (pomijając siebie)
             if (!string.IsNullOrWhiteSpace(request.Email) && request.Email != user.email)
             {
                 var emailExists = await _context.users.AnyAsync(u => u.email == request.Email && u.id != id);
@@ -169,7 +179,11 @@ namespace paczkomat.Controllers
                 user.email = request.Email.Trim();
             }
 
-            // Sprawdź unikalność telefonu (pomijając siebie)
+            // Hasło — tylko jeśli podane
+            if (!string.IsNullOrWhiteSpace(request.Password))
+                user.password = request.Password;
+
+            // Telefon — sprawdź unikalność (pomijając siebie)
             if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
             {
                 string cleanPhone = request.PhoneNumber.Replace(" ", "").Replace("-", "");
@@ -183,14 +197,7 @@ namespace paczkomat.Controllers
                 user.phone_number = parsedPhone;
             }
 
-            if (!string.IsNullOrWhiteSpace(request.Name))
-                user.name = request.Name.Trim();
-            if (!string.IsNullOrWhiteSpace(request.Surname))
-                user.surname = request.Surname.Trim();
-            if (!string.IsNullOrWhiteSpace(request.Password))
-                user.password = request.Password;
-
-            // Zmiana roli — aktualizuj powiązane tabele
+            // Rola — tylko jeśli podana i różna od obecnej (admin zmienia rolę)
             if (!string.IsNullOrWhiteSpace(request.Role) && request.Role != user.role)
             {
                 // Usuń stary rekord roli
@@ -241,7 +248,6 @@ namespace paczkomat.Controllers
             if (user == null)
                 return NotFound(new { message = "Użytkownik nie istnieje." });
 
-            // Kaskadowe usunięcie obsługuje baza danych (ON DELETE CASCADE)
             _context.users.Remove(user);
             await _context.SaveChangesAsync();
 

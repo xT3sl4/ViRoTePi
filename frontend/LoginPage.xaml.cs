@@ -29,6 +29,7 @@ namespace frontend
         {
             public bool IsAuthenticated { get; set; }
             public string Role { get; set; }
+            public int? UserId { get; set; }
             public int? KlientId { get; set; }
             public int? KurierId { get; set; }
             public string Selfie { get; set; }
@@ -76,6 +77,27 @@ namespace frontend
             }
         }
 
+        // Wspólna metoda nawigacji po zalogowaniu
+        private void NavigateToPanel(LoginResponse result)
+        {
+            switch (result.Role)
+            {
+                case "kurier":
+                    new CourierPanel(result.KurierId, result.Selfie).Show();
+                    break;
+                case "klient":
+                    new MainWindow(result.KlientId, result.Selfie, result.UserId).Show();
+                    break;
+                case "admin":
+                    new AdminPanel(result.Selfie).Show();
+                    break;
+                default:
+                    MessageBox.Show("Nieznana rola użytkownika.");
+                    return;
+            }
+            this.Close();
+        }
+
         private async void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
             string email = txtUsername.Text;
@@ -84,32 +106,11 @@ namespace frontend
             try
             {
                 var result = await LoginApiAsync(email, password);
-               
+
                 if (result != null && result.IsAuthenticated)
-                {
-                    switch (result.Role)
-                    {
-                        case "kurier":
-                            new CourierPanel(result.KurierId, result.Selfie).Show();
-                            break;
-                        case "klient":
-                            MainWindow main = new MainWindow(result.KlientId, result.Selfie);
-                            main.Show();
-                            break;
-                        case "admin":
-                            AdminPanel adminPanel = new AdminPanel(result.Selfie);
-                            adminPanel.Show();
-                            break;
-                        default:
-                            MessageBox.Show("Nieznana rola użytkownika.");
-                            return;
-                    }
-                    this.Close();
-                }
+                    NavigateToPanel(result);
                 else
-                {
                     MessageBox.Show("Błędne dane logowania!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
             catch (Exception ex)
             {
@@ -156,43 +157,37 @@ namespace frontend
 
                 if (credential == null || string.IsNullOrEmpty(credential.Token.AccessToken))
                 {
-                    string email2 = await GetGoogleEmailAsync(credential.Token.AccessToken);
-                    MessageBox.Show("Email z Google: '" + email2 + "'");
                     MessageBox.Show("Nie udało się pobrać tokena Google.");
                     return;
                 }
-                string email = await GetGoogleEmailAsync(credential.Token.AccessToken);
-                if (string.IsNullOrEmpty(email))
+
+                // Pobierz pełne dane użytkownika z Google (imię, nazwisko, email)
+                var googleUser = await GetGoogleUserInfoAsync(credential.Token.AccessToken);
+                if (googleUser == null || string.IsNullOrEmpty(googleUser.Email))
                 {
                     MessageBox.Show("Nie udało się pobrać adresu email z konta Google.");
                     return;
                 }
-                var result = await LoginGoogleApiAsync(email);
 
+                // Sprawdź czy konto istnieje
+                var result = await LoginGoogleApiAsync(googleUser.Email);
 
-                if (result == null || !result.IsAuthenticated)
+                if (result != null && result.IsAuthenticated)
                 {
-                    MessageBox.Show("Brak konta powiązanego z tym adresem Google.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    // Konto istnieje — zaloguj normalnie
+                    NavigateToPanel(result);
                 }
-
-                switch (result.Role)
+                else
                 {
-                    case "kurier":
-                        new CourierPanel(result.KurierId, result.Selfie).Show(); 
-                        break;
-                    case "klient":
-                        new MainWindow(result.KlientId, result.Selfie).Show();
-                        break;
-                    case "admin":
-                        new AdminPanel(result.Selfie).Show();
-                        break;
-                    default:
-                        MessageBox.Show("Nieznana rola użytkownika.");
-                        return;
+                    // Brak konta — otwórz rejestrację z danymi z Google już wypełnionymi
+                    var registerWindow = new RegisterWindow(
+                        email: googleUser.Email,
+                        firstName: googleUser.GivenName ?? "",
+                        lastName: googleUser.FamilyName ?? ""
+                    );
+                    registerWindow.Show();
+                    this.Close();
                 }
-
-                this.Close();
             }
             catch (Exception ex)
             {
@@ -200,27 +195,21 @@ namespace frontend
             }
         }
 
-        private async Task<string> GetGoogleEmailAsync(string accessToken)
+        private async Task<GoogleUserInfo> GetGoogleUserInfoAsync(string accessToken)
         {
             using (var http = new HttpClient())
             {
                 http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var response = await http.GetAsync("https://www.googleapis.com/oauth2/v2/userinfo");
 
-               
-                string raw = await response.Content.ReadAsStringAsync();
-                
-
                 if (!response.IsSuccessStatusCode)
                     return null;
 
-                var userInfo = JsonSerializer.Deserialize<GoogleUserInfo>(raw,
+                string raw = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<GoogleUserInfo>(raw,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-                return userInfo?.Email;
             }
         }
-
 
         private async Task<LoginResponse> LoginGoogleApiAsync(string email)
         {
@@ -231,10 +220,7 @@ namespace frontend
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await client.PostAsync("api/auth/login-google", content);
-
-                
                 string rawResponse = await response.Content.ReadAsStringAsync();
-                
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -255,13 +241,14 @@ namespace frontend
         {
             public string Email { get; set; }
             public string Name { get; set; }
+            public string GivenName { get; set; }
+            public string FamilyName { get; set; }
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow registerWindow = new RegisterWindow();
             registerWindow.Show();
-
             this.Close();
         }
     }

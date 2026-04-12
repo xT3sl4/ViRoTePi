@@ -3,7 +3,7 @@ using paczkomat.Models;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<inpostContext>();
+
 
 builder.Services.AddDbContext<inpostContext>(options =>
     options.UseMySql(
@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

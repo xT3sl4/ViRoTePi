@@ -1,12 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "OK2o7TTDDCeuhebOxsEQbr8VsNLDnyeBlwlCsW4EtJU=",
-  "Source": "paczkomat",
-  "BasePath": "_content/paczkomat",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
-}
+{"Version":1,"Hash":"QauGvjZEl7qBOJCYawccPyMVGDOliGyeQluJKhmFylk=","Source":"paczkomat","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}

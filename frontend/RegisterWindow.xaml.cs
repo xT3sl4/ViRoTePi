@@ -16,13 +16,13 @@ namespace frontend
     {
         private string _prefilledEmail;
 
-
+        // Konstruktor domyślny — puste pola
         public RegisterWindow()
         {
             InitializeComponent();
         }
 
-
+        // Konstruktor z samym emailem (stary — zachowany dla kompatybilności z MainWindow)
         public RegisterWindow(string email)
         {
             InitializeComponent();
@@ -33,6 +33,33 @@ namespace frontend
                 EmailBox.Text = email;
                 NameBox.Focus();
             }
+        }
+
+        // Konstruktor wywoływany gdy login Google nie znajdzie konta
+        // Wypełnia email, imię i nazwisko pobrane z Google
+        public RegisterWindow(string email, string firstName, string lastName)
+        {
+            InitializeComponent();
+            _prefilledEmail = email;
+
+            if (!string.IsNullOrWhiteSpace(email))
+                EmailBox.Text = email;
+
+            if (!string.IsNullOrWhiteSpace(firstName))
+                NameBox.Text = firstName;
+
+            if (!string.IsNullOrWhiteSpace(lastName))
+                SurnameBox.Text = lastName;
+
+            // Pokaż baner informacyjny że dane przyszły z Google
+            if (!string.IsNullOrWhiteSpace(email) || !string.IsNullOrWhiteSpace(firstName))
+            {
+                GoogleInfoBanner.Visibility = Visibility.Visible;
+                GoogleInfoText.Text = $"Dane pobrane z Google ({email})";
+            }
+
+            // Ustaw focus na polu hasła bo reszta jest już wypełniona
+            PasswordBox.Focus();
         }
 
         private static HttpClient CreateHttpClient()
@@ -50,6 +77,7 @@ namespace frontend
         private async void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
             ErrorText.Text = "";
+
             if (string.IsNullOrWhiteSpace(NameBox.Text))
             {
                 ErrorText.Text = "Podaj imię.";
@@ -91,6 +119,7 @@ namespace frontend
                 EmailBox.Focus();
                 return;
             }
+
             string phoneClean = PhoneBox.Text.Replace(" ", "").Replace("-", "").Trim();
             if (!long.TryParse(phoneClean, out _))
             {
@@ -126,8 +155,12 @@ namespace frontend
 
                     if (response.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Konto zostało utworzone pomyślnie!\n\nMożesz teraz wysłać paczkę lub zalogować się.", 
+                        MessageBox.Show(
+                            "Konto zostało utworzone pomyślnie!\n\nMożesz się teraz zalogować.",
                             "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        LoginPage loginPage = new LoginPage();
+                        loginPage.Show();
                         this.Close();
                     }
                     else
@@ -136,13 +169,9 @@ namespace frontend
                         {
                             var error = JsonDocument.Parse(responseBody);
                             if (error.RootElement.TryGetProperty("message", out var messageProperty))
-                            {
                                 ErrorText.Text = messageProperty.GetString();
-                            }
                             else
-                            {
                                 ErrorText.Text = "Błąd rejestracji: " + responseBody;
-                            }
                         }
                         catch
                         {
@@ -157,28 +186,7 @@ namespace frontend
             }
         }
 
-        private bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        private void User_Click(object sender, RoutedEventArgs e)
-        {
-            LoginPage loginWindow = new LoginPage();
-            loginWindow.Show();
-            this.Close();
-        }
-
-        // UWAGA: Rejestracja przez Google zostanie zaimplementowana później
-        // Na razie przycisk może być ukryty lub nieaktywny w XAML
-        /*
+        // Przycisk "Uzupełnij z Google" — wypełnia formularz danymi z Google
         private async void RegisterGoogle_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -232,12 +240,23 @@ namespace frontend
                 var googleUser = JsonSerializer.Deserialize<GoogleUserInfo>(googleJson,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                // Uzupełnij formularz danymi z Google
-                EmailBox.Text = googleUser.Email ?? "";
-                NameBox.Text = googleUser.GivenName ?? googleUser.Name ?? "";
+                // Wypełnij formularz danymi z Google
+                if (!string.IsNullOrWhiteSpace(googleUser?.Email))
+                    EmailBox.Text = googleUser.Email;
 
-                MessageBox.Show($"Pobrano dane z Google: {googleUser.Email}\nUzupełnij pozostałe pola i kliknij Utwórz konto.",
-                                "Google", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (!string.IsNullOrWhiteSpace(googleUser?.GivenName))
+                    NameBox.Text = googleUser.GivenName;
+                else if (!string.IsNullOrWhiteSpace(googleUser?.Name))
+                    NameBox.Text = googleUser.Name.Split(' ')[0];
+
+                if (!string.IsNullOrWhiteSpace(googleUser?.FamilyName))
+                    SurnameBox.Text = googleUser.FamilyName;
+
+                // Pokaż baner potwierdzający
+                GoogleInfoBanner.Visibility = Visibility.Visible;
+                GoogleInfoText.Text = $"Dane pobrane z Google ({googleUser?.Email})";
+
+                PasswordBox.Focus();
             }
             catch (Exception ex)
             {
@@ -264,7 +283,27 @@ namespace frontend
             public string Email { get; set; }
             public string Name { get; set; }
             public string GivenName { get; set; }
+            public string FamilyName { get; set; }
         }
-        */
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void User_Click(object sender, RoutedEventArgs e)
+        {
+            LoginPage loginWindow = new LoginPage();
+            loginWindow.Show();
+            this.Close();
+        }
     }
 }

@@ -24,36 +24,95 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <!-- Nagłówek -->
             <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
                 <Grid Height="120">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="Images/inpost_logo.png" Height="100" Grid.Column="0" HorizontalAlignment="Left" Margin="20,0,0,0"/>
-                    <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0">
-                        <Ellipse Width="64" Height="64" Margin="0,0,12,0">
-                            <Ellipse.Fill>
-                                <ImageBrush x:Name="ProfileImageBrush" Stretch="UniformToFill"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <Button BorderBrush="Transparent" Background="Transparent" Height="64" x:Name="User" Click="User_Click">
-                            <Image Source="Images/user.png" Height="64"/>
+
+                    <Image Source="Images/inpost_logo.png" Height="100" Grid.Column="0"
+                           HorizontalAlignment="Left" Margin="20,0,0,0"/>
+
+                    <!-- Prawa strona: selfie + imię + przyciski -->
+                    <StackPanel Orientation="Horizontal" Grid.Column="2"
+                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                Margin="0,0,20,0">
+
+                        <!-- Selfie / domyślna ikona -->
+                        <Button BorderBrush="Transparent" Background="Transparent"
+                                Height="64" Width="64" Margin="0,0,10,0"
+                                Click="User_Click" ToolTip="Edytuj profil"
+                                Cursor="Hand">
+                            <Grid>
+                                <!-- Ikona domyślna (gdy nie ma selfie) -->
+                                <Image x:Name="DefaultUserIcon" Source="Images/user.png"
+                                       Height="64" Width="64"/>
+                                <!-- Selfie w kółku (pokazywane gdy zalogowany) -->
+                                <Ellipse x:Name="SelfieEllipse" Width="64" Height="64"
+                                         Visibility="Collapsed">
+                                    <Ellipse.Fill>
+                                        <ImageBrush x:Name="ProfileImageBrush" Stretch="UniformToFill"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Grid>
                         </Button>
+
+                        <!-- Imię użytkownika + wyloguj (tylko gdy zalogowany) -->
+                        <StackPanel x:Name="LoggedInPanel" Visibility="Collapsed"
+                                    VerticalAlignment="Center">
+                            <TextBlock x:Name="UserNameText"
+                                       Text=""
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Foreground="#333"
+                                       Margin="0,0,0,4"/>
+                            <Button x:Name="LogoutBtn"
+                                    Content="Wyloguj"
+                                    Click="LogoutBtn_Click"
+                                    Background="#FF6200"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    FontSize="11"
+                                    Padding="12,5"
+                                    BorderThickness="0"
+                                    Cursor="Hand"/>
+                        </StackPanel>
+
+                        <!-- Zaloguj (tylko gdy gość) -->
+                        <Button x:Name="LoginBtn"
+                                Content="Zaloguj się"
+                                Visibility="Collapsed"
+                                Click="User_Click"
+                                Background="#FFCD00"
+                                Foreground="Black"
+                                FontWeight="Bold"
+                                FontSize="12"
+                                Padding="16,8"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                VerticalAlignment="Center"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>
 
+            <!-- Menu boczne -->
             <Grid Grid.Row="1" Grid.Column="0">
                 <StackPanel Margin="10">
-                    <Button Content="Moje paczki" Height="60" FontSize="18" Margin="0,5" Click="Packages_Click" Style="{StaticResource MenuButtonStyle}"/>
-                    <Button Content="Wyślij paczkę" Height="60" FontSize="18" Margin="0,5" Click="SendPackage_Click" Style="{StaticResource MenuButtonStyle}"/>
-                    <Button Content="Mapa punktów" Height="60" FontSize="18" Margin="0,5" Click="MapButton_Click" Style="{StaticResource MenuButtonStyle}"/>
-                    <Button Content="Pomoc" Height="60" FontSize="18" Margin="0,5" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Content="Moje paczki" Height="60" FontSize="18" Margin="0,5"
+                            Click="Packages_Click" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Content="Wyślij paczkę" Height="60" FontSize="18" Margin="0,5"
+                            Click="SendPackage_Click" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Content="Mapa punktów" Height="60" FontSize="18" Margin="0,5"
+                            Click="MapButton_Click" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Content="Pomoc" Height="60" FontSize="18" Margin="0,5"
+                            Style="{StaticResource MenuButtonStyle}"/>
                 </StackPanel>
             </Grid>
 
+            <!-- Panele główne -->
             <Grid Grid.Row="1" Grid.Column="1">
                 <StackPanel x:Name="PackagesPanel" Visibility="Visible" Margin="10">
                     <TextBlock Text="Twoje Paczki" FontSize="24" FontWeight="Bold" Margin="0,0,0,15"/>
@@ -72,6 +131,7 @@
                         </DataGrid>
                     </Border>
                 </StackPanel>
+
                 <StackPanel x:Name="SendPackagePanel" Visibility="Collapsed" Margin="10">
                     <TextBlock Text="Wyślij paczkę" FontSize="24" FontWeight="Bold" Margin="0,0,0,15"/>
                     <Border Width="770" Height="450" Background="White" CornerRadius="6">
@@ -88,8 +148,11 @@
                                 <TextBox x:Name="EmailAdres_TextBox" Margin="0,5"/>
                                 <TextBlock Text="Numer telefonu odbiorcy" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
                                 <StackPanel Orientation="Horizontal">
-                                    <Slider x:Name="PhoneSlider" Minimum="500000000" Maximum="899999999" TickFrequency="1" IsSnapToTickEnabled="True" Width="590" KeyDown="PhoneSlider_KeyDown" ValueChanged="PhoneSlider_ValueChanged"/>
-                                    <TextBlock x:Name="PhoneValueText" Text="500 000 000" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Margin="15,0,0,0"/>
+                                    <Slider x:Name="PhoneSlider" Minimum="500000000" Maximum="899999999"
+                                            TickFrequency="1" IsSnapToTickEnabled="True" Width="590"
+                                            KeyDown="PhoneSlider_KeyDown" ValueChanged="PhoneSlider_ValueChanged"/>
+                                    <TextBlock x:Name="PhoneValueText" Text="500 000 000" FontSize="18"
+                                               FontWeight="Bold" VerticalAlignment="Center" Margin="15,0,0,0"/>
                                 </StackPanel>
                                 <TextBlock Text="Rozmiar paczki" FontWeight="Bold" FontSize="16" Margin="0,10,0,10"/>
                                 <ListBox x:Name="parcel_size_ListBox" Height="230" Background="Transparent" BorderThickness="0">
@@ -100,7 +163,8 @@
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="ListBoxItem">
-                                                        <Border x:Name="border" Background="White" CornerRadius="12" Padding="15" BorderBrush="#E0E0E0" BorderThickness="1">
+                                                        <Border x:Name="border" Background="White" CornerRadius="12"
+                                                                Padding="15" BorderBrush="#E0E0E0" BorderThickness="1">
                                                             <ContentPresenter/>
                                                         </Border>
                                                         <ControlTemplate.Triggers>
@@ -142,14 +206,17 @@
                                     </ListBoxItem>
                                 </ListBox>
                                 <TextBlock x:Name="price_to_pay" Text="" Foreground="Gray" FontStyle="Italic"/>
-                                <Button Content="Wybierz Paczkomat z Mapy" Click="LockerButton_Click" Background="#FAD02A" Height="40" Margin="0,10"/>
-                                <TextBlock x:Name="SelectedLockerInfo" Text="Nie wybrano paczkomatu" Foreground="Gray" FontStyle="Italic"/>
-                                <Button Content="Wyślij" Click="SendButton_Click" Background="#FAD02A" Height="40" Margin="0,10"/>
+                                <Button Content="Wybierz Paczkomat z Mapy" Click="LockerButton_Click"
+                                        Background="#FAD02A" Height="40" Margin="0,10"/>
+                                <TextBlock x:Name="SelectedLockerInfo" Text="Nie wybrano paczkomatu"
+                                           Foreground="Gray" FontStyle="Italic"/>
+                                <Button Content="Wyślij" Click="SendButton_Click"
+                                        Background="#FAD02A" Height="40" Margin="0,10"/>
                             </StackPanel>
                         </ScrollViewer>
                     </Border>
                 </StackPanel>
-                </Grid>
-           </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
