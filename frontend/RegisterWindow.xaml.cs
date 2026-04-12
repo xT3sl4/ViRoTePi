@@ -22,7 +22,7 @@ namespace frontend
             InitializeComponent();
         }
 
-        // Konstruktor z samym emailem (stary — zachowany dla kompatybilności z MainWindow)
+        // Konstruktor z samym emailem (zachowany dla kompatybilności z MainWindow)
         public RegisterWindow(string email)
         {
             InitializeComponent();
@@ -35,8 +35,8 @@ namespace frontend
             }
         }
 
-        // Konstruktor wywoływany gdy login Google nie znajdzie konta
-        // Wypełnia email, imię i nazwisko pobrane z Google
+        // Konstruktor wywoływany gdy login Google nie znajdzie konta —
+        // wypełnia email, imię i nazwisko pobrane z Google
         public RegisterWindow(string email, string firstName, string lastName)
         {
             InitializeComponent();
@@ -58,7 +58,7 @@ namespace frontend
                 GoogleInfoText.Text = $"Dane pobrane z Google ({email})";
             }
 
-            // Ustaw focus na polu hasła bo reszta jest już wypełniona
+            // Ustaw focus na haśle bo reszta jest już wypełniona
             PasswordBox.Focus();
         }
 
@@ -84,35 +84,30 @@ namespace frontend
                 NameBox.Focus();
                 return;
             }
-
             if (string.IsNullOrWhiteSpace(SurnameBox.Text))
             {
                 ErrorText.Text = "Podaj nazwisko.";
                 SurnameBox.Focus();
                 return;
             }
-
             if (string.IsNullOrWhiteSpace(EmailBox.Text))
             {
                 ErrorText.Text = "Podaj adres email.";
                 EmailBox.Focus();
                 return;
             }
-
             if (string.IsNullOrWhiteSpace(PasswordBox.Password))
             {
                 ErrorText.Text = "Podaj hasło.";
                 PasswordBox.Focus();
                 return;
             }
-
             if (string.IsNullOrWhiteSpace(PhoneBox.Text))
             {
                 ErrorText.Text = "Podaj numer telefonu.";
                 PhoneBox.Focus();
                 return;
             }
-
             if (!IsValidEmail(EmailBox.Text.Trim()))
             {
                 ErrorText.Text = "Podaj prawidłowy adres email.";
@@ -127,7 +122,6 @@ namespace frontend
                 PhoneBox.Focus();
                 return;
             }
-
             if (phoneClean.Length < 9 || phoneClean.Length > 11)
             {
                 ErrorText.Text = "Numer telefonu musi mieć 9-11 cyfr.";
@@ -186,33 +180,21 @@ namespace frontend
             }
         }
 
-        // Przycisk "Uzupełnij z Google" — wypełnia formularz danymi z Google
+        // Przycisk "Uzupełnij z Google" — JEDNO AuthorizeAsync = jedno okno przeglądarki
         private async void RegisterGoogle_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 string credentialPath = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    "frontend"
+                    "frontend_google_auth"
                 );
 
+                // Usuń cache — wymusza wybór konta, ale tylko JEDNO okno
                 if (Directory.Exists(credentialPath))
                     Directory.Delete(credentialPath, recursive: true);
 
                 UserCredential credential;
-                using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
-                {
-                    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                        GoogleClientSecrets.FromStream(stream).Secrets,
-                        new[] { "profile", "email" },
-                        "user",
-                        CancellationToken.None,
-                        new FileDataStore(credentialPath, fullPath: true)
-                    );
-                }
-
-                await credential.RevokeTokenAsync(CancellationToken.None);
-
                 using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
                 {
                     credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(

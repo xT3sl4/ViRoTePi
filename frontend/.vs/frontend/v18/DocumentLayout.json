@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\adminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:adminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\registerwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,35 +19,35 @@
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:RegisterWindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\victo\\desktop\\projekt\\virotepi\\frontend\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:custommessagebox.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\victo\\desktop\\projekt\\virotepi\\frontend\\adminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:adminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\victo\\desktop\\projekt\\virotepi\\frontend\\profileeditwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\victo\\desktop\\projekt\\virotepi\\frontend\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\profileeditwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:profileeditwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\victo\\desktop\\projekt\\virotepi\\frontend\\usereditdialog.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\usereditdialog.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:usereditdialog.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|c:\\users\\victo\\desktop\\projekt\\virotepi\\frontend\\profileeditwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\profileeditwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EFC9BA78-E9CE-47BB-A023-9F2A8F8EFA1F}|frontend.csproj|solutionrelative:profileeditwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -86,36 +86,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1211,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\App.xaml",
-              "RelativeDocumentMoniker": "App.xaml",
-              "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\App.xaml",
-              "RelativeToolTip": "App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-04-12T12:36:45.912Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "UserEditDialog.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\UserEditDialog.xaml.cs",
-              "RelativeDocumentMoniker": "UserEditDialog.xaml.cs",
-              "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\UserEditDialog.xaml.cs",
-              "RelativeToolTip": "UserEditDialog.xaml.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T12:07:44.604Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -126,31 +101,30 @@
               "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\ProfileEditWindow.xaml",
               "RelativeToolTip": "ProfileEditWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-04-12T12:01:37.01Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-12T12:01:37.01Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAHgAAAAAAAAAAAA4wI0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAwwAEAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-11T21:06:22.342Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "AdminPanel.xaml.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\AdminPanel.xaml.cs",
               "RelativeDocumentMoniker": "AdminPanel.xaml.cs",
               "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\AdminPanel.xaml.cs",
               "RelativeToolTip": "AdminPanel.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHwAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAJYAAAAAAAAAAAAgwHwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-11T21:06:22.419Z",
               "EditorCaption": ""
@@ -163,7 +137,7 @@
               "RelativeDocumentMoniker": "RegisterWindow.xaml.cs",
               "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\RegisterWindow.xaml.cs",
               "RelativeToolTip": "RegisterWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAOcAAAAAAAAAAAAwwCIBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-11T21:06:22.537Z",
               "EditorCaption": ""
@@ -182,7 +156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "LoginPage.xaml",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\LoginPage.xaml",
               "RelativeDocumentMoniker": "LoginPage.xaml",
@@ -194,27 +168,63 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "LoginPage.xaml.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\LoginPage.xaml.cs",
               "RelativeDocumentMoniker": "LoginPage.xaml.cs",
               "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\LoginPage.xaml.cs",
               "RelativeToolTip": "LoginPage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAMsAAAAAAAAAAAAwwCsAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-11T21:06:22.538Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
               "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-11T21:06:22.538Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CustomMessageBox.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\CustomMessageBox.xaml.cs",
+              "RelativeDocumentMoniker": "CustomMessageBox.xaml.cs",
+              "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\CustomMessageBox.xaml.cs",
+              "RelativeToolTip": "CustomMessageBox.xaml.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAwwFAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-11T21:06:22.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserEditDialog.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\UserEditDialog.xaml.cs",
+              "RelativeDocumentMoniker": "UserEditDialog.xaml.cs",
+              "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\UserEditDialog.xaml.cs",
+              "RelativeToolTip": "UserEditDialog.xaml.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T12:07:44.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-12T12:36:45.912Z",
               "EditorCaption": ""
             },
             {
@@ -227,21 +237,7 @@
               "RelativeToolTip": "ProfileEditWindow.xaml.cs",
               "ViewState": "AgIAADgAAAAAAAAAAAAwwBcAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T12:07:50.663Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CustomMessageBox.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\CustomMessageBox.xaml.cs",
-              "RelativeDocumentMoniker": "CustomMessageBox.xaml.cs",
-              "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\CustomMessageBox.xaml.cs",
-              "RelativeToolTip": "CustomMessageBox.xaml.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAowB4AAABUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T21:06:22.538Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-12T12:07:50.663Z"
             },
             {
               "$type": "Document",
@@ -321,7 +317,8 @@
               "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\frontend\\CustomMessageBox.xaml",
               "RelativeToolTip": "CustomMessageBox.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-04-11T21:06:22.541Z"
+              "WhenOpened": "2026-04-11T21:06:22.541Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\victo\\desktop\\projekt\\virotepi\\paczkomat\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|c:\\users\\victo\\desktop\\projekt\\virotepi\\paczkomat\\properties\\launchsettings.json||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{9070E206-C092-49E6-B5DF-AE07F1B0CD14}|paczkomat.csproj|solutionrelative:properties\\launchsettings.json||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
@@ -103,6 +107,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T12:21:29.727Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
@@ -115,7 +132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
@@ -128,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
@@ -141,7 +158,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PacksController.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Controllers\\PacksController.cs",
               "RelativeDocumentMoniker": "Controllers\\PacksController.cs",
@@ -154,7 +171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "LoginResponse.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\LoginResponse.cs",
               "RelativeDocumentMoniker": "Models\\LoginResponse.cs",
@@ -167,7 +184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "user.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\user.cs",
               "RelativeDocumentMoniker": "Models\\user.cs",
@@ -180,7 +197,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "klient.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\klient.cs",
               "RelativeDocumentMoniker": "Models\\klient.cs",
@@ -192,7 +209,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "paczkomat.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\paczkomat.cs",
               "RelativeDocumentMoniker": "Models\\paczkomat.cs",
@@ -204,7 +221,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "SendPackRequest.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\SendPackRequest.cs",
               "RelativeDocumentMoniker": "Models\\SendPackRequest.cs",
@@ -216,7 +233,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "pending_pack.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\pending_pack.cs",
               "RelativeDocumentMoniker": "Models\\pending_pack.cs",
@@ -228,7 +245,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -241,7 +258,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "inpostContext.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\inpostContext.cs",
               "RelativeDocumentMoniker": "Models\\inpostContext.cs",
@@ -254,7 +271,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "paczkomat.csproj.Backup.tmp",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj.Backup.tmp",
               "RelativeDocumentMoniker": "paczkomat.csproj.Backup.tmp",
@@ -266,7 +283,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -278,7 +295,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "KlientController.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Controllers\\KlientController.cs",
               "RelativeDocumentMoniker": "Controllers\\KlientController.cs",
@@ -290,7 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "LoginRequest.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\LoginRequest.cs",
               "RelativeDocumentMoniker": "Models\\LoginRequest.cs",
@@ -302,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "admin.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\admin.cs",
               "RelativeDocumentMoniker": "Models\\admin.cs",
@@ -314,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "paczkomat_datum.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\paczkomat_datum.cs",
               "RelativeDocumentMoniker": "Models\\paczkomat_datum.cs",
@@ -326,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "box.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\box.cs",
               "RelativeDocumentMoniker": "Models\\box.cs",
@@ -338,7 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "GoogleLoginRequest.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\GoogleLoginRequest.cs",
               "RelativeDocumentMoniker": "Models\\GoogleLoginRequest.cs",
@@ -350,7 +367,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "pack.cs",
               "DocumentMoniker": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\Models\\pack.cs",
               "RelativeDocumentMoniker": "Models\\pack.cs",

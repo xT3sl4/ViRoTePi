@@ -77,7 +77,6 @@ namespace frontend
             }
         }
 
-        // Wspólna metoda nawigacji po zalogowaniu
         private void NavigateToPanel(LoginResponse result)
         {
             switch (result.Role)
@@ -124,26 +123,15 @@ namespace frontend
             {
                 string credentialPath = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    "frontend"
+                    "frontend_google_auth"
                 );
 
+                // Usuń zapisany token — dzięki temu zawsze pojawia się wybór konta.
+                // Usunięcie cache + JEDNO AuthorizeAsync = dokładnie jedno okno przeglądarki.
                 if (Directory.Exists(credentialPath))
                     Directory.Delete(credentialPath, recursive: true);
 
                 UserCredential credential;
-                using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
-                {
-                    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                        GoogleClientSecrets.FromStream(stream).Secrets,
-                        new[] { "profile", "email" },
-                        "user",
-                        CancellationToken.None,
-                        new FileDataStore(credentialPath, fullPath: true)
-                    );
-                }
-
-                await credential.RevokeTokenAsync(CancellationToken.None);
-
                 using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
                 {
                     credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
@@ -161,7 +149,7 @@ namespace frontend
                     return;
                 }
 
-                // Pobierz pełne dane użytkownika z Google (imię, nazwisko, email)
+                // Pobierz dane użytkownika z Google (email, imię, nazwisko)
                 var googleUser = await GetGoogleUserInfoAsync(credential.Token.AccessToken);
                 if (googleUser == null || string.IsNullOrEmpty(googleUser.Email))
                 {
@@ -169,12 +157,12 @@ namespace frontend
                     return;
                 }
 
-                // Sprawdź czy konto istnieje
+                // Sprawdź czy konto istnieje w systemie
                 var result = await LoginGoogleApiAsync(googleUser.Email);
 
                 if (result != null && result.IsAuthenticated)
                 {
-                    // Konto istnieje — zaloguj normalnie
+                    // Konto istnieje — zaloguj
                     NavigateToPanel(result);
                 }
                 else
@@ -199,7 +187,9 @@ namespace frontend
         {
             using (var http = new HttpClient())
             {
-                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                http.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", accessToken);
+
                 var response = await http.GetAsync("https://www.googleapis.com/oauth2/v2/userinfo");
 
                 if (!response.IsSuccessStatusCode)
