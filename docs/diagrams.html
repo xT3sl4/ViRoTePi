@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>ViRoTePi - Diagramy UML</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; }
+        .header {
+            background: linear-gradient(135deg, #FFCD00, #FF6200);
+            padding: 30px 40px;
+            color: white;
+            text-align: center;
+        }
+        .header h1 { font-size: 32px; margin-bottom: 8px; text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .header p { font-size: 16px; opacity: 0.9; }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            background: white;
+            border-bottom: 3px solid #FF6200;
+        }
+        .tab {
+            padding: 14px 32px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            color: #666;
+            border: none;
+            background: white;
+            transition: all 0.2s;
+        }
+        .tab:hover { color: #FF6200; background: #FFF8E1; }
+        .tab.active { color: #FF6200; background: #FFF8E1; border-bottom: 3px solid #FF6200; margin-bottom: -3px; }
+        .content { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
+        .diagram-section { 
+    position: absolute;
+    left: -10000px;
+    top: -10000px;
+    visibility: hidden;
+}
+.diagram-section.active { 
+    position: relative;
+    left: 0;
+    top: 0;
+    visibility: visible;
+}
+        .diagram-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .diagram-card-header {
+            background: #FF6200;
+            color: white;
+            padding: 16px 24px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .diagram-card-body {
+            padding: 30px;
+            overflow-x: auto;
+        }
+        .mermaid { text-align: center; }
+        .legend {
+            background: #FFF8E1;
+            border: 1px solid #FFE082;
+            border-radius: 8px;
+            padding: 16px 24px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .legend b { color: #FF6200; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>ViRoTePi - Diagramy UML</h1>
+    <p>System zarzadzania paczkami typu InPost</p>
+</div>
+
+<div class="tabs">
+    <button class="tab active" onclick="showTab('class')">Diagram klas</button>
+    <button class="tab" onclick="showTab('usecase')">Diagram przypadkow uzycia</button>
+</div>
+
+<div class="content">
+
+    <!-- ==================== DIAGRAM KLAS ==================== -->
+    <div id="class" class="diagram-section active">
+
+        <div class="legend">
+            <b>Legenda:</b> Diagram przedstawia encje bazodanowe (backend, MariaDB) oraz klasy okien WPF (frontend).
+            Linie ciagle = relacje bazodanowe (FK). Linie przerywane = nawigacja miedzy oknami.
+        </div>
+
+        <div class="diagram-card">
+            <div class="diagram-card-header">Diagram klas - Encje bazodanowe</div>
+            <div class="diagram-card-body">
+                <pre class="mermaid">
+classDiagram
+    direction LR
+
+    class user {
+        +int id
+        +string name
+        +string surname
+        +string email
+        +DateOnly date_of_birth
+        +string password
+        +string role
+        +int phone_number
+        +string selfie
+        +bool sex
+    }
+
+    class admin {
+        +int admin_id
+        +int user_id
+    }
+
+    class klient {
+        +int klient_id
+        +int user_id
+        +int pack_id
+    }
+
+    class kurier {
+        +int kurier_id
+        +int user_id
+        +string state
+    }
+
+    class pack {
+        +int pack_id
+        +string size
+        +int klient_id
+        +bool delivered
+        +DateOnly date
+        +DateOnly to_when
+        +bool picked_up
+    }
+
+    class pending_pack {
+        +int pending_id
+        +int sender_klient_id
+        +int receiver_klient_id
+        +string size
+        +int paczkomat_id
+        +DateTime created_at
+        +string status
+    }
+
+    class box {
+        +int box_id
+        +int pack_id
+        +string size
+    }
+
+    class paczkomat {
+        +int paczkomat_id
+        +string paczkomat_name
+        +string address
+    }
+
+    class kuriers_datum {
+        +int kurier_id
+        +int pack_id
+    }
+
+    class paczkomat_datum {
+        +int paczkomat_id
+        +int box_id
+    }
+
+    user "1" --> "*" admin : has
+    user "1" --> "*" klient : has
+    user "1" --> "*" kurier : has
+
+    klient "1" --> "*" pack : owns
+    klient "1" --> "*" pending_pack : sends
+    klient "1" --> "*" pending_pack : receives
+
+    pack "1" --> "*" box : contains
+    box "1" --> "0..1" paczkomat_datum : stored in
+    paczkomat "1" --> "*" paczkomat_datum : holds
+
+    kurier "1" --> "*" kuriers_datum : assigned
+    pack "1" --> "*" kuriers_datum : delivered by
+
+    pending_pack "*" --> "1" paczkomat : target
+                </pre>
+            </div>
+        </div>
+
+        <div class="diagram-card">
+            <div class="diagram-card-header">Diagram klas - Okna WPF (frontend)</div>
+            <div class="diagram-card-body">
+                <pre class="mermaid">
+classDiagram
+    direction TB
+
+    class LoginPage {
+        -int userId
+        -int klientId
+        -int kurierId
+        +LoginBtn_Click()
+        +LoginGoogle_Click()
+        +Register_Click()
+        -LoginApiAsync()
+        -LoginGoogleApiAsync()
+    }
+
+    class MainWindow {
+        -int userId
+        -int klientId
+        +Packages_Click()
+        +SendPackage_Click()
+        +History_Click()
+        +SendToClient_Click()
+        +MapButton_Click()
+        +PickupPack_Click()
+        +Help_Click()
+        -GetPacksAsync()
+        -GetPackHistoryAsync()
+        -LoadClientsListAsync()
+    }
+
+    class AdminPanel {
+        -ObservableCollection AllPacks
+        -List KuriersList
+        +LoadAllPacks()
+        +LoadKuriers()
+        +LoadStats()
+        +LoadUsers()
+        +AssignBtn_Click()
+        +ReleasePackBtn_Click()
+        +RejectAnyPackBtn_Click()
+        +AddUserBtn_Click()
+        +EditUserBtn_Click()
+        +DeleteUserBtn_Click()
+    }
+
+    class CourierPanel {
+        -ObservableCollection ActiveParcels
+        -int kurierId
+        -bool isAvailable
+        +LoadParcels()
+        +LoadCourierMap()
+        +DeliverButton_Click()
+        +StatusToggle_Click()
+        -LoadKurierState()
+        -InjectParcelMarkers()
+    }
+
+    class HelpWindow {
+        -List videoPaths
+        -int currentVideoIndex
+        +DiscoverVideos()
+        +LoadVideo()
+        +PrevVideo_Click()
+        +NextVideo_Click()
+    }
+
+    class RegisterWindow {
+        +RegisterBtn_Click()
+        +RegisterGoogle_Click()
+    }
+
+    class ProfileEditWindow {
+        -int userId
+        +SaveBtn_Click()
+    }
+
+    class MapPickerWindow {
+        +string WybranyPaczkomat
+        +InitializeMap()
+        +Confirm_Click()
+    }
+
+    class UserEditDialog {
+        +int EditUserId
+        +SaveBtn_Click()
+    }
+
+    LoginPage ..> MainWindow : klient
+    LoginPage ..> AdminPanel : admin
+    LoginPage ..> CourierPanel : kurier
+    LoginPage ..> RegisterWindow : rejestracja
+
+    MainWindow ..> HelpWindow : pomoc
+    MainWindow ..> MapPickerWindow : wybor paczkomatu
+    MainWindow ..> ProfileEditWindow : edycja profilu
+
+    AdminPanel ..> UserEditDialog : zarzadzanie
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DIAGRAM PRZYPADKOW UZYCIA ==================== -->
+    <div id="usecase" class="diagram-section">
+
+        <div class="legend">
+            <b>Legenda:</b> 4 aktorzy systemu: Gosc, Klient, Kurier, Administrator.
+            Linie przerywane = zaleznosci include/extend miedzy przypadkami uzycia.
+        </div>
+
+        <div class="diagram-card">
+            <div class="diagram-card-header">Diagram przypadkow uzycia</div>
+            <div class="diagram-card-body">
+                <pre class="mermaid">
+graph LR
+    Guest(("Gosc"))
+    Klient(("Klient"))
+    Kurier(("Kurier"))
+    Admin(("Administrator"))
+
+    subgraph System["System ViRoTePi"]
+        direction TB
+
+        subgraph Auth["Autoryzacja"]
+            UC1["Logowanie email/haslo"]
+            UC2["Logowanie Google"]
+            UC3["Rejestracja konta"]
+            UC4["Wylogowanie"]
+        end
+
+        subgraph ClientPanel["Panel Klienta"]
+            UC5["Przegladanie paczek"]
+            UC6["Nadanie paczki"]
+            UC7["Wyslanie do klienta"]
+            UC8["Odbior paczki"]
+            UC9["Historia odbioru"]
+            UC10["Mapa paczkomatow"]
+            UC11["Edycja profilu"]
+            UC12["Pomoc - filmy"]
+        end
+
+        subgraph CourierPnl["Panel Kuriera"]
+            UC13["Przegladanie przypisanych paczek"]
+            UC14["Dostarczenie paczki"]
+            UC15["Mapa paczek kuriera"]
+            UC16["Zmiana statusu dostepnosci"]
+        end
+
+        subgraph AdminPnl["Panel Administratora"]
+            UC17["Przegladanie statystyk"]
+            UC18["Przegladanie wszystkich paczek"]
+            UC19["Przypisanie kuriera"]
+            UC20["Wydanie oczekujacej paczki"]
+            UC21["Odrzucenie paczki"]
+            UC22["Usuniecie paczki"]
+            UC23["Zarzadzanie uzytkownikami"]
+            UC24["Przegladanie dostarczonych"]
+        end
+
+        subgraph MapSub["Mapa"]
+            UC25["Wybor paczkomatu na mapie"]
+        end
+    end
+
+    Guest --- UC1
+    Guest --- UC2
+    Guest --- UC3
+    Guest --- UC6
+    Guest --- UC10
+
+    Klient --- UC1
+    Klient --- UC2
+    Klient --- UC4
+    Klient --- UC5
+    Klient --- UC6
+    Klient --- UC7
+    Klient --- UC8
+    Klient --- UC9
+    Klient --- UC10
+    Klient --- UC11
+    Klient --- UC12
+
+    Kurier --- UC1
+    Kurier --- UC2
+    Kurier --- UC4
+    Kurier --- UC13
+    Kurier --- UC14
+    Kurier --- UC15
+    Kurier --- UC16
+
+    Admin --- UC1
+    Admin --- UC4
+    Admin --- UC17
+    Admin --- UC18
+    Admin --- UC19
+    Admin --- UC20
+    Admin --- UC21
+    Admin --- UC22
+    Admin --- UC23
+    Admin --- UC24
+
+    UC6 -.->|include| UC25
+    UC7 -.->|include| UC25
+    UC20 -.->|extend| UC19
+                </pre>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        themeVariables: {
+            primaryColor: '#FFF8E1',
+            primaryBorderColor: '#FF6200',
+            primaryTextColor: '#333',
+            lineColor: '#FF6200',
+            secondaryColor: '#FFCD00',
+            tertiaryColor: '#F5F5F5'
+        },
+        flowchart: { curve: 'basis' },
+        securityLevel: 'loose'
+    });
+
+    function showTab(tabName) {
+        document.querySelectorAll('.diagram-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        event.target.classList.add('active');
+    }
+</script>
+
+</body>
+</html>

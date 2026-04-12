@@ -1,0 +1,103 @@
+graph TB
+    subgraph Aktorzy
+        Guest["👤 Gość (niezalogowany)"]
+        Klient["👤 Klient"]
+        Kurier["👤 Kurier"]
+        Admin["👤 Administrator"]
+    end
+
+    subgraph System["🖥️ System ViRoTePi"]
+
+        subgraph Autoryzacja["Autoryzacja"]
+            UC_LOGIN["Logowanie (email + hasło)"]
+            UC_GOOGLE["Logowanie przez Google"]
+            UC_REGISTER["Rejestracja konta"]
+            UC_LOGOUT["Wylogowanie"]
+        end
+
+        subgraph PanelKlienta["Panel Klienta"]
+            UC_VIEW_PACKS["Przeglądanie swoich paczek"]
+            UC_SEND_PACK["Nadanie paczki (formularz)"]
+            UC_SEND_TO_CLIENT["Wysłanie paczki do klienta"]
+            UC_PICKUP["Odbiór paczki z paczkomatu"]
+            UC_HISTORY["Przeglądanie historii odbioru"]
+            UC_MAP["Przeglądanie mapy paczkomatów"]
+            UC_EDIT_PROFILE["Edycja profilu"]
+            UC_HELP["Wyświetlenie pomocy (filmy)"]
+        end
+
+        subgraph PanelKuriera["Panel Kuriera"]
+            UC_VIEW_ASSIGNED["Przeglądanie przypisanych paczek"]
+            UC_DELIVER["Dostarczenie paczki do paczkomatu"]
+            UC_COURIER_MAP["Przeglądanie mapy paczek"]
+            UC_TOGGLE_STATUS["Zmiana statusu dostępności"]
+        end
+
+        subgraph PanelAdmina["Panel Administratora"]
+            UC_STATS["Przeglądanie statystyk"]
+            UC_VIEW_ALL_PACKS["Przeglądanie wszystkich paczek"]
+            UC_ASSIGN_COURIER["Przypisanie kuriera do paczki"]
+            UC_RELEASE_PACK["Wydanie oczekującej paczki"]
+            UC_REJECT_PACK["Odrzucenie paczki"]
+            UC_DELETE_PACK["Usunięcie paczki"]
+            UC_MANAGE_USERS["Zarządzanie użytkownikami"]
+            UC_ADD_USER["Dodanie użytkownika"]
+            UC_EDIT_USER["Edycja użytkownika"]
+            UC_DELETE_USER["Usunięcie użytkownika"]
+            UC_VIEW_DELIVERED["Przeglądanie dostarczonych paczek"]
+        end
+
+        subgraph Mapa["Mapa interaktywna"]
+            UC_SELECT_LOCKER["Wybór paczkomatu na mapie"]
+        end
+
+    end
+
+    %% ── Gość ──
+    Guest --> UC_LOGIN
+    Guest --> UC_GOOGLE
+    Guest --> UC_REGISTER
+    Guest --> UC_SEND_PACK
+    Guest --> UC_MAP
+
+    %% ── Klient ──
+    Klient --> UC_LOGIN
+    Klient --> UC_GOOGLE
+    Klient --> UC_LOGOUT
+    Klient --> UC_VIEW_PACKS
+    Klient --> UC_SEND_PACK
+    Klient --> UC_SEND_TO_CLIENT
+    Klient --> UC_PICKUP
+    Klient --> UC_HISTORY
+    Klient --> UC_MAP
+    Klient --> UC_EDIT_PROFILE
+    Klient --> UC_HELP
+
+    %% ── Kurier ──
+    Kurier --> UC_LOGIN
+    Kurier --> UC_GOOGLE
+    Kurier --> UC_LOGOUT
+    Kurier --> UC_VIEW_ASSIGNED
+    Kurier --> UC_DELIVER
+    Kurier --> UC_COURIER_MAP
+    Kurier --> UC_TOGGLE_STATUS
+
+    %% ── Administrator ──
+    Admin --> UC_LOGIN
+    Admin --> UC_LOGOUT
+    Admin --> UC_STATS
+    Admin --> UC_VIEW_ALL_PACKS
+    Admin --> UC_ASSIGN_COURIER
+    Admin --> UC_RELEASE_PACK
+    Admin --> UC_REJECT_PACK
+    Admin --> UC_DELETE_PACK
+    Admin --> UC_MANAGE_USERS
+    Admin --> UC_VIEW_DELIVERED
+
+    %% ── Zależności (include / extend) ──
+    UC_SEND_PACK -.->|include| UC_SELECT_LOCKER
+    UC_SEND_TO_CLIENT -.->|include| UC_SELECT_LOCKER
+    UC_MANAGE_USERS -.->|include| UC_ADD_USER
+    UC_MANAGE_USERS -.->|include| UC_EDIT_USER
+    UC_MANAGE_USERS -.->|include| UC_DELETE_USER
+    UC_RELEASE_PACK -.->|extend| UC_ASSIGN_COURIER
