@@ -148,6 +148,7 @@ namespace paczkomat.Controllers
         {
             var kuriers = await _context.kuriers
                 .Include(k => k.user)
+                .Where(k => k.user != null)
                 .ToListAsync();
 
             var result = new List<KurierDto>();
@@ -224,6 +225,37 @@ namespace paczkomat.Controllers
             return Ok(new { message = "Kurier został usunięty z paczki." });
         }
 
+        [HttpDelete("delete-pack/{packId}")]
+        public async Task<IActionResult> DeletePack(int packId)
+        {
+            var pack = await _context.packs.FindAsync(packId);
+            if (pack == null)
+                return NotFound(new { message = "Nie znaleziono paczki." });
+
+            // Usuń przypisanie kuriera jeśli istnieje
+            var assignment = await _context.kuriers_data
+                .FirstOrDefaultAsync(kd => kd.pack_id == packId);
+            if (assignment != null)
+                _context.kuriers_data.Remove(assignment);
+
+            // Usuń powiązania box → paczkomat_data
+            var boxList = await _context.boxs
+                .Where(b => b.pack_id == packId)
+                .ToListAsync();
+            foreach (var box in boxList)
+            {
+                var paczkomatData = await _context.paczkomat_data
+                    .Where(pd => pd.box_id == box.box_id)
+                    .ToListAsync();
+                _context.paczkomat_data.RemoveRange(paczkomatData);
+            }
+            _context.boxs.RemoveRange(boxList);
+
+            _context.packs.Remove(pack);
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Paczka została usunięta." });
+        }
+
         [HttpGet("stats")]
         public async Task<ActionResult> GetStats()
         {
@@ -245,8 +277,12 @@ namespace paczkomat.Controllers
                     unassignedPacks++;
             }
 
-            var totalKuriers = await _context.kuriers.CountAsync();
-            var activeKuriers = await _context.kuriers.CountAsync(k => k.state == "available");
+            var totalKuriers = await _context.kuriers
+                .Include(k => k.user)
+                .CountAsync(k => k.user != null);
+            var activeKuriers = await _context.kuriers
+                .Include(k => k.user)
+                .CountAsync(k => k.user != null && k.state == "available");
             var pendingPacks = await _context.pending_packs.CountAsync(p => p.status == "waiting");
 
             return Ok(new
@@ -337,6 +373,19 @@ namespace paczkomat.Controllers
                     ? $"{pending.receiver_klient.user.name} {pending.receiver_klient.user.surname}"
                     : "Nieznany"
             });
+        }
+
+        [HttpPut("kurier/{kurierId}/toggle-state")]
+        public async Task<IActionResult> ToggleKurierState(int kurierId)
+        {
+            var kurier = await _context.kuriers.FindAsync(kurierId);
+            if (kurier == null)
+                return NotFound(new { message = "Kurier nie istnieje." });
+
+            kurier.state = (kurier.state == "available") ? "unavailable" : "available";
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Status zmieniony.", state = kurier.state });
         }
 
         [HttpDelete("reject-pack/{pendingId}")]

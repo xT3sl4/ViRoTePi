@@ -17,6 +17,25 @@ namespace frontend
 {
     #region Models
 
+    // Model ujednolicony — łączy pending_pack i pack w jedną listę
+    public class UnifiedPackItem
+    {
+        // Wspólne pola wyświetlane w DataGrid
+        public string DisplayId { get; set; }
+        public string Size { get; set; }
+        public string SenderName { get; set; } = "";
+        public string ReceiverName { get; set; }
+        public string PaczkomatName { get; set; }
+        public string Date { get; set; }
+        public string Status { get; set; }  // "Oczekująca", "Nieprzypisana", "Przypisana"
+
+        // Identyfikatory wewnętrzne
+        public int? PendingId { get; set; }   // null jeśli to aktywna paczka
+        public int? PackId { get; set; }      // null jeśli to pending
+        public bool IsPending => PendingId.HasValue && !PackId.HasValue;
+    }
+
+    // DTO z backendu - aktywne paczki
     public class UnassignedPack
     {
         public int PackId { get; set; }
@@ -27,6 +46,7 @@ namespace frontend
         public bool HasKurier { get; set; }
     }
 
+    // DTO z backendu - kurierzy
     public class KurierInfo
     {
         public int KurierId { get; set; }
@@ -47,6 +67,7 @@ namespace frontend
         public int PendingPacks { get; set; }
     }
 
+    // DTO z backendu - oczekujące
     public class PendingPack
     {
         public int PendingId { get; set; }
@@ -73,6 +94,16 @@ namespace frontend
         public string Email { get; set; }
         public string Role { get; set; }
         public int? PhoneNumber { get; set; }
+    }
+
+    public class DeliveredPackDto
+    {
+        public int PackId { get; set; }
+        public string Size { get; set; }
+        public string Delivered { get; set; }
+        public string Date { get; set; }
+        public string KlientName { get; set; }
+        public bool PickedUp { get; set; }
     }
 
     public class ReferencePreservedList<T>
@@ -119,30 +150,28 @@ namespace frontend
 
     public partial class AdminPanel : Window
     {
-        private ObservableCollection<UnassignedPack> _packs;
+        private ObservableCollection<UnifiedPackItem> _allPacks;
         private ObservableCollection<KurierInfo> _kuriers;
-        private ObservableCollection<PendingPack> _pendingPacks;
         private ObservableCollection<AdminUserDto> _allUsers;
         private ObservableCollection<AdminUserDto> _filteredUsers;
-        private PendingPack _selectedPending;
+        private ObservableCollection<DeliveredPackDto> _deliveredPacks;
+        private UnifiedPackItem _selectedPack;
         private string _selfie;
 
         public AdminPanel(string selfie = null)
         {
             InitializeComponent();
             _selfie = selfie;
-            _packs = new ObservableCollection<UnassignedPack>();
+            _allPacks = new ObservableCollection<UnifiedPackItem>();
             _kuriers = new ObservableCollection<KurierInfo>();
-            _pendingPacks = new ObservableCollection<PendingPack>();
             _allUsers = new ObservableCollection<AdminUserDto>();
             _filteredUsers = new ObservableCollection<AdminUserDto>();
+            _deliveredPacks = new ObservableCollection<DeliveredPackDto>();
 
-            PacksDataGrid.ItemsSource = _packs;
+            PacksDataGrid.ItemsSource = _allPacks;
             KuriersListBox.ItemsSource = _kuriers;
-            PendingPacksDataGrid.ItemsSource = _pendingPacks;
             UsersDataGrid.ItemsSource = _filteredUsers;
-
-            PendingPacksDataGrid.SelectionChanged += PendingPacksDataGrid_SelectionChanged;
+            DeliveredPacksDataGrid.ItemsSource = _deliveredPacks;
 
             LoadProfileImage(_selfie);
             Loaded += async (s, e) => await LoadData();
@@ -152,17 +181,21 @@ namespace frontend
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(selfieFileName)) return;
-                string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", selfieFileName);
-                if (!System.IO.File.Exists(path)) return;
-                var bitmap = new System.Windows.Media.Imaging.BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(path, UriKind.Absolute);
-                bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
+                string imageFile = string.IsNullOrWhiteSpace(selfieFileName) ? "user.png" : selfieFileName;
+                var bitmap = new System.Windows.Media.Imaging.BitmapImage(
+                    new Uri($"pack://application:,,,/Images/{imageFile}", UriKind.Absolute));
                 ProfileImageBrush.ImageSource = bitmap;
             }
-            catch { }
+            catch
+            {
+                try
+                {
+                    var bmp = new System.Windows.Media.Imaging.BitmapImage(
+                        new Uri("pack://application:,,,/Images/user.png", UriKind.Absolute));
+                    ProfileImageBrush.ImageSource = bmp;
+                }
+                catch { }
+            }
         }
 
         private static HttpClient CreateHttpClient()
@@ -177,13 +210,15 @@ namespace frontend
             return client;
         }
 
+        // ── Ładowanie danych ──────────────────────────────────────────────────
+
         private async Task LoadData()
         {
             await LoadStats();
-            await LoadPacks();
+            await LoadAllPacks();
             await LoadKuriers();
-            await LoadPendingPacks();
             await LoadUsers();
+            await LoadDeliveredPacks();
         }
 
         private async Task LoadStats()
@@ -216,35 +251,78 @@ namespace frontend
             }
         }
 
-        private async Task LoadPacks()
+        /// <summary>
+        /// Ładuje oczekujące (pending) i aktywne paczki do jednej listy.
+        /// </summary>
+        private async Task LoadAllPacks()
         {
+            _allPacks.Clear();
+
             using (var client = CreateHttpClient())
             {
+                // 1. Pobierz oczekujące (pending_packs)
                 try
                 {
-                    var response = await client.GetAsync("api/admin/packs");
-
-                    if (response.IsSuccessStatusCode)
+                    var pendingResp = await client.GetAsync("api/admin/pending-packs");
+                    if (pendingResp.IsSuccessStatusCode)
                     {
-                        string json = await response.Content.ReadAsStringAsync();
+                        string json = await pendingResp.Content.ReadAsStringAsync();
+                        var wrapper = JsonSerializer.Deserialize<ReferencePreservedList<PendingPack>>(json,
+                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                        if (wrapper?.Values != null)
+                        {
+                            foreach (var p in wrapper.Values)
+                            {
+                                _allPacks.Add(new UnifiedPackItem
+                                {
+                                    PendingId = p.PendingId,
+                                    PackId = null,
+                                    DisplayId = $"P{p.PendingId}",
+                                    Size = p.Size,
+                                    SenderName = p.SenderName ?? "",
+                                    ReceiverName = p.ReceiverName ?? "",
+                                    PaczkomatName = p.PaczkomatName ?? "",
+                                    Date = p.CreatedAt ?? "",
+                                    Status = "Oczekująca"
+                                });
+                            }
+                        }
+                    }
+                }
+                catch { }
+
+                // 2. Pobierz aktywne paczki (niedostarczone)
+                try
+                {
+                    var packsResp = await client.GetAsync("api/admin/packs");
+                    if (packsResp.IsSuccessStatusCode)
+                    {
+                        string json = await packsResp.Content.ReadAsStringAsync();
                         var wrapper = JsonSerializer.Deserialize<ReferencePreservedList<UnassignedPack>>(json,
                             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                        var packs = wrapper?.Values;
 
-                        _packs.Clear();
-                        if (packs != null)
-                            foreach (var pack in packs)
-                                _packs.Add(pack);
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Błąd pobierania paczek: {response.StatusCode}");
+                        if (wrapper?.Values != null)
+                        {
+                            foreach (var p in wrapper.Values)
+                            {
+                                _allPacks.Add(new UnifiedPackItem
+                                {
+                                    PendingId = null,
+                                    PackId = p.PackId,
+                                    DisplayId = p.PackId.ToString(),
+                                    Size = p.Size,
+                                    SenderName = "",
+                                    ReceiverName = p.ReceiverName ?? "",
+                                    PaczkomatName = p.PaczkomatName ?? "",
+                                    Date = p.Date ?? "",
+                                    Status = p.HasKurier ? "Przypisana" : "Nieprzypisana"
+                                });
+                            }
+                        }
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Błąd pobierania paczek: {ex.Message}");
-                }
+                catch { }
             }
         }
 
@@ -276,38 +354,6 @@ namespace frontend
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Błąd pobierania kurierów: {ex.Message}");
-                }
-            }
-        }
-
-        private async Task LoadPendingPacks()
-        {
-            using (var client = CreateHttpClient())
-            {
-                try
-                {
-                    var response = await client.GetAsync("api/admin/pending-packs");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string json = await response.Content.ReadAsStringAsync();
-                        var wrapper = JsonSerializer.Deserialize<ReferencePreservedList<PendingPack>>(json,
-                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                        var pending = wrapper?.Values;
-
-                        _pendingPacks.Clear();
-                        if (pending != null)
-                            foreach (var p in pending)
-                                _pendingPacks.Add(p);
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Błąd pobierania oczekujących paczek: {response.StatusCode}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Błąd pobierania oczekujących paczek: {ex.Message}");
                 }
             }
         }
@@ -360,16 +406,59 @@ namespace frontend
             }
         }
 
-        private void PendingPacksDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private async Task LoadDeliveredPacks()
         {
-            _selectedPending = PendingPacksDataGrid.SelectedItem as PendingPack;
-
-            if (_selectedPending != null)
+            using (var client = CreateHttpClient())
             {
-                SelectedPackInfo.Text = $"Paczka #{_selectedPending.PendingId} ({_selectedPending.Size})\n" +
-                                       $"Nadawca: {_selectedPending.SenderName}\n" +
-                                       $"Odbiorca: {_selectedPending.ReceiverName}\n" +
-                                       $"Paczkomat: {_selectedPending.PaczkomatName}";
+                try
+                {
+                    var response = await client.GetAsync("api/packs/delivered");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+
+                        List<DeliveredPackDto> packs = null;
+                        try
+                        {
+                            var wrapper = JsonSerializer.Deserialize<ReferencePreservedList<DeliveredPackDto>>(json,
+                                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                            packs = wrapper?.Values;
+                        }
+                        catch
+                        {
+                            packs = JsonSerializer.Deserialize<List<DeliveredPackDto>>(json,
+                                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        }
+
+                        _deliveredPacks.Clear();
+                        if (packs != null)
+                            foreach (var p in packs)
+                                _deliveredPacks.Add(p);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Błąd: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        // ── Obsługa zaznaczenia w ujednoliconej liście ───────────────────────
+
+        private void PacksDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            _selectedPack = PacksDataGrid.SelectedItem as UnifiedPackItem;
+
+            if (_selectedPack != null)
+            {
+                string id = _selectedPack.IsPending
+                    ? $"Oczekująca #{_selectedPack.PendingId}"
+                    : $"Paczka #{_selectedPack.PackId}";
+
+                SelectedPackInfo.Text = $"{id} ({_selectedPack.Size})\n" +
+                                       $"Odbiorca: {_selectedPack.ReceiverName}\n" +
+                                       $"Paczkomat: {_selectedPack.PaczkomatName}\n" +
+                                       $"Status: {_selectedPack.Status}";
             }
             else
             {
@@ -377,11 +466,13 @@ namespace frontend
             }
         }
 
+        // ── Przypisz kuriera ─────────────────────────────────────────────────
+
         private async void AssignBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (_selectedPending == null)
+            if (_selectedPack == null)
             {
-                MessageBox.Show("Wybierz paczkę oczekującą z listy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Wybierz paczkę z listy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -396,32 +487,39 @@ namespace frontend
             {
                 try
                 {
-                    var releaseResponse = await client.PostAsync(
-                        $"api/admin/release-pack/{_selectedPending.PendingId}", null);
+                    int packIdToAssign;
 
-                    if (!releaseResponse.IsSuccessStatusCode)
+                    if (_selectedPack.IsPending)
                     {
-                        string error = await releaseResponse.Content.ReadAsStringAsync();
-                        MessageBox.Show($"Błąd wydawania paczki: {error}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
+                        // Najpierw wydaj oczekującą → staje się paczką
+                        var releaseResponse = await client.PostAsync(
+                            $"api/admin/release-pack/{_selectedPack.PendingId}", null);
+
+                        if (!releaseResponse.IsSuccessStatusCode)
+                        {
+                            string error = await releaseResponse.Content.ReadAsStringAsync();
+                            MessageBox.Show($"Błąd wydawania paczki: {error}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+
+                        string releaseJson = await releaseResponse.Content.ReadAsStringAsync();
+                        var releaseResult = JsonSerializer.Deserialize<ReleasePackResponse>(releaseJson,
+                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                        if (releaseResult == null || releaseResult.PackId == 0)
+                        {
+                            MessageBox.Show("Błąd pobierania ID wydanej paczki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                        packIdToAssign = releaseResult.PackId;
+                    }
+                    else
+                    {
+                        packIdToAssign = _selectedPack.PackId.Value;
                     }
 
-                    string releaseJson = await releaseResponse.Content.ReadAsStringAsync();
-                    var releaseResult = JsonSerializer.Deserialize<ReleasePackResponse>(releaseJson,
-                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-                    if (releaseResult == null || releaseResult.PackId == 0)
-                    {
-                        MessageBox.Show("Błąd pobierania ID wydanej paczki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-
-                    var assignRequest = new
-                    {
-                        PackId = releaseResult.PackId,
-                        KurierId = selectedKurier.KurierId
-                    };
-
+                    // Przypisz kuriera
+                    var assignRequest = new { PackId = packIdToAssign, KurierId = selectedKurier.KurierId };
                     string assignJson = JsonSerializer.Serialize(assignRequest);
                     var assignContent = new StringContent(assignJson, Encoding.UTF8, "application/json");
                     var assignResponse = await client.PostAsync("api/admin/assign-pack", assignContent);
@@ -429,19 +527,18 @@ namespace frontend
                     if (assignResponse.IsSuccessStatusCode)
                     {
                         MessageBox.Show(
-                            $"Paczka wydana i przypisana do kuriera {selectedKurier.Name}!",
+                            $"Paczka przypisana do kuriera {selectedKurier.Name}!",
                             "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
 
                         await LoadData();
-                        PendingPacksDataGrid.SelectedItem = null;
                         KuriersListBox.SelectedItem = null;
                         SelectedPackInfo.Text = "Nie wybrano";
-                        _selectedPending = null;
+                        _selectedPack = null;
                     }
                     else
                     {
                         string error = await assignResponse.Content.ReadAsStringAsync();
-                        MessageBox.Show($"Paczka wydana ale błąd przypisania kuriera: {error}",
+                        MessageBox.Show($"Błąd przypisania kuriera: {error}",
                             "Ostrzeżenie", MessageBoxButton.OK, MessageBoxImage.Warning);
                         await LoadData();
                     }
@@ -453,39 +550,39 @@ namespace frontend
             }
         }
 
+        // ── Wydaj oczekującą paczkę (bez przypisywania kuriera) ──────────────
+
         private async void ReleasePackBtn_Click(object sender, RoutedEventArgs e)
         {
-            var selectedPending = PendingPacksDataGrid.SelectedItem as PendingPack;
-            if (selectedPending == null)
+            if (_selectedPack == null || !_selectedPack.IsPending)
             {
-                MessageBox.Show("Wybierz paczkę oczekującą z listy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Wybierz oczekującą paczkę z listy (status: Oczekująca).",
+                    "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             var confirm = MessageBox.Show(
-                $"Czy na pewno chcesz wydać paczkę #{selectedPending.PendingId} bez kuriera?\n" +
-                $"Odbiorca: {selectedPending.ReceiverName}\n" +
-                $"Paczkomat: {selectedPending.PaczkomatName}",
+                $"Czy na pewno chcesz wydać paczkę P{_selectedPack.PendingId} bez kuriera?\n" +
+                $"Odbiorca: {_selectedPack.ReceiverName}\n" +
+                $"Paczkomat: {_selectedPack.PaczkomatName}",
                 "Potwierdzenie",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question);
 
-            if (confirm != MessageBoxResult.Yes)
-                return;
+            if (confirm != MessageBoxResult.Yes) return;
 
             using (var client = CreateHttpClient())
             {
                 try
                 {
                     var response = await client.PostAsync(
-                        $"api/admin/release-pack/{selectedPending.PendingId}", null);
+                        $"api/admin/release-pack/{_selectedPack.PendingId}", null);
 
                     if (response.IsSuccessStatusCode)
                     {
                         MessageBox.Show(
-                            $"Paczka została wydana dla {selectedPending.ReceiverName}.",
+                            $"Paczka została wydana dla {_selectedPack.ReceiverName}.",
                             "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
-
                         await LoadData();
                     }
                     else
@@ -501,36 +598,49 @@ namespace frontend
             }
         }
 
-        private async void RejectPackBtn_Click(object sender, RoutedEventArgs e)
+        // ── Odrzuć dowolną paczkę (przycisk w wierszu DataGrid) ──────────────
+
+        private async void RejectAnyPackBtn_Click(object sender, RoutedEventArgs e)
         {
-            var selectedPending = PendingPacksDataGrid.SelectedItem as PendingPack;
-            if (selectedPending == null)
-            {
-                MessageBox.Show("Wybierz paczkę oczekującą z listy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            var button = sender as System.Windows.Controls.Button;
+            var pack = button?.Tag as UnifiedPackItem;
+            if (pack == null) return;
+
+            string displayName = pack.IsPending
+                ? $"oczekującą P{pack.PendingId}"
+                : $"#{pack.PackId}";
 
             var confirm = MessageBox.Show(
-                $"Czy na pewno chcesz odrzucić paczkę #{selectedPending.PendingId}?",
-                "Potwierdzenie",
+                $"Czy na pewno chcesz odrzucić paczkę {displayName}?\n" +
+                $"Odbiorca: {pack.ReceiverName}\n" +
+                $"Ta operacja jest nieodwracalna!",
+                "Potwierdzenie odrzucenia",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning);
 
-            if (confirm != MessageBoxResult.Yes)
-                return;
+            if (confirm != MessageBoxResult.Yes) return;
 
             using (var client = CreateHttpClient())
             {
                 try
                 {
-                    var response = await client.DeleteAsync(
-                        $"api/admin/reject-pack/{selectedPending.PendingId}");
+                    HttpResponseMessage response;
+
+                    if (pack.IsPending)
+                    {
+                        // Odrzuć pending_pack
+                        response = await client.DeleteAsync($"api/admin/reject-pack/{pack.PendingId}");
+                    }
+                    else
+                    {
+                        // Usuń aktywną paczkę
+                        response = await client.DeleteAsync($"api/admin/delete-pack/{pack.PackId}");
+                    }
 
                     if (response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Paczka została odrzucona.",
                             "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
-
                         await LoadData();
                     }
                     else
@@ -546,9 +656,7 @@ namespace frontend
             }
         }
 
-        private void PacksDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-        }
+        // ── Odśwież / Użytkownicy / Dostarczone ─────────────────────────────
 
         private async void RefreshBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -640,6 +748,11 @@ namespace frontend
                     MessageBox.Show($"Błąd: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private async void RefreshDeliveredBtn_Click(object sender, RoutedEventArgs e)
+        {
+            await LoadDeliveredPacks();
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)

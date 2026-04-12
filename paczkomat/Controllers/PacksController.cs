@@ -25,6 +25,8 @@ namespace paczkomat.Controllers
             public string Delivered { get; set; } = "";
             public string? Date { get; set; }
             public string KlientName { get; set; } = "";
+            public bool PickedUp { get; set; } = false;
+            public string PaczkomatName { get; set; } = "";
         }
 
         [HttpGet]
@@ -49,7 +51,11 @@ namespace paczkomat.Controllers
             if (delivered.HasValue)
                 query = query.Where(p => p.delivered == delivered);
             if (klientId.HasValue)
+            {
                 query = query.Where(p => p.klient_id == klientId);
+                // Ukryj paczki odebrane przez klienta
+                query = query.Where(p => p.picked_up != true);
+            }
 
             query = sort switch
             {
@@ -76,11 +82,14 @@ namespace paczkomat.Controllers
                 {
                     PackId = pack.pack_id,
                     Size = pack.size,
-                    Delivered = pack.delivered.HasValue
-                        ? (pack.delivered.Value ? "Doręczona" : "W drodze")
-                        : "Nieznany",
+                    Delivered = pack.picked_up == true
+                        ? "Odebrana"
+                        : pack.delivered.HasValue
+                            ? (pack.delivered.Value ? "Doręczona" : "W drodze")
+                            : "Nieznany",
                     Date = pack.date?.ToString("yyyy-MM-dd"),
-                    KlientName = paczkomatAddress ?? "Brak paczkomatu"
+                    KlientName = paczkomatAddress ?? "Brak paczkomatu",
+                    PickedUp = pack.picked_up == true
                 });
             }
 
@@ -136,12 +145,12 @@ namespace paczkomat.Controllers
 
             foreach (var pack in packs)
             {
-                var paczkomatAddress = await (from pd in _context.paczkomat_data
-                                              join pac in _context.paczkomats on pd.paczkomat_id equals pac.paczkomat_id
-                                              join b in _context.boxs on pd.box_id equals b.box_id
-                                              where b.pack_id == pack.pack_id
-                                              select pac.address)
-                                             .FirstOrDefaultAsync();
+                var paczkomatInfo = await (from pd in _context.paczkomat_data
+                                           join pac in _context.paczkomats on pd.paczkomat_id equals pac.paczkomat_id
+                                           join b in _context.boxs on pd.box_id equals b.box_id
+                                           where b.pack_id == pack.pack_id
+                                           select new { pac.address, pac.paczkomat_name })
+                                          .FirstOrDefaultAsync();
 
                 packDtos.Add(new PackDto
                 {
@@ -151,7 +160,8 @@ namespace paczkomat.Controllers
                         ? (pack.delivered.Value ? "Doręczona" : "W drodze")
                         : "Nieznany",
                     Date = pack.date?.ToString("yyyy-MM-dd"),
-                    KlientName = paczkomatAddress ?? "Brak paczkomatu"
+                    KlientName = paczkomatInfo?.address ?? "Brak paczkomatu",
+                    PaczkomatName = paczkomatInfo?.paczkomat_name ?? ""
                 });
             }
 
@@ -169,6 +179,130 @@ namespace paczkomat.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("history")]
+        public async Task<IEnumerable<PackDto>> GetPackHistory([FromQuery] int? klientId, [FromQuery] int? userId)
+        {
+            if (!klientId.HasValue && userId.HasValue)
+            {
+                var klient = await _context.klients.FirstOrDefaultAsync(k => k.user_id == userId.Value);
+                if (klient != null)
+                    klientId = klient.klient_id;
+            }
+
+            if (!klientId.HasValue)
+                return new List<PackDto>();
+
+            var list = await _context.packs
+                .Where(p => p.klient_id == klientId && p.picked_up == true)
+                .OrderByDescending(p => p.date)
+                .ToListAsync();
+
+            var packDtos = new List<PackDto>();
+            foreach (var pack in list)
+            {
+                var paczkomatAddress = await (from pd in _context.paczkomat_data
+                                              join pac in _context.paczkomats on pd.paczkomat_id equals pac.paczkomat_id
+                                              join b in _context.boxs on pd.box_id equals b.box_id
+                                              where b.pack_id == pack.pack_id
+                                              select pac.address)
+                                             .FirstOrDefaultAsync();
+
+                packDtos.Add(new PackDto
+                {
+                    PackId = pack.pack_id,
+                    Size = pack.size,
+                    Delivered = "Odebrana",
+                    Date = pack.date?.ToString("yyyy-MM-dd"),
+                    KlientName = paczkomatAddress ?? "Brak paczkomatu",
+                    PickedUp = true
+                });
+            }
+            return packDtos;
+        }
+
+        [HttpGet("delivered")]
+        public async Task<IEnumerable<PackDto>> GetDeliveredPacks()
+        {
+            var list = await _context.packs
+                .Where(p => p.delivered == true)
+                .OrderByDescending(p => p.date)
+                .ToListAsync();
+
+            var packDtos = new List<PackDto>();
+            foreach (var pack in list)
+            {
+                var paczkomatAddress = await (from pd in _context.paczkomat_data
+                                              join pac in _context.paczkomats on pd.paczkomat_id equals pac.paczkomat_id
+                                              join b in _context.boxs on pd.box_id equals b.box_id
+                                              where b.pack_id == pack.pack_id
+                                              select pac.address)
+                                             .FirstOrDefaultAsync();
+
+                var receiverName = "";
+                if (pack.klient_id.HasValue)
+                {
+                    var klient = await _context.klients
+                        .Include(k => k.user)
+                        .FirstOrDefaultAsync(k => k.klient_id == pack.klient_id);
+                    if (klient?.user != null)
+                        receiverName = $"{klient.user.name} {klient.user.surname}";
+                }
+
+                packDtos.Add(new PackDto
+                {
+                    PackId = pack.pack_id,
+                    Size = pack.size,
+                    Delivered = pack.picked_up == true ? "Odebrana" : "Doręczona",
+                    Date = pack.date?.ToString("yyyy-MM-dd"),
+                    KlientName = paczkomatAddress ?? "Brak paczkomatu",
+                    PickedUp = pack.picked_up == true
+                });
+            }
+            return packDtos;
+        }
+
+        [HttpGet("clients-list")]
+        public async Task<ActionResult<IEnumerable<object>>> GetClientsList()
+        {
+            var clients = await _context.klients
+                .Include(k => k.user)
+                .Where(k => k.user != null)
+                .Select(k => new
+                {
+                    KlientId = k.klient_id,
+                    Name = k.user.name ?? "",
+                    Surname = k.user.surname ?? "",
+                    Email = k.user.email ?? "",
+                    Phone = k.user.phone_number,
+                    Selfie = k.user.selfie ?? ""
+                })
+                .ToListAsync();
+
+            return Ok(clients);
+        }
+
+        [HttpPut("{id}/pickup")]
+        public async Task<IActionResult> PickupPack(int id, [FromQuery] int? klientId)
+        {
+            var pack = await _context.packs.FindAsync(id);
+            if (pack == null)
+                return NotFound(new { message = "Paczka nie została znaleziona." });
+
+            if (pack.delivered != true)
+                return BadRequest(new { message = "Paczka nie została jeszcze doręczona do paczkomatu." });
+
+            if (pack.picked_up == true)
+                return BadRequest(new { message = "Paczka została już odebrana." });
+
+            if (klientId.HasValue && pack.klient_id != klientId.Value)
+                return BadRequest(new { message = "Ta paczka nie należy do tego klienta." });
+
+            pack.picked_up = true;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Paczka została odebrana." });
         }
 
         [HttpPost]

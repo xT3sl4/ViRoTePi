@@ -163,6 +163,8 @@ public partial class inpostContext : DbContext
             entity.Property(e => e.klient_id).HasColumnType("int(11)");
             entity.Property(e => e.size).HasColumnType("text");
 
+            entity.Property(e => e.picked_up).HasDefaultValue(false);
+
             entity.HasOne(d => d.klient).WithMany(p => p.packs)
                 .HasForeignKey(d => d.klient_id)
                 .OnDelete(DeleteBehavior.Cascade)

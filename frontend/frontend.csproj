@@ -131,66 +131,39 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
+  <!-- ========== XAML Pages ========== -->
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AdminPanel.xaml.cs">
-      <DependentUpon>AdminPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LoginModels.cs" />
-    <Compile Include="ProfileEditWindow.xaml.cs">
-      <DependentUpon>ProfileEditWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RegisterWindow.xaml.cs">
-      <DependentUpon>RegisterWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Services\ApiService.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserEditDialog.xaml.cs">
-      <DependentUpon>UserEditDialog.xaml</DependentUpon>
-    </Compile>
     <Page Include="AdminPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="CourierPanel.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMessageBox.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="HelpWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="LoginPage.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CourierPanel.xaml.cs">
-      <DependentUpon>CourierPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomMessageBox.xaml.cs">
-      <DependentUpon>CustomMessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="ProfileEditWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="MapPickerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProfileEditWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="RegisterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -201,6 +174,48 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <!-- ========== Code-Behind ========== -->
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AdminPanel.xaml.cs">
+      <DependentUpon>AdminPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CourierPanel.xaml.cs">
+      <DependentUpon>CourierPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HelpWindow.xaml.cs">
+      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MapPickerWindow.xaml.cs">
+      <DependentUpon>MapPickerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileEditWindow.xaml.cs">
+      <DependentUpon>ProfileEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterWindow.xaml.cs">
+      <DependentUpon>RegisterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserEditDialog.xaml.cs">
+      <DependentUpon>UserEditDialog.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- ========== Models & Services ========== -->
+  <ItemGroup>
+    <Compile Include="Models\LoginModels.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Services\ApiService.cs" />
+  </ItemGroup>
+  <!-- ========== Properties ========== -->
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -219,30 +234,23 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="client_secret.json" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <!-- ========== Config & Secrets ========== -->
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="client_secret.json" />
+    <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Resource Include="Images/inpost_logo.png" />
-    <Resource Include="Images/user.png" />
-    <Resource Include="Images/menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\" />
-  </ItemGroup>
+  <!-- ========== Images (embedded resources) ========== -->
   <ItemGroup>
     <Resource Include="Images\inpost_logo.png" />
     <Resource Include="Images\menu.png" />
+    <Resource Include="Images\user.png" />
     <Resource Include="Images\selfie1.jpg" />
-    <Resource Include="Images\selfie10.jpg" />
     <Resource Include="Images\selfie2.jpg" />
     <Resource Include="Images\selfie3.jpg" />
     <Resource Include="Images\selfie4.jpg" />
@@ -251,8 +259,30 @@
     <Resource Include="Images\selfie7.jpg" />
     <Resource Include="Images\selfie8.jpg" />
     <Resource Include="Images\selfie9.jpg" />
-    <Resource Include="Images\user.png" />
+    <Resource Include="Images\selfie10.jpg" />
   </ItemGroup>
+  <!-- ========== Content (copied to output) ========== -->
+  <ItemGroup>
+    <Content Include="Assets\map.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Videos\help.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Videos\help0.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Videos\help1.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Videos\help2.mp4" Condition="Exists('Videos\help2.mp4')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Videos\help3.mp4" Condition="Exists('Videos\help3.mp4')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Ten projekt zawiera odwołania do pakietów NuGet, których nie ma na tym komputerze. Użyj przywracania pakietów NuGet, aby je pobrać. Aby uzyskać więcej informacji, zobacz http://go.microsoft.com/fwlink/?LinkID=322105. Brakujący plik: {0}.</ErrorText>

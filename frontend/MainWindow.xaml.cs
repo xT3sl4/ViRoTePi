@@ -1,17 +1,33 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using frontend;
 
 namespace frontend
 {
+    // Converter: przycisk "Odbierz" widoczny tylko gdy status = "Doręczona"
+    public class DeliveredToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (value as string) == "Doręczona" ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public partial class MainWindow : Window
     {
         private int? klientId;
@@ -63,19 +79,18 @@ namespace frontend
                 _ = LoadUserNameAsync(userId.Value);
 
             // Pokaż listę paczek jako domyślny widok
+            HideAllPanels();
             PackagesPanel.Visibility = Visibility.Visible;
-            SendPackagePanel.Visibility = Visibility.Collapsed;
         }
 
         private void ConfigureUIForGuest()
         {
-            // Gość — ukryj selfie i wyloguj, pokaż "Zaloguj się"
+            // Gość — ukryj wyloguj, pokaż "Zaloguj się", domyślna ikona w Ellipse
             LoggedInPanel.Visibility = Visibility.Collapsed;
             LoginBtn.Visibility = Visibility.Visible;
-            SelfieEllipse.Visibility = Visibility.Collapsed;
-            DefaultUserIcon.Visibility = Visibility.Visible;
+            LoadSelfie(null); // załaduje domyślną ikonę user.png
 
-            PackagesPanel.Visibility = Visibility.Collapsed;
+            HideAllPanels();
             SendPackagePanel.Visibility = Visibility.Visible;
         }
 
@@ -83,38 +98,28 @@ namespace frontend
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(selfieFileName))
-                {
-                    // Brak selfie — zostaje domyślna ikona
-                    SelfieEllipse.Visibility = Visibility.Collapsed;
-                    DefaultUserIcon.Visibility = Visibility.Visible;
-                    return;
-                }
+                string imageFile = selfieFileName;
 
-                string path = System.IO.Path.Combine(
-                    AppDomain.CurrentDomain.BaseDirectory, "Images", selfieFileName);
+                // Jeśli brak selfie — użyj domyślnej ikony
+                if (string.IsNullOrWhiteSpace(imageFile))
+                    imageFile = "user.png";
 
-                if (!System.IO.File.Exists(path))
-                {
-                    SelfieEllipse.Visibility = Visibility.Collapsed;
-                    DefaultUserIcon.Visibility = Visibility.Visible;
-                    return;
-                }
-
-                var bitmap = new System.Windows.Media.Imaging.BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(path, UriKind.Absolute);
-                bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
+                // Obrazki są osadzone jako Resource — używamy pack URI
+                var bitmap = new System.Windows.Media.Imaging.BitmapImage(
+                    new Uri($"pack://application:,,,/Images/{imageFile}", UriKind.Absolute));
 
                 ProfileImageBrush.ImageSource = bitmap;
-                SelfieEllipse.Visibility = Visibility.Visible;
-                DefaultUserIcon.Visibility = Visibility.Collapsed;
             }
             catch
             {
-                SelfieEllipse.Visibility = Visibility.Collapsed;
-                DefaultUserIcon.Visibility = Visibility.Visible;
+                // Fallback — domyślna ikona user.png
+                try
+                {
+                    var bmp = new System.Windows.Media.Imaging.BitmapImage(
+                        new Uri("pack://application:,,,/Images/user.png", UriKind.Absolute));
+                    ProfileImageBrush.ImageSource = bmp;
+                }
+                catch { }
             }
         }
 
@@ -147,6 +152,23 @@ namespace frontend
             public string Delivered { get; set; } = "";
             public string Date { get; set; }
             public string KlientName { get; set; } = "";
+            public bool PickedUp { get; set; } = false;
+        }
+
+        public class ClientInfo
+        {
+            public int KlientId { get; set; }
+            public string Name { get; set; }
+            public string Surname { get; set; }
+            public string Email { get; set; }
+            public int? Phone { get; set; }
+            public string Selfie { get; set; }
+        }
+
+        public class ClientsResponse
+        {
+            [JsonPropertyName("$values")]
+            public List<ClientInfo> Values { get; set; } = new List<ClientInfo>();
         }
 
         public class PackResponse
@@ -261,6 +283,14 @@ namespace frontend
 
         // ── Nawigacja ─────────────────────────────────────────────────────────
 
+        private void HideAllPanels()
+        {
+            PackagesPanel.Visibility = Visibility.Collapsed;
+            SendPackagePanel.Visibility = Visibility.Collapsed;
+            HistoryPanel.Visibility = Visibility.Collapsed;
+            SendToClientPanel.Visibility = Visibility.Collapsed;
+        }
+
         public async void Packages_Click(object sender, RoutedEventArgs e)
         {
             if (!klientId.HasValue)
@@ -270,8 +300,8 @@ namespace frontend
                 return;
             }
 
+            HideAllPanels();
             PackagesPanel.Visibility = Visibility.Visible;
-            SendPackagePanel.Visibility = Visibility.Collapsed;
 
             List<Pack> packs = await GetPacksAsync(klientId);
             PacksDataGrid.ItemsSource = packs;
@@ -279,12 +309,108 @@ namespace frontend
 
         public void SendPackage_Click(object sender, RoutedEventArgs e)
         {
-            PackagesPanel.Visibility = Visibility.Collapsed;
+            HideAllPanels();
             SendPackagePanel.Visibility = Visibility.Visible;
+        }
+
+        public async void History_Click(object sender, RoutedEventArgs e)
+        {
+            if (!klientId.HasValue)
+            {
+                MessageBox.Show("Musisz być zalogowany, aby zobaczyć historię paczek.",
+                    "Wymagane logowanie", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            HideAllPanels();
+            HistoryPanel.Visibility = Visibility.Visible;
+
+            List<Pack> history = await GetPackHistoryAsync();
+            HistoryDataGrid.ItemsSource = history;
+        }
+
+        public async void SendToClient_Click(object sender, RoutedEventArgs e)
+        {
+            if (!klientId.HasValue)
+            {
+                MessageBox.Show("Musisz być zalogowany, aby wysyłać paczki do klientów.",
+                    "Wymagane logowanie", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            HideAllPanels();
+            SendToClientPanel.Visibility = Visibility.Visible;
+
+            await LoadClientsListAsync();
         }
 
         private void MapButton_Click(object sender, RoutedEventArgs e) => OtworzMape();
         private void LockerButton_Click(object sender, RoutedEventArgs e) => OtworzMape();
+
+        // Otwórz okno pomocy
+        public void Help_Click(object sender, RoutedEventArgs e)
+        {
+            var helpWindow = new HelpWindow();
+            helpWindow.Owner = this;
+            helpWindow.ShowDialog();
+        }
+
+        // Odbiór paczki przez klienta
+        private async void PickupPack_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as System.Windows.Controls.Button;
+            var pack = button?.Tag as Pack;
+            if (pack == null) return;
+
+            var confirm = MessageBox.Show(
+                $"Czy na pewno chcesz odebrać paczkę nr {pack.PackId}?",
+                "Potwierdzenie odbioru",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (confirm != MessageBoxResult.Yes) return;
+
+            using (var client = CreateHttpClient())
+            {
+                try
+                {
+                    string url = $"api/packs/{pack.PackId}/pickup";
+                    if (klientId.HasValue)
+                        url += $"?klientId={klientId.Value}";
+
+                    var response = await client.PutAsync(url, null);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show(
+                            $"Paczka nr {pack.PackId} została odebrana!",
+                            "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        // Odśwież listę paczek — odebrana zniknie
+                        List<Pack> packs = await GetPacksAsync(klientId);
+                        PacksDataGrid.ItemsSource = packs;
+                    }
+                    else
+                    {
+                        string body = await response.Content.ReadAsStringAsync();
+                        try
+                        {
+                            var error = JsonDocument.Parse(body);
+                            string msg = error.RootElement.GetProperty("message").GetString() ?? body;
+                            MessageBox.Show(msg, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        catch
+                        {
+                            MessageBox.Show($"Błąd: {body}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Błąd połączenia: " + ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
 
         // Kliknięcie na zdjęcie/ikonę — edycja profilu (tylko gdy zalogowany)
         public void User_Click(object sender, RoutedEventArgs e)
@@ -361,6 +487,280 @@ namespace frontend
             }
         }
 
+        // ── Historia paczek ───────────────────────────────────────────────────
+
+        private async Task<List<Pack>> GetPackHistoryAsync()
+        {
+            using (HttpClient client = CreateHttpClient())
+            {
+                string url = _userId.HasValue
+                    ? $"api/packs/history?userId={_userId.Value}"
+                    : $"api/packs/history?klientId={klientId}";
+
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (!response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show($"Błąd pobierania historii: {response.StatusCode}");
+                    return new List<Pack>();
+                }
+
+                string json = await response.Content.ReadAsStringAsync();
+                PackResponse wrapper = JsonSerializer.Deserialize<PackResponse>(json,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                return wrapper?.Values ?? new List<Pack>();
+            }
+        }
+
+        // ── Wyślij do klienta ─────────────────────────────────────────────────
+
+        private List<ClientInfo> _clientsList = new List<ClientInfo>();
+        private ClientInfo _selectedClient = null;
+        private string _clientSelectedPaczkomatName = null;
+        private string _clientSelectedSize = null;
+
+        private async Task LoadClientsListAsync()
+        {
+            using (HttpClient client = CreateHttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync("api/packs/clients-list");
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show($"Błąd pobierania listy klientów: {response.StatusCode}");
+                        return;
+                    }
+
+                    string json = await response.Content.ReadAsStringAsync();
+
+                    // Spróbuj deserializować jako $values wrapper lub jako zwykłą listę
+                    try
+                    {
+                        var wrapper = JsonSerializer.Deserialize<ClientsResponse>(json,
+                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        _clientsList = wrapper?.Values ?? new List<ClientInfo>();
+                    }
+                    catch
+                    {
+                        _clientsList = JsonSerializer.Deserialize<List<ClientInfo>>(json,
+                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<ClientInfo>();
+                    }
+
+                    // Filtruj siebie z listy
+                    if (klientId.HasValue)
+                        _clientsList.RemoveAll(c => c.KlientId == klientId.Value);
+
+                    ClientsListBox.Items.Clear();
+                    foreach (var cl in _clientsList)
+                    {
+                        var sp = new System.Windows.Controls.StackPanel
+                        {
+                            Orientation = System.Windows.Controls.Orientation.Horizontal
+                        };
+
+                        // Selfie
+                        var ellipse = new System.Windows.Shapes.Ellipse
+                        {
+                            Width = 48,
+                            Height = 48,
+                            Margin = new Thickness(0, 0, 12, 0)
+                        };
+
+                        try
+                        {
+                            string imgFile = string.IsNullOrWhiteSpace(cl.Selfie) ? "user.png" : cl.Selfie;
+                            var bitmap = new System.Windows.Media.Imaging.BitmapImage(
+                                new Uri($"pack://application:,,,/Images/{imgFile}", UriKind.Absolute));
+                            ellipse.Fill = new System.Windows.Media.ImageBrush(bitmap)
+                            {
+                                Stretch = System.Windows.Media.Stretch.UniformToFill
+                            };
+                        }
+                        catch
+                        {
+                            var bmp = new System.Windows.Media.Imaging.BitmapImage(
+                                new Uri("pack://application:,,,/Images/user.png", UriKind.Absolute));
+                            ellipse.Fill = new System.Windows.Media.ImageBrush(bmp)
+                            {
+                                Stretch = System.Windows.Media.Stretch.UniformToFill
+                            };
+                        }
+
+                        sp.Children.Add(ellipse);
+
+                        var textPanel = new System.Windows.Controls.StackPanel();
+                        textPanel.Children.Add(new System.Windows.Controls.TextBlock
+                        {
+                            Text = $"{cl.Name} {cl.Surname}",
+                            FontSize = 16,
+                            FontWeight = FontWeights.Bold
+                        });
+                        textPanel.Children.Add(new System.Windows.Controls.TextBlock
+                        {
+                            Text = cl.Email ?? "",
+                            FontSize = 12,
+                            Foreground = System.Windows.Media.Brushes.Gray
+                        });
+                        if (cl.Phone.HasValue)
+                        {
+                            textPanel.Children.Add(new System.Windows.Controls.TextBlock
+                            {
+                                Text = cl.Phone.Value.ToString("000 000 000"),
+                                FontSize = 12,
+                                Foreground = System.Windows.Media.Brushes.Gray
+                            });
+                        }
+                        sp.Children.Add(textPanel);
+
+                        var item = new System.Windows.Controls.ListBoxItem
+                        {
+                            Content = sp,
+                            Tag = cl
+                        };
+                        ClientsListBox.Items.Add(item);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Błąd: " + ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void ClientsListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var selectedItem = ClientsListBox.SelectedItem as System.Windows.Controls.ListBoxItem;
+            if (selectedItem?.Tag is ClientInfo ci)
+            {
+                _selectedClient = ci;
+                SelectedClientInfo.Text = $"Odbiorca: {ci.Name} {ci.Surname}";
+                SelectedClientInfo.FontStyle = FontStyles.Normal;
+                SelectedClientInfo.FontWeight = FontWeights.Bold;
+            }
+        }
+
+        private void client_small_parcel_Selected(object sender, RoutedEventArgs e)
+        {
+            _clientSelectedSize = "S";
+            ClientPriceText.Text = "Do zapłaty: 14.99 zł";
+        }
+
+        private void client_medium_parcel_Selected(object sender, RoutedEventArgs e)
+        {
+            _clientSelectedSize = "M";
+            ClientPriceText.Text = "Do zapłaty: 16.99 zł";
+        }
+
+        private void client_big_parcel_Selected(object sender, RoutedEventArgs e)
+        {
+            _clientSelectedSize = "L";
+            ClientPriceText.Text = "Do zapłaty: 19.99 zł";
+        }
+
+        private void ClientLockerButton_Click(object sender, RoutedEventArgs e)
+        {
+            MapPickerWindow mapaWindow = new MapPickerWindow { Owner = this };
+            if (mapaWindow.ShowDialog() == true)
+            {
+                var wybrany = mapaWindow.WybranyPaczkomat;
+                if (wybrany != null)
+                {
+                    _clientSelectedPaczkomatName = wybrany.name;
+                    ClientSelectedLockerInfo.Text = $"Wybrany punkt: {wybrany.name}";
+                    ClientSelectedLockerInfo.FontStyle = FontStyles.Normal;
+                    ClientSelectedLockerInfo.FontWeight = FontWeights.Bold;
+                }
+            }
+        }
+
+        private async void SendToClientButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedClient == null)
+            {
+                MessageBox.Show("Wybierz odbiorcę z listy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(_clientSelectedSize))
+            {
+                MessageBox.Show("Wybierz rozmiar paczki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(_clientSelectedPaczkomatName))
+            {
+                MessageBox.Show("Wybierz paczkomat z mapy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Pobierz email zalogowanego nadawcy
+            string senderEmail = "";
+            if (_userId.HasValue)
+            {
+                using (var client = CreateHttpClient())
+                {
+                    var resp = await client.GetAsync($"api/users/{_userId.Value}");
+                    if (resp.IsSuccessStatusCode)
+                    {
+                        string json = await resp.Content.ReadAsStringAsync();
+                        var user = JsonSerializer.Deserialize<UserProfile>(json,
+                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        senderEmail = user?.Email ?? "";
+                    }
+                }
+            }
+
+            var request = new SendPackRequest
+            {
+                ReceiverEmail = senderEmail,
+                ReceiverPhone = _selectedClient.Phone?.ToString() ?? "",
+                Size = _clientSelectedSize,
+                PaczkomatName = _clientSelectedPaczkomatName
+            };
+
+            using (var client = CreateHttpClient())
+            {
+                string json = JsonSerializer.Serialize(request);
+                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("api/packs/send", content);
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show($"Paczka do {_selectedClient.Name} {_selectedClient.Surname} została wysłana!",
+                        "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Reset formularza
+                    _selectedClient = null;
+                    _clientSelectedPaczkomatName = null;
+                    _clientSelectedSize = null;
+                    ClientsListBox.SelectedIndex = -1;
+                    SelectedClientInfo.Text = "Nie wybrano odbiorcy";
+                    SelectedClientInfo.FontStyle = FontStyles.Italic;
+                    SelectedClientInfo.FontWeight = FontWeights.Normal;
+                    ClientSelectedLockerInfo.Text = "Nie wybrano paczkomatu";
+                    ClientSelectedLockerInfo.FontStyle = FontStyles.Italic;
+                    ClientSelectedLockerInfo.FontWeight = FontWeights.Normal;
+                    ClientPriceText.Text = "";
+                    ClientParcelSizeListBox.SelectedIndex = -1;
+                }
+                else
+                {
+                    try
+                    {
+                        var error = JsonDocument.Parse(responseBody);
+                        string msg = error.RootElement.GetProperty("message").GetString() ?? responseBody;
+                        MessageBox.Show(msg, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    catch
+                    {
+                        MessageBox.Show($"Błąd: {responseBody}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+        }
+
         // ── Slider i rozmiary paczki ──────────────────────────────────────────
 
         private void small_parcel_Selected(object sender, RoutedEventArgs e) => price_to_pay.Text = "Do zapłaty: 14.99 zł";
@@ -394,7 +794,7 @@ namespace frontend
 
         private void OtworzMape()
         {
-            CustomMessageBox mapaWindow = new CustomMessageBox { Owner = this };
+            MapPickerWindow mapaWindow = new MapPickerWindow { Owner = this };
             if (mapaWindow.ShowDialog() == true)
             {
                 var wybrany = mapaWindow.WybranyPaczkomat;

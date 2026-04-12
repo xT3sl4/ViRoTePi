@@ -2766,19 +2766,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\victo\\.nuget\\packages\\": {}
+    "C:\\Users\\robiz\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
+      "projectUniqueName": "D:\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
       "projectName": "paczkomat",
-      "projectPath": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
-      "packagesPath": "C:\\Users\\victo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\victo\\Desktop\\projekt\\ViRoTePi\\paczkomat\\obj\\",
+      "projectPath": "D:\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
+      "packagesPath": "C:\\Users\\robiz\\.nuget\\packages\\",
+      "outputPath": "D:\\projekt\\ViRoTePi\\paczkomat\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\victo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\robiz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2803,8 +2803,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "10.0.100"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -2854,7 +2853,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

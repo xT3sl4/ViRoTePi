@@ -103,171 +103,28 @@
             <!-- ===================== ZAKŁADKA: PACZKI ===================== -->
             <TabItem Header="Paczki i kurierzy" FontSize="14" FontWeight="SemiBold" Padding="16,8">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.5*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <!-- Paczki + Kurierzy -->
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="20"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Border Grid.Column="0" Background="White" CornerRadius="8">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-                                <Border Grid.Row="0" Background="#FF6200" Padding="15" CornerRadius="8,8,0,0">
-                                    <Grid>
-                                        <TextBlock Text="Paczki do przypisania" FontSize="18" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
-                                        <Button Content="Odśwież" HorizontalAlignment="Right" Background="White" Foreground="#FF6200" FontWeight="Bold" Padding="15,8" BorderThickness="0" Cursor="Hand" Click="RefreshBtn_Click"/>
-                                    </Grid>
-                                </Border>
-
-                                <DataGrid x:Name="PacksDataGrid" 
-                                          Grid.Row="1"
-                                          AutoGenerateColumns="False" 
-                                          IsReadOnly="True"
-                                          CanUserAddRows="False"
-                                          CanUserDeleteRows="False"
-                                          CanUserResizeRows="False"
-                                          HeadersVisibility="Column"
-                                          GridLinesVisibility="Horizontal"
-                                          HorizontalGridLinesBrush="#E0E0E0"
-                                          BorderThickness="0"
-                                          SelectionMode="Single"
-                                          SelectionChanged="PacksDataGrid_SelectionChanged">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID" Binding="{Binding PackId}" Width="60"/>
-                                        <DataGridTextColumn Header="Rozmiar" Binding="{Binding Size}" Width="80"/>
-                                        <DataGridTextColumn Header="Odbiorca" Binding="{Binding ReceiverName}" Width="*"/>
-                                        <DataGridTextColumn Header="Paczkomat" Binding="{Binding PaczkomatName}" Width="150"/>
-                                        <DataGridTextColumn Header="Data" Binding="{Binding Date}" Width="120"/>
-                                        <DataGridTemplateColumn Header="Status" Width="120">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Border CornerRadius="4" Padding="8,4">
-                                                        <TextBlock Foreground="White" FontWeight="SemiBold" FontSize="11" HorizontalAlignment="Center"/>
-                                                    </Border>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                    </DataGrid.Columns>
-                                    <DataGrid.RowStyle>
-                                        <Style TargetType="DataGridRow">
-                                            <Setter Property="Height" Value="50"/>
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#FFF8E1"/>
-                                                </Trigger>
-                                                <Trigger Property="IsSelected" Value="True">
-                                                    <Setter Property="Background" Value="#FFE082"/>
-                                                    <Setter Property="Foreground" Value="#000000"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </DataGrid.RowStyle>
-                                </DataGrid>
-                            </Grid>
-                        </Border>
-
-                        <Border Grid.Column="2" Background="White" CornerRadius="8">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <Border Grid.Row="0" Background="#FFCD00" Padding="15" CornerRadius="8,8,0,0">
-                                    <TextBlock Text="Kurierzy" FontSize="18" FontWeight="Bold" Foreground="#333333"/>
-                                </Border>
-
-                                <Border Grid.Row="1" Background="#FFF8E1" Padding="15" BorderBrush="#FFE082" BorderThickness="0,0,0,1">
-                                    <StackPanel>
-                                        <TextBlock Text="Wybrana paczka:" FontSize="12" Foreground="#666666" FontWeight="SemiBold"/>
-                                        <TextBlock x:Name="SelectedPackInfo" Text="Nie wybrano" FontSize="14" Foreground="#333333" FontWeight="Bold" Margin="0,5,0,0" TextWrapping="Wrap"/>
-                                    </StackPanel>
-                                </Border>
-
-                                <ListBox x:Name="KuriersListBox" Grid.Row="2" BorderThickness="0" SelectionMode="Single">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border Padding="15,10" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
-                                                <Grid>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                    </Grid.RowDefinitions>
-                                                    <TextBlock Grid.Row="0" Text="{Binding Name}" FontWeight="Bold" FontSize="14"/>
-                                                    <TextBlock Grid.Row="1" Text="{Binding Email}" FontSize="11" Foreground="#666666" Margin="0,2,0,0"/>
-                                                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,0">
-                                                        <Border Background="#E3F2FD" CornerRadius="3" Padding="6,2" Margin="0,0,5,0">
-                                                            <TextBlock FontSize="10" Foreground="#2196F3" FontWeight="SemiBold">
-                                                                <Run Text="Paczek: "/>
-                                                                <Run Text="{Binding AssignedPacksCount}"/>
-                                                            </TextBlock>
-                                                        </Border>
-                                                        <Border CornerRadius="3" Padding="6,2">
-                                                            <Border.Style>
-                                                                <Style TargetType="Border">
-                                                                    <Setter Property="Background" Value="#E8F5E9"/>
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding State}" Value="busy">
-                                                                            <Setter Property="Background" Value="#FFEBEE"/>
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </Border.Style>
-                                                            <TextBlock FontSize="10" FontWeight="SemiBold">
-                                                                <TextBlock.Style>
-                                                                    <Style TargetType="TextBlock">
-                                                                        <Setter Property="Foreground" Value="#4CAF50"/>
-                                                                        <Setter Property="Text" Value="Dostępny"/>
-                                                                        <Style.Triggers>
-                                                                            <DataTrigger Binding="{Binding State}" Value="busy">
-                                                                                <Setter Property="Foreground" Value="#F44336"/>
-                                                                                <Setter Property="Text" Value="Zajęty"/>
-                                                                            </DataTrigger>
-                                                                        </Style.Triggers>
-                                                                    </Style>
-                                                                </TextBlock.Style>
-                                                            </TextBlock>
-                                                        </Border>
-                                                    </StackPanel>
-                                                </Grid>
-                                            </Border>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-
-                                <Button Grid.Row="3" Content="Przypisz do wybranego kuriera" Background="#FF6200" Foreground="White" FontSize="14" FontWeight="Bold" Padding="0,15" BorderThickness="0" Cursor="Hand" Click="AssignBtn_Click" Margin="15"/>
-                            </Grid>
-                        </Border>
-                    </Grid>
-
-                    <!-- Paczki oczekujące -->
-                    <Border Grid.Row="2" Background="White" CornerRadius="8">
+                    <!-- Jedna lista wszystkich paczek -->
+                    <Border Grid.Column="0" Background="White" CornerRadius="8">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Border Grid.Row="0" Background="#E91E63" Padding="15" CornerRadius="8,8,0,0">
-                                <TextBlock Text="Paczki oczekujące na wydanie" FontSize="18" FontWeight="Bold" Foreground="White"/>
+
+                            <Border Grid.Row="0" Background="#FF6200" Padding="15" CornerRadius="8,8,0,0">
+                                <Grid>
+                                    <TextBlock Text="Wszystkie paczki" FontSize="18" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+                                    <Button Content="Odśwież" HorizontalAlignment="Right" Background="White" Foreground="#FF6200" FontWeight="Bold" Padding="15,8" BorderThickness="0" Cursor="Hand" Click="RefreshBtn_Click"/>
+                                </Grid>
                             </Border>
 
-                            <DataGrid x:Name="PendingPacksDataGrid"
+                            <DataGrid x:Name="PacksDataGrid"
                                       Grid.Row="1"
                                       AutoGenerateColumns="False"
                                       IsReadOnly="True"
@@ -278,52 +135,136 @@
                                       GridLinesVisibility="Horizontal"
                                       HorizontalGridLinesBrush="#E0E0E0"
                                       BorderThickness="0"
-                                      SelectionMode="Single">
+                                      SelectionMode="Single"
+                                      SelectionChanged="PacksDataGrid_SelectionChanged">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID" Binding="{Binding PendingId}" Width="60"/>
-                                    <DataGridTextColumn Header="Rozmiar" Binding="{Binding Size}" Width="80"/>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding DisplayId}" Width="55"/>
+                                    <DataGridTextColumn Header="Rozmiar" Binding="{Binding Size}" Width="65"/>
                                     <DataGridTextColumn Header="Nadawca" Binding="{Binding SenderName}" Width="*"/>
                                     <DataGridTextColumn Header="Odbiorca" Binding="{Binding ReceiverName}" Width="*"/>
-                                    <DataGridTextColumn Header="Paczkomat" Binding="{Binding PaczkomatName}" Width="150"/>
-                                    <DataGridTextColumn Header="Data zgłoszenia" Binding="{Binding CreatedAt}" Width="150"/>
-                                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100"/>
+                                    <DataGridTextColumn Header="Paczkomat" Binding="{Binding PaczkomatName}" Width="120"/>
+                                    <DataGridTextColumn Header="Data" Binding="{Binding Date}" Width="100"/>
+                                    <DataGridTemplateColumn Header="Status" Width="120">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Border CornerRadius="4" Padding="8,4">
+                                                    <Border.Style>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="Background" Value="#FFF3E0"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Status}" Value="Nieprzypisana">
+                                                                    <Setter Property="Background" Value="#E3F2FD"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Status}" Value="Przypisana">
+                                                                    <Setter Property="Background" Value="#E8F5E9"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Border.Style>
+                                                    <TextBlock Text="{Binding Status}" FontWeight="SemiBold" FontSize="11" HorizontalAlignment="Center">
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="TextBlock">
+                                                                <Setter Property="Foreground" Value="#E65100"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Status}" Value="Nieprzypisana">
+                                                                        <Setter Property="Foreground" Value="#2196F3"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Status}" Value="Przypisana">
+                                                                        <Setter Property="Foreground" Value="#4CAF50"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                </Border>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Akcje" Width="90">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Odrzuć"
+                                                        Tag="{Binding}"
+                                                        Background="#D32F2F"
+                                                        Foreground="White"
+                                                        FontSize="11"
+                                                        FontWeight="Bold"
+                                                        Padding="10,4"
+                                                        BorderThickness="0"
+                                                        Cursor="Hand"
+                                                        Click="RejectAnyPackBtn_Click"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                                 <DataGrid.RowStyle>
                                     <Style TargetType="DataGridRow">
-                                        <Setter Property="Height" Value="45"/>
+                                        <Setter Property="Height" Value="48"/>
                                         <Style.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#FCE4EC"/>
+                                                <Setter Property="Background" Value="#FFF8E1"/>
                                             </Trigger>
                                             <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="Background" Value="#F48FB1"/>
+                                                <Setter Property="Background" Value="#FFE082"/>
                                                 <Setter Property="Foreground" Value="#000000"/>
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
                                 </DataGrid.RowStyle>
                             </DataGrid>
+                        </Grid>
+                    </Border>
 
-                            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="15">
-                                <Button Content="Odrzuć paczkę"
-                                        Background="#9E9E9E"
-                                        Foreground="White"
-                                        FontSize="13"
-                                        FontWeight="Bold"
-                                        Padding="20,12"
-                                        BorderThickness="0"
-                                        Cursor="Hand"
-                                        Margin="0,0,10,0"
-                                        Click="RejectPackBtn_Click"/>
-                                <Button Content="Wydaj paczkę"
-                                        Background="#E91E63"
-                                        Foreground="White"
-                                        FontSize="13"
-                                        FontWeight="Bold"
-                                        Padding="20,12"
-                                        BorderThickness="0"
-                                        Cursor="Hand"
-                                        Click="ReleasePackBtn_Click"/>
+                    <!-- Panel kurierów -->
+                    <Border Grid.Column="2" Background="White" CornerRadius="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Background="#FFCD00" Padding="15" CornerRadius="8,8,0,0">
+                                <TextBlock Text="Kurierzy" FontSize="18" FontWeight="Bold" Foreground="#333333"/>
+                            </Border>
+
+                            <Border Grid.Row="1" Background="#FFF8E1" Padding="15" BorderBrush="#FFE082" BorderThickness="0,0,0,1">
+                                <StackPanel>
+                                    <TextBlock Text="Wybrana paczka:" FontSize="12" Foreground="#666666" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="SelectedPackInfo" Text="Nie wybrano" FontSize="14" Foreground="#333333" FontWeight="Bold" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ListBox x:Name="KuriersListBox" Grid.Row="2" BorderThickness="0" SelectionMode="Single">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="15,10" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Row="0" Text="{Binding Name}" FontWeight="Bold" FontSize="14"/>
+                                                <TextBlock Grid.Row="1" Text="{Binding Email}" FontSize="11" Foreground="#666666" Margin="0,2,0,0"/>
+                                                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,0">
+                                                    <Border Background="#E3F2FD" CornerRadius="3" Padding="6,2">
+                                                        <TextBlock FontSize="10" Foreground="#2196F3" FontWeight="SemiBold">
+                                                            <Run Text="Paczek: "/>
+                                                            <Run Text="{Binding AssignedPacksCount}"/>
+                                                        </TextBlock>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <StackPanel Grid.Row="3" Margin="15">
+                                <Button Content="Przypisz kuriera" Background="#FF6200" Foreground="White" FontSize="14" FontWeight="Bold" Padding="0,15" BorderThickness="0" Cursor="Hand" Click="AssignBtn_Click" Margin="0,0,0,8"/>
+                                <Button Content="Wydaj oczekującą" Background="#E91E63" Foreground="White" FontSize="13" FontWeight="Bold" Padding="0,12" BorderThickness="0" Cursor="Hand" Click="ReleasePackBtn_Click"/>
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -480,6 +421,94 @@
                                         </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="#C5CAE9"/>
+                                            <Setter Property="Foreground" Value="#000000"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </TabItem>
+
+            <!-- ===================== ZAKŁADKA: DOSTARCZONE ===================== -->
+            <TabItem Header="Dostarczone paczki" FontSize="14" FontWeight="SemiBold" Padding="16,8">
+                <Border Background="White" CornerRadius="8">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Background="#4CAF50" Padding="15" CornerRadius="8,8,0,0">
+                            <Grid>
+                                <TextBlock Text="Wszystkie dostarczone paczki" FontSize="18" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+                                <Button Content="Odśwież" HorizontalAlignment="Right"
+                                        Background="White" Foreground="#4CAF50" FontWeight="Bold"
+                                        Padding="15,8" BorderThickness="0" Cursor="Hand"
+                                        Click="RefreshDeliveredBtn_Click"/>
+                            </Grid>
+                        </Border>
+
+                        <DataGrid x:Name="DeliveredPacksDataGrid"
+                                  Grid.Row="1"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="False"
+                                  CanUserResizeRows="False"
+                                  HeadersVisibility="Column"
+                                  GridLinesVisibility="Horizontal"
+                                  HorizontalGridLinesBrush="#E0E0E0"
+                                  BorderThickness="0"
+                                  SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding PackId}" Width="60"/>
+                                <DataGridTextColumn Header="Rozmiar" Binding="{Binding Size}" Width="80"/>
+                                <DataGridTextColumn Header="Paczkomat" Binding="{Binding KlientName}" Width="*"/>
+                                <DataGridTextColumn Header="Data" Binding="{Binding Date}" Width="120"/>
+                                <DataGridTemplateColumn Header="Status" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border CornerRadius="4" Padding="8,4">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Background" Value="#E8F5E9"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding PickedUp}" Value="True">
+                                                                <Setter Property="Background" Value="#E3F2FD"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <TextBlock FontWeight="SemiBold" FontSize="11" HorizontalAlignment="Center">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="Doręczona"/>
+                                                            <Setter Property="Foreground" Value="#4CAF50"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding PickedUp}" Value="True">
+                                                                    <Setter Property="Text" Value="Odebrana"/>
+                                                                    <Setter Property="Foreground" Value="#2196F3"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Height" Value="48"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#E8F5E9"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#C8E6C9"/>
                                             <Setter Property="Foreground" Value="#000000"/>
                                         </Trigger>
                                     </Style.Triggers>

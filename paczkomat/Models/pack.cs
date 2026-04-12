@@ -17,6 +17,8 @@ public partial class pack
 
     public DateOnly? to_when { get; set; }
 
+    public bool? picked_up { get; set; }
+
     public virtual ICollection<box> boxes { get; set; } = new List<box>();
 
     public virtual klient? klient { get; set; }

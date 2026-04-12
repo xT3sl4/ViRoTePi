@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/map.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("videos/help.mp4")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("videos/help0.mp4")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("videos/help1.mp4")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("packages/microsoft.web.webview2.1.0.3595.46/runtimes/win-x86/native/webview2loade" +
     "r.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("packages/microsoft.web.webview2.1.0.3595.46/runtimes/win-x64/native/webview2loade" +

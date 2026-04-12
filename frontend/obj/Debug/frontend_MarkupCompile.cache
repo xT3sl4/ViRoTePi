@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\victo\Desktop\projekt\ViRoTePi\frontend\obj\Debug\
+D:\projekt\ViRoTePi\frontend\obj\Debug\
 frontend
 none
 false
 DEBUG;TRACE
-C:\Users\victo\Desktop\projekt\ViRoTePi\frontend\App.xaml
-8-1732348741
-3-1298895089
-15-483944248
-41-1498074173
-AdminPanel.xaml;CourierPanel.xaml;CustomMessageBox.xaml;LoginPage.xaml;MainWindow.xaml;ProfileEditWindow.xaml;RegisterWindow.xaml;UserEditDialog.xaml;
+D:\projekt\ViRoTePi\frontend\App.xaml
+91074654581
+7912175318
+162053708094
+41-1741684469
+AdminPanel.xaml;CourierPanel.xaml;HelpWindow.xaml;LoginPage.xaml;MainWindow.xaml;MapPickerWindow.xaml;ProfileEditWindow.xaml;RegisterWindow.xaml;UserEditDialog.xaml;
 
 False
 
