@@ -77,7 +77,8 @@ Domyślnie:
 ## Uruchamianie backendu API
 
 ```bash
-cd /home/runner/work/ViRoTePi/ViRoTePi/paczkomat
+cd paczkomat
+dotnet restore
 dotnet run
 ```
 
@@ -89,7 +90,11 @@ W trybie developerskim Swagger jest dostępny pod adresem:
 
 Frontend należy uruchamiać na Windows (Visual Studio):
 1. Otwórz `frontend/frontend.sln`.
-2. Przywróć pakiety NuGet.
+2. Przywróć pakiety NuGet.  
+```
+nuget install frontend/packages.config -OutputDirectory frontend/packages
+```
+
 3. Uruchom projekt `frontend`.
 
 Aplikacja komunikuje się z API pod adresem bazowym:
