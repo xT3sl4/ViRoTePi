@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2026 at 01:38 PM
--- Wersja serwera: 10.4.28-MariaDB
--- Wersja PHP: 8.1.17
+-- Generation Time: Apr 13, 2026 at 08:53 AM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,24 +57,16 @@ CREATE TABLE `boxs` (
 --
 
 INSERT INTO `boxs` (`box_id`, `pack_id`, `size`) VALUES
-(1, 1, 'S'),
 (2, 2, 'M'),
 (3, 3, 'L'),
 (4, 4, 'S'),
-(5, 5, 'M'),
-(6, 6, 'L'),
 (7, 7, 'S'),
-(8, 8, 'M'),
 (9, 9, 'L'),
-(10, 10, 'S'),
-(11, 11, 'S'),
-(12, 12, 'M'),
-(13, 13, 'L'),
-(14, 14, 'L'),
-(15, 15, 'S'),
 (16, 16, 'M'),
 (17, 17, 'S'),
-(18, 18, 'L');
+(18, 18, 'L'),
+(20, 19, 'S'),
+(21, 20, 'M');
 
 -- --------------------------------------------------------
 
@@ -97,7 +89,6 @@ INSERT INTO `klients` (`klient_id`, `user_id`, `pack_id`) VALUES
 (2, 6, 0),
 (3, 7, 0),
 (4, 8, 0),
-(5, 10, 0),
 (6, 12, 0);
 
 -- --------------------------------------------------------
@@ -117,9 +108,7 @@ CREATE TABLE `kuriers` (
 --
 
 INSERT INTO `kuriers` (`kurier_id`, `user_id`, `state`) VALUES
-(1, 3, 'available'),
-(2, 4, 'busy'),
-(3, 9, 'available');
+(2, 4, 'available');
 
 -- --------------------------------------------------------
 
@@ -137,19 +126,13 @@ CREATE TABLE `kuriers_data` (
 --
 
 INSERT INTO `kuriers_data` (`kurier_id`, `pack_id`) VALUES
-(1, 1),
-(1, 2),
-(1, 7),
-(1, 10),
 (2, 3),
 (2, 4),
-(2, 8),
 (2, 16),
 (2, 17),
 (2, 18),
-(3, 5),
-(3, 6),
-(3, 9);
+(2, 19),
+(2, 20);
 
 -- --------------------------------------------------------
 
@@ -163,32 +146,25 @@ CREATE TABLE `packs` (
   `klient_id` int(11) DEFAULT NULL,
   `delivered` tinyint(1) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `to_when` date DEFAULT NULL
+  `to_when` date DEFAULT NULL,
+  `picked_up` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `packs`
 --
 
-INSERT INTO `packs` (`pack_id`, `size`, `klient_id`, `delivered`, `date`, `to_when`) VALUES
-(1, 'S', 1, 0, '2025-11-01', '2025-11-05'),
-(2, 'M', 2, 1, '2025-11-01', '2025-11-04'),
-(3, 'L', 3, 1, '2025-11-02', '2025-11-06'),
-(4, 'S', 4, 1, '2025-11-02', '2025-11-03'),
-(5, 'M', 5, 0, '2025-11-03', '2025-11-07'),
-(6, 'L', 1, 0, '2025-11-03', '2025-11-08'),
-(7, 'S', 2, 1, '2025-11-04', '2025-11-06'),
-(8, 'M', 3, 0, '2025-11-04', '2025-11-09'),
-(9, 'L', 4, 1, '2025-11-05', '2025-11-10'),
-(10, 'S', 5, 0, '2025-11-05', '2025-11-11'),
-(11, 'S', 1, 0, '2026-04-09', '2026-04-12'),
-(12, 'M', 1, 0, '2026-04-09', '2026-04-12'),
-(13, 'L', 1, 0, '2026-04-09', '2026-04-12'),
-(14, 'L', 1, 0, '2026-04-09', '2026-04-12'),
-(15, 'S', 1, 0, '2026-04-09', '2026-04-12'),
-(16, 'M', 1, 1, '2026-04-10', '2026-04-13'),
-(17, 'S', 1, 1, '2026-04-10', '2026-04-13'),
-(18, 'L', 1, 1, '2026-04-10', '2026-04-13');
+INSERT INTO `packs` (`pack_id`, `size`, `klient_id`, `delivered`, `date`, `to_when`, `picked_up`) VALUES
+(2, 'M', 2, 1, '2025-11-01', '2025-11-04', 0),
+(3, 'L', 3, 1, '2025-11-02', '2025-11-06', 1),
+(4, 'S', 4, 1, '2025-11-02', '2025-11-03', 0),
+(7, 'S', 2, 1, '2025-11-04', '2025-11-06', 0),
+(9, 'L', 4, 1, '2025-11-05', '2025-11-10', 0),
+(16, 'M', 1, 1, '2026-04-10', '2026-04-13', 0),
+(17, 'S', 1, 1, '2026-04-10', '2026-04-13', 0),
+(18, 'L', 1, 1, '2026-04-10', '2026-04-13', 0),
+(19, 'S', 1, 1, '2026-04-13', '2026-04-16', 0),
+(20, 'M', 2, 0, '2026-04-13', '2026-04-16', 0);
 
 -- --------------------------------------------------------
 
@@ -234,24 +210,16 @@ CREATE TABLE `paczkomat_data` (
 --
 
 INSERT INTO `paczkomat_data` (`paczkomat_id`, `box_id`) VALUES
-(1, 1),
-(1, 11),
 (2, 2),
 (2, 18),
 (3, 3),
 (4, 4),
-(4, 14),
-(5, 5),
-(6, 6),
 (7, 7),
-(7, 12),
-(7, 13),
-(7, 15),
 (7, 16),
 (7, 17),
-(8, 8),
-(9, 9),
-(10, 10);
+(7, 20),
+(7, 21),
+(9, 9);
 
 -- --------------------------------------------------------
 
@@ -275,7 +243,12 @@ CREATE TABLE `pending_packs` (
 
 INSERT INTO `pending_packs` (`pending_id`, `sender_klient_id`, `receiver_klient_id`, `size`, `paczkomat_id`, `created_at`, `status`) VALUES
 (1, 1, 1, 'S', 7, '2026-04-10 12:24:34', 'released'),
-(2, 1, 1, 'L', 2, '2026-04-10 12:31:45', 'released');
+(2, 1, 1, 'L', 2, '2026-04-10 12:31:45', 'released'),
+(3, 3, 4, 'M', 7, '2026-04-13 08:03:26', 'released'),
+(4, 3, 2, 'S', 1, '2026-04-13 08:07:50', 'rejected'),
+(5, 3, 2, 'S', 6, '2026-04-13 08:33:37', 'rejected'),
+(6, 3, 2, 'M', 7, '2026-04-13 08:44:24', 'released'),
+(7, 3, 1, 'S', 7, '2026-04-13 08:49:01', 'released');
 
 -- --------------------------------------------------------
 
@@ -303,14 +276,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `surname`, `email`, `date_of_birth`, `password`, `role`, `phone_number`, `selfie`, `sex`) VALUES
 (1, 'Natalia', 'Dąbrowska', 'jachuwroblewski4e@gmail.com', '1994-10-10', 'pass123', 'klient', 500000000, 'selfie10.jpg', 0),
 (2, 'Jan', 'Kowalski', 'jan1@mail.pl', '1990-01-01', 'pass123', 'admin', 111111111, 'selfie1.jpg', 1),
-(3, 'Anna', 'Nowak', 'anna2@mail.pl', '1992-02-02', 'pass123', 'admin', 222222222, 'selfie2.jpg', 0),
 (4, 'Piotr', 'Wiśniewski', 'piotr3@mail.pl', '1995-03-03', 'pass123', 'kurier', 333333333, 'selfie3.jpg', 1),
-(5, 'Kasia', 'Wójcik', 'kasia4@mail.pl', '1996-04-04', 'pass123', 'kurier', 444444444, 'selfie4.jpg', 0),
 (6, 'Tomasz', 'Kamiński', 'tomasz5@mail.pl', '1988-05-05', 'pass123', 'klient', 555555555, 'selfie5.jpg', 1),
 (7, 'Magda', 'Lewandowska', 'magda6@mail.pl', '1999-06-06', 'pass123', 'klient', 666666666, 'selfie6.jpg', 0),
 (8, 'Adam', 'Zieliński', 'adam7@mail.pl', '1991-07-07', 'pass123', 'klient', 777777777, 'selfie7.jpg', 1),
-(9, 'Ola', 'Szymańska', 'ola8@mail.pl', '1993-08-08', 'pass123', 'klient', 888888888, 'selfie8.jpg', 0),
-(10, 'Marek', 'Woźniak', 'marek9@mail.pl', '1987-09-09', 'pass123', 'kurier', 999999999, 'selfie9.jpg', 1),
 (12, 'Jan', 'Tesla', '1@mail.pl', NULL, 'pass123', 'klient', 698151415, NULL, NULL);
 
 --
@@ -401,7 +370,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `boxs`
 --
 ALTER TABLE `boxs`
-  MODIFY `box_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `box_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `klients`
@@ -419,7 +388,7 @@ ALTER TABLE `kuriers`
 -- AUTO_INCREMENT for table `packs`
 --
 ALTER TABLE `packs`
-  MODIFY `pack_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `pack_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `paczkomat`
@@ -431,7 +400,7 @@ ALTER TABLE `paczkomat`
 -- AUTO_INCREMENT for table `pending_packs`
 --
 ALTER TABLE `pending_packs`
-  MODIFY `pending_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `pending_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`

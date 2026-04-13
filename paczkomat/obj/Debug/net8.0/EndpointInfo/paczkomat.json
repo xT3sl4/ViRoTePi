@@ -173,6 +173,29 @@
         }
       }
     },
+    "/api/Admin/delete-pack/{packId}": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "packId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Admin/stats": {
       "get": {
         "tags": [
@@ -231,6 +254,29 @@
         "parameters": [
           {
             "name": "pendingId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/kurier/{kurierId}/toggle-state": {
+      "put": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "kurierId",
             "in": "path",
             "required": true,
             "schema": {
@@ -892,6 +938,163 @@
         }
       }
     },
+    "/api/Packs/history": {
+      "get": {
+        "tags": [
+          "Packs"
+        ],
+        "parameters": [
+          {
+            "name": "klientId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PackDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PackDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PackDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Packs/delivered": {
+      "get": {
+        "tags": [
+          "Packs"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PackDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PackDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PackDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Packs/clients-list": {
+      "get": {
+        "tags": [
+          "Packs"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Packs/{id}/pickup": {
+      "put": {
+        "tags": [
+          "Packs"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "klientId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Packs/send": {
       "post": {
         "tags": [
@@ -1180,6 +1383,13 @@
           "klientName": {
             "type": "string",
             "nullable": true
+          },
+          "pickedUp": {
+            "type": "boolean"
+          },
+          "paczkomatName": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1296,6 +1506,9 @@
         "additionalProperties": false
       },
       "UserCreateRequest": {
+        "required": [
+          "role"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -1315,8 +1528,8 @@
             "nullable": true
           },
           "role": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "phoneNumber": {
             "type": "string",
@@ -1506,6 +1719,10 @@
           "to_when": {
             "type": "string",
             "format": "date",
+            "nullable": true
+          },
+          "picked_up": {
+            "type": "boolean",
             "nullable": true
           },
           "boxes": {

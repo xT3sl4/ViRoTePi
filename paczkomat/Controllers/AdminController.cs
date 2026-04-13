@@ -238,16 +238,14 @@ namespace paczkomat.Controllers
             if (assignment != null)
                 _context.kuriers_data.Remove(assignment);
 
-            // Usuń powiązania box → paczkomat_data
+            // Usuń powiązania box → paczkomat_data (raw SQL bo paczkomat_data nie ma klucza głównego)
             var boxList = await _context.boxs
                 .Where(b => b.pack_id == packId)
                 .ToListAsync();
             foreach (var box in boxList)
             {
-                var paczkomatData = await _context.paczkomat_data
-                    .Where(pd => pd.box_id == box.box_id)
-                    .ToListAsync();
-                _context.paczkomat_data.RemoveRange(paczkomatData);
+                await _context.Database.ExecuteSqlRawAsync(
+                    "DELETE FROM paczkomat_data WHERE box_id = {0}", box.box_id);
             }
             _context.boxs.RemoveRange(boxList);
 
@@ -339,8 +337,13 @@ namespace paczkomat.Controllers
             if (pending.status != "waiting")
                 return BadRequest(new { message = "Paczka została już wydana." });
 
+            var maxPackId = await _context.packs.AnyAsync()
+                ? await _context.packs.MaxAsync(p => p.pack_id)
+                : 0;
+
             var newPack = new pack
             {
+                pack_id = maxPackId + 1,
                 size = pending.size,
                 klient_id = pending.receiver_klient_id,
                 delivered = false,

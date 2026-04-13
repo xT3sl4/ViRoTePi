@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj": {}
+    "C:\\Users\\robiz\\Desktop\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj": {}
   },
   "projects": {
-    "D:\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj": {
+    "C:\\Users\\robiz\\Desktop\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
+        "projectUniqueName": "C:\\Users\\robiz\\Desktop\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
         "projectName": "paczkomat",
-        "projectPath": "D:\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
+        "projectPath": "C:\\Users\\robiz\\Desktop\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
         "packagesPath": "C:\\Users\\robiz\\.nuget\\packages\\",
-        "outputPath": "D:\\projekt\\ViRoTePi\\paczkomat\\obj\\",
+        "outputPath": "C:\\Users\\robiz\\Desktop\\projekt\\ViRoTePi\\paczkomat\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\robiz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -89,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

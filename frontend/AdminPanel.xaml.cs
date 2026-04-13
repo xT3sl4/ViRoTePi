@@ -278,7 +278,7 @@ namespace frontend
                                 {
                                     PendingId = p.PendingId,
                                     PackId = null,
-                                    DisplayId = $"P{p.PendingId}",
+                                    DisplayId = p.PendingId.ToString(),
                                     Size = p.Size,
                                     SenderName = p.SenderName ?? "",
                                     ReceiverName = p.ReceiverName ?? "",

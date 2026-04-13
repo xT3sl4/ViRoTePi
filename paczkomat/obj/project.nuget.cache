@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hb/g0Q71vJU=",
+  "dgSpecHash": "5+Tm9lhEKyc=",
   "success": true,
-  "projectFilePath": "D:\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
+  "projectFilePath": "C:\\Users\\robiz\\Desktop\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\robiz\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\robiz\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
