@@ -2,6 +2,8 @@
 
 Aplikacja desktopowa zarządzająca paczkomatami
 
+📄 **[Pełna dokumentacja projektu](docs/dokumentacja.md)**
+
 ![Mem1](docs/images/mozesz_klepnac.jpg)
 
 ![Mem2](docs/images/anon..jpeg)
