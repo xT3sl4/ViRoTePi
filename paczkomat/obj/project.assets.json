@@ -2766,24 +2766,26 @@
     ]
   },
   "packageFolders": {
-    "/home/runner/.nuget/packages/": {}
+    "C:\\Users\\robiz\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/runner/work/ViRoTePi/ViRoTePi/paczkomat/paczkomat.csproj",
+      "projectUniqueName": "D:\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
       "projectName": "paczkomat",
-      "projectPath": "/home/runner/work/ViRoTePi/ViRoTePi/paczkomat/paczkomat.csproj",
-      "packagesPath": "/home/runner/.nuget/packages/",
-      "outputPath": "/home/runner/work/ViRoTePi/ViRoTePi/paczkomat/obj/",
+      "projectPath": "D:\\projekt\\ViRoTePi\\paczkomat\\paczkomat.csproj",
+      "packagesPath": "C:\\Users\\robiz\\.nuget\\packages\\",
+      "outputPath": "D:\\projekt\\ViRoTePi\\paczkomat\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/runner/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\robiz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2801,8 +2803,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "10.0.200"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -2852,7 +2853,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
