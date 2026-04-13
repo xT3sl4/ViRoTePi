@@ -36,10 +36,6 @@ namespace frontend
             UpdateVideoIndexText();
         }
 
-        /// <summary>
-        /// Szuka plików help0.mp4, help1.mp4, help2.mp4... w folderze Videos.
-        /// Jeśli nie znajdzie żadnego, szuka help.mp4 jako fallback.
-        /// </summary>
         private void DiscoverVideos()
         {
             string videosDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Videos");
@@ -47,7 +43,7 @@ namespace frontend
             if (!Directory.Exists(videosDir))
                 return;
 
-            // Szukaj help0.mp4, help1.mp4, help2.mp4 ...
+
             var numbered = new List<string>();
             for (int i = 0; i < 100; i++)
             {
@@ -55,7 +51,7 @@ namespace frontend
                 if (File.Exists(path))
                     numbered.Add(path);
                 else
-                    break; // Przerywamy jak nie ma kolejnego
+                    break; 
             }
 
             if (numbered.Count > 0)
@@ -64,7 +60,7 @@ namespace frontend
                 return;
             }
 
-            // Fallback — help.mp4
+
             string fallback = Path.Combine(videosDir, "help.mp4");
             if (File.Exists(fallback))
                 _videoPaths.Add(fallback);
@@ -147,7 +143,7 @@ namespace frontend
 
         private void HelpVideo_MediaEnded(object sender, RoutedEventArgs e)
         {
-            // Po zakonczeniu filmu automatycznie przejdz do nastepnego
+
             if (_videoPaths.Count > 1)
             {
                 _currentVideoIndex++;

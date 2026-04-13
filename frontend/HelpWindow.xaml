@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Nagłówek -->
+
         <Border Grid.Row="0" Background="#FFCD00" BorderBrush="#FF6200" BorderThickness="0,0,0,4">
             <Grid Margin="20,0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -35,11 +35,11 @@
             </Grid>
         </Border>
 
-        <!-- Zawartość -->
+
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="20">
 
-                <!-- Sekcja wideo -->
+
                 <Border Background="White" CornerRadius="8" Margin="0,0,0,20">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -52,7 +52,7 @@
                             <TextBlock Text="Film instruktażowy" FontSize="16" FontWeight="Bold" Foreground="White"/>
                         </Border>
 
-                        <!-- Odtwarzacz wideo -->
+
                         <Border Grid.Row="1" Background="Black" MinHeight="350">
                             <Grid>
                                 <MediaElement x:Name="HelpVideo"
@@ -61,7 +61,7 @@
                                               Stretch="Uniform"
                                               MediaEnded="HelpVideo_MediaEnded"/>
 
-                                <!-- Overlay gdy brak wideo -->
+
                                 <StackPanel x:Name="NoVideoOverlay"
                                             VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <TextBlock Text="🎬" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,10"/>
@@ -71,10 +71,10 @@
                             </Grid>
                         </Border>
 
-                        <!-- Kontrolki odtwarzacza -->
+
                         <Border Grid.Row="2" Background="#F5F5F5" Padding="10" CornerRadius="0,0,8,8">
                             <Grid>
-                                <!-- Nawigacja filmów -->
+
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                                     <Button Content="Poprzedni" Click="PrevVideo_Click"
                                             Background="#9E9E9E" Foreground="White" FontWeight="Bold"
@@ -89,7 +89,6 @@
                                             FontSize="12"/>
                                 </StackPanel>
 
-                                <!-- Kontrolki playback -->
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                     <Button Content="Odtworz" Click="Play_Click"
                                             Background="#FF6200" Foreground="White" FontWeight="Bold"
@@ -109,7 +108,7 @@
                     </Grid>
                 </Border>
 
-                <!-- Sekcja informacyjna -->
+
                 <Border Background="White" CornerRadius="8" Padding="20">
                     <StackPanel>
                         <TextBlock Text="Jak korzystać z aplikacji InPost?"

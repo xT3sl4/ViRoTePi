@@ -560,3 +560,4 @@ C:\Users\robiz\Desktop\projekt\ViRoTePi\frontend\obj\Debug\frontend.csproj.CoreC
 C:\Users\robiz\Desktop\projekt\ViRoTePi\frontend\obj\Debug\frontend.csproj.Up2Date
 C:\Users\robiz\Desktop\projekt\ViRoTePi\frontend\obj\Debug\frontend.exe
 C:\Users\robiz\Desktop\projekt\ViRoTePi\frontend\obj\Debug\frontend.pdb
+C:\Users\robiz\Desktop\projekt\ViRoTePi\frontend\obj\Debug\frontend.exe.config

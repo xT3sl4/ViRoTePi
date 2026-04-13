@@ -126,8 +126,7 @@ namespace frontend
                     "frontend_google_auth"
                 );
 
-                // Usuń zapisany token — dzięki temu zawsze pojawia się wybór konta.
-                // Usunięcie cache + JEDNO AuthorizeAsync = dokładnie jedno okno przeglądarki.
+
                 if (Directory.Exists(credentialPath))
                     Directory.Delete(credentialPath, recursive: true);
 
@@ -149,7 +148,7 @@ namespace frontend
                     return;
                 }
 
-                // Pobierz dane użytkownika z Google (email, imię, nazwisko)
+
                 var googleUser = await GetGoogleUserInfoAsync(credential.Token.AccessToken);
                 if (googleUser == null || string.IsNullOrEmpty(googleUser.Email))
                 {
@@ -157,17 +156,16 @@ namespace frontend
                     return;
                 }
 
-                // Sprawdź czy konto istnieje w systemie
                 var result = await LoginGoogleApiAsync(googleUser.Email);
 
                 if (result != null && result.IsAuthenticated)
                 {
-                    // Konto istnieje — zaloguj
+
                     NavigateToPanel(result);
                 }
                 else
                 {
-                    // Brak konta — otwórz rejestrację z danymi z Google już wypełnionymi
+
                     var registerWindow = new RegisterWindow(
                         email: googleUser.Email,
                         firstName: googleUser.GivenName ?? "",

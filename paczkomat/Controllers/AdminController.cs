@@ -232,13 +232,11 @@ namespace paczkomat.Controllers
             if (pack == null)
                 return NotFound(new { message = "Nie znaleziono paczki." });
 
-            // Usuń przypisanie kuriera jeśli istnieje
             var assignment = await _context.kuriers_data
                 .FirstOrDefaultAsync(kd => kd.pack_id == packId);
             if (assignment != null)
                 _context.kuriers_data.Remove(assignment);
 
-            // Usuń powiązania box → paczkomat_data (raw SQL bo paczkomat_data nie ma klucza głównego)
             var boxList = await _context.boxs
                 .Where(b => b.pack_id == packId)
                 .ToListAsync();

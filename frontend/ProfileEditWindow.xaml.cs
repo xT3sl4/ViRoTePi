@@ -12,7 +12,7 @@ namespace frontend
     {
         private readonly int _userId;
 
-        // Wywoływane po udanym zapisie — można odświeżyć dane w oknie nadrzędnym
+
         public event Action ProfileUpdated;
 
         public ProfileEditWindow(int userId, string name, string surname, string email, string phone)
@@ -47,7 +47,7 @@ namespace frontend
             string phone = PhoneBox.Text.Trim();
             string password = PasswordBox.Password;
 
-            // Walidacja
+
             if (string.IsNullOrWhiteSpace(name))
             {
                 ErrorText.Text = "Imię nie może być puste.";
@@ -87,9 +87,9 @@ namespace frontend
                     Name = name,
                     Surname = surname,
                     Email = email,
-                    Password = password,   // puste = bez zmiany (obsługa w backendzie)
+                    Password = password,   
                     PhoneNumber = phone
-                    // Role nie wysyłamy — klient nie może zmieniać własnej roli
+
                 };
 
                 string json = JsonSerializer.Serialize(requestBody);

@@ -30,15 +30,14 @@ namespace frontend
 
                 MapWebView.CoreWebView2.WebMessageReceived += OnMapMessageReceived;
 
-                // Szukaj map.html względem katalogu exe
+
                 string appDir = AppDomain.CurrentDomain.BaseDirectory;
                 string htmlPath = Path.Combine(appDir, "Assets", "map.html");
 
-                // Fallback — szukaj w katalogu głównym
                 if (!File.Exists(htmlPath))
                     htmlPath = Path.Combine(appDir, "map.html");
 
-                // Fallback dla trybu debug (bin\Debug -> projekt główny)
+
                 if (!File.Exists(htmlPath))
                     htmlPath = Path.GetFullPath(Path.Combine(appDir, "..", "..", "Assets", "map.html"));
 

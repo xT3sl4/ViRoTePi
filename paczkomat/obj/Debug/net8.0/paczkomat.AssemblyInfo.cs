@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("paczkomat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2da54bb258695e88feaac8d61bf0c09cd0a5631")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd25edac13e72700f3f752e72cb3f874fe0702f1")]
 [assembly: System.Reflection.AssemblyProductAttribute("paczkomat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("paczkomat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

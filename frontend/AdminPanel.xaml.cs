@@ -210,7 +210,7 @@ namespace frontend
             return client;
         }
 
-        // ── Ładowanie danych ──────────────────────────────────────────────────
+
 
         private async Task LoadData()
         {
@@ -251,16 +251,14 @@ namespace frontend
             }
         }
 
-        /// <summary>
-        /// Ładuje oczekujące (pending) i aktywne paczki do jednej listy.
-        /// </summary>
+
         private async Task LoadAllPacks()
         {
             _allPacks.Clear();
 
             using (var client = CreateHttpClient())
             {
-                // 1. Pobierz oczekujące (pending_packs)
+  
                 try
                 {
                     var pendingResp = await client.GetAsync("api/admin/pending-packs");
@@ -292,7 +290,6 @@ namespace frontend
                 }
                 catch { }
 
-                // 2. Pobierz aktywne paczki (niedostarczone)
                 try
                 {
                     var packsResp = await client.GetAsync("api/admin/packs");
@@ -443,7 +440,6 @@ namespace frontend
             }
         }
 
-        // ── Obsługa zaznaczenia w ujednoliconej liście ───────────────────────
 
         private void PacksDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -466,7 +462,7 @@ namespace frontend
             }
         }
 
-        // ── Przypisz kuriera ─────────────────────────────────────────────────
+
 
         private async void AssignBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -491,7 +487,7 @@ namespace frontend
 
                     if (_selectedPack.IsPending)
                     {
-                        // Najpierw wydaj oczekującą → staje się paczką
+
                         var releaseResponse = await client.PostAsync(
                             $"api/admin/release-pack/{_selectedPack.PendingId}", null);
 
@@ -518,7 +514,7 @@ namespace frontend
                         packIdToAssign = _selectedPack.PackId.Value;
                     }
 
-                    // Przypisz kuriera
+
                     var assignRequest = new { PackId = packIdToAssign, KurierId = selectedKurier.KurierId };
                     string assignJson = JsonSerializer.Serialize(assignRequest);
                     var assignContent = new StringContent(assignJson, Encoding.UTF8, "application/json");
@@ -550,7 +546,7 @@ namespace frontend
             }
         }
 
-        // ── Wydaj oczekującą paczkę (bez przypisywania kuriera) ──────────────
+
 
         private async void ReleasePackBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -598,7 +594,6 @@ namespace frontend
             }
         }
 
-        // ── Odrzuć dowolną paczkę (przycisk w wierszu DataGrid) ──────────────
 
         private async void RejectAnyPackBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -628,12 +623,10 @@ namespace frontend
 
                     if (pack.IsPending)
                     {
-                        // Odrzuć pending_pack
                         response = await client.DeleteAsync($"api/admin/reject-pack/{pack.PendingId}");
                     }
                     else
                     {
-                        // Usuń aktywną paczkę
                         response = await client.DeleteAsync($"api/admin/delete-pack/{pack.PackId}");
                     }
 
@@ -656,7 +649,6 @@ namespace frontend
             }
         }
 
-        // ── Odśwież / Użytkownicy / Dostarczone ─────────────────────────────
 
         private async void RefreshBtn_Click(object sender, RoutedEventArgs e)
         {

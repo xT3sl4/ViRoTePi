@@ -14,7 +14,7 @@ using frontend;
 
 namespace frontend
 {
-    // Converter: przycisk "Odbierz" widoczny tylko gdy status = "Doręczona"
+
     public class DeliveredToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -48,7 +48,7 @@ namespace frontend
 
             if (klientId.HasValue)
             {
-                // Zalogowany — pokaż selfie i przycisk wyloguj
+
                 ConfigureUIForLoggedIn(selfie, userId);
 
                 Loaded += async (s, e) =>
@@ -63,32 +63,32 @@ namespace frontend
             }
         }
 
-        // ── UI helpers ────────────────────────────────────────────────────────
+
 
         private void ConfigureUIForLoggedIn(string selfieFileName, int? userId)
         {
-            // Pokaż panel zalogowanego, ukryj przycisk "Zaloguj się"
+
             LoggedInPanel.Visibility = Visibility.Visible;
             LoginBtn.Visibility = Visibility.Collapsed;
 
-            // Pobierz i ustaw selfie
+
             LoadSelfie(selfieFileName);
 
-            // Pokaż imię jeśli uda się pobrać (async — nie blokujemy UI)
+
             if (userId.HasValue)
                 _ = LoadUserNameAsync(userId.Value);
 
-            // Pokaż listę paczek jako domyślny widok
+
             HideAllPanels();
             PackagesPanel.Visibility = Visibility.Visible;
         }
 
         private void ConfigureUIForGuest()
         {
-            // Gość — ukryj wyloguj, pokaż "Zaloguj się", domyślna ikona w Ellipse
+
             LoggedInPanel.Visibility = Visibility.Collapsed;
             LoginBtn.Visibility = Visibility.Visible;
-            LoadSelfie(null); // załaduje domyślną ikonę user.png
+            LoadSelfie(null); 
 
             HideAllPanels();
             SendPackagePanel.Visibility = Visibility.Visible;
@@ -100,11 +100,10 @@ namespace frontend
             {
                 string imageFile = selfieFileName;
 
-                // Jeśli brak selfie — użyj domyślnej ikony
+
                 if (string.IsNullOrWhiteSpace(imageFile))
                     imageFile = "user.png";
 
-                // Obrazki są osadzone jako Resource — używamy pack URI
                 var bitmap = new System.Windows.Media.Imaging.BitmapImage(
                     new Uri($"pack://application:,,,/Images/{imageFile}", UriKind.Absolute));
 
@@ -112,7 +111,7 @@ namespace frontend
             }
             catch
             {
-                // Fallback — domyślna ikona user.png
+
                 try
                 {
                     var bmp = new System.Windows.Media.Imaging.BitmapImage(
@@ -143,7 +142,6 @@ namespace frontend
             catch { }
         }
 
-        // ── Modele ────────────────────────────────────────────────────────────
 
         public class Pack
         {
@@ -200,7 +198,6 @@ namespace frontend
             public string Role { get; set; }
         }
 
-        // ── HttpClient ────────────────────────────────────────────────────────
 
         private static HttpClient CreateHttpClient()
         {
@@ -281,7 +278,6 @@ namespace frontend
             }
         }
 
-        // ── Nawigacja ─────────────────────────────────────────────────────────
 
         private void HideAllPanels()
         {
@@ -347,7 +343,7 @@ namespace frontend
         private void MapButton_Click(object sender, RoutedEventArgs e) => OtworzMape();
         private void LockerButton_Click(object sender, RoutedEventArgs e) => OtworzMape();
 
-        // Otwórz okno pomocy
+
         public void Help_Click(object sender, RoutedEventArgs e)
         {
             var helpWindow = new HelpWindow();
@@ -355,7 +351,7 @@ namespace frontend
             helpWindow.ShowDialog();
         }
 
-        // Odbiór paczki przez klienta
+
         private async void PickupPack_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as System.Windows.Controls.Button;
@@ -386,7 +382,6 @@ namespace frontend
                             $"Paczka nr {pack.PackId} została odebrana!",
                             "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        // Odśwież listę paczek — odebrana zniknie
                         List<Pack> packs = await GetPacksAsync(klientId);
                         PacksDataGrid.ItemsSource = packs;
                     }
@@ -412,7 +407,7 @@ namespace frontend
             }
         }
 
-        // Kliknięcie na zdjęcie/ikonę — edycja profilu (tylko gdy zalogowany)
+
         public void User_Click(object sender, RoutedEventArgs e)
         {
             if (_userId.HasValue)
@@ -421,14 +416,13 @@ namespace frontend
             }
             else
             {
-                // Gość — wróć do logowania
+
                 LoginPage loginWindow = new LoginPage();
                 loginWindow.Show();
                 this.Close();
             }
         }
 
-        // Wylogowanie
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)
         {
             var confirm = MessageBox.Show(
@@ -475,7 +469,7 @@ namespace frontend
                     editWindow.Owner = this;
                     editWindow.ProfileUpdated += () =>
                     {
-                        // Odśwież imię w nagłówku po zapisie
+
                         _ = LoadUserNameAsync(_userId.Value);
                     };
                     editWindow.ShowDialog();
@@ -487,7 +481,7 @@ namespace frontend
             }
         }
 
-        // ── Historia paczek ───────────────────────────────────────────────────
+
 
         private async Task<List<Pack>> GetPackHistoryAsync()
         {
@@ -512,7 +506,7 @@ namespace frontend
             }
         }
 
-        // ── Wyślij do klienta ─────────────────────────────────────────────────
+
 
         private List<ClientInfo> _clientsList = new List<ClientInfo>();
         private ClientInfo _selectedClient = null;
@@ -534,7 +528,6 @@ namespace frontend
 
                     string json = await response.Content.ReadAsStringAsync();
 
-                    // Spróbuj deserializować jako $values wrapper lub jako zwykłą listę
                     try
                     {
                         var wrapper = JsonSerializer.Deserialize<ClientsResponse>(json,
@@ -547,7 +540,7 @@ namespace frontend
                             new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<ClientInfo>();
                     }
 
-                    // Filtruj siebie z listy
+
                     if (klientId.HasValue)
                         _clientsList.RemoveAll(c => c.KlientId == klientId.Value);
 
@@ -559,7 +552,6 @@ namespace frontend
                             Orientation = System.Windows.Controls.Orientation.Horizontal
                         };
 
-                        // Selfie
                         var ellipse = new System.Windows.Shapes.Ellipse
                         {
                             Width = 48,
@@ -694,7 +686,7 @@ namespace frontend
                 return;
             }
 
-            // Pobierz email zalogowanego nadawcy
+
             string senderEmail = "";
             if (_userId.HasValue)
             {
@@ -731,7 +723,7 @@ namespace frontend
                     MessageBox.Show($"Paczka do {_selectedClient.Name} {_selectedClient.Surname} została wysłana!",
                         "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Reset formularza
+ 
                     _selectedClient = null;
                     _clientSelectedPaczkomatName = null;
                     _clientSelectedSize = null;
@@ -761,7 +753,7 @@ namespace frontend
             }
         }
 
-        // ── Slider i rozmiary paczki ──────────────────────────────────────────
+
 
         private void small_parcel_Selected(object sender, RoutedEventArgs e) => price_to_pay.Text = "Do zapłaty: 14.99 zł";
         private void medium_parcel_Selected(object sender, RoutedEventArgs e) => price_to_pay.Text = "Do zapłaty: 16.99 zł";
@@ -779,7 +771,7 @@ namespace frontend
                 PhoneValueText.Text = ((long)e.NewValue).ToString("000 000 000");
         }
 
-        // ── Wysyłanie paczki ──────────────────────────────────────────────────
+
 
         public class SendPackRequest
         {

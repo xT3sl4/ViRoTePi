@@ -16,7 +16,6 @@ namespace paczkomat.Controllers
             _context = context;
         }
 
-        // DTO - zwracane do frontendu
         public class UserDto
         {
             public int Id { get; set; }
@@ -27,7 +26,6 @@ namespace paczkomat.Controllers
             public int? PhoneNumber { get; set; }
         }
 
-        // DTO do tworzenia użytkownika (przez admina — rola wymagana)
         public class UserCreateRequest
         {
             public string Name { get; set; }
@@ -39,19 +37,17 @@ namespace paczkomat.Controllers
             public string PhoneNumber { get; set; }
         }
 
-        // DTO do edycji użytkownika — rola jest opcjonalna
-        // (klient edytuje swój profil bez podawania roli)
         public class UserUpdateRequest
         {
             public string Name { get; set; }
             public string Surname { get; set; }
             public string Email { get; set; }
             public string Password { get; set; }
-            public string? Role { get; set; }   // nullable — nie wymagana
+            public string? Role { get; set; }   
             public string PhoneNumber { get; set; }
         }
 
-        // GET api/users - lista wszystkich użytkowników
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
@@ -70,7 +66,6 @@ namespace paczkomat.Controllers
             return Ok(result);
         }
 
-        // GET api/users/{id} - pojedynczy użytkownik
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUser(int id)
         {
@@ -89,7 +84,6 @@ namespace paczkomat.Controllers
             });
         }
 
-        // POST api/users - dodaj nowego użytkownika (przez admina)
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] UserCreateRequest request)
         {
@@ -153,8 +147,6 @@ namespace paczkomat.Controllers
             return Ok(new { message = "Użytkownik został utworzony.", userId = newUser.id });
         }
 
-        // PUT api/users/{id} - edytuj użytkownika
-        // Rola jest opcjonalna — jeśli nie podana, pozostaje bez zmian
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserUpdateRequest request)
         {
@@ -162,15 +154,14 @@ namespace paczkomat.Controllers
             if (user == null)
                 return NotFound(new { message = "Użytkownik nie istnieje." });
 
-            // Imię
+            
             if (!string.IsNullOrWhiteSpace(request.Name))
                 user.name = request.Name.Trim();
 
-            // Nazwisko
+            
             if (!string.IsNullOrWhiteSpace(request.Surname))
                 user.surname = request.Surname.Trim();
 
-            // Email — sprawdź unikalność (pomijając siebie)
             if (!string.IsNullOrWhiteSpace(request.Email) && request.Email != user.email)
             {
                 var emailExists = await _context.users.AnyAsync(u => u.email == request.Email && u.id != id);
@@ -179,11 +170,9 @@ namespace paczkomat.Controllers
                 user.email = request.Email.Trim();
             }
 
-            // Hasło — tylko jeśli podane
             if (!string.IsNullOrWhiteSpace(request.Password))
                 user.password = request.Password;
 
-            // Telefon — sprawdź unikalność (pomijając siebie)
             if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
             {
                 string cleanPhone = request.PhoneNumber.Replace(" ", "").Replace("-", "");
@@ -197,10 +186,8 @@ namespace paczkomat.Controllers
                 user.phone_number = parsedPhone;
             }
 
-            // Rola — tylko jeśli podana i różna od obecnej (admin zmienia rolę)
             if (!string.IsNullOrWhiteSpace(request.Role) && request.Role != user.role)
             {
-                // Usuń stary rekord roli
                 if (user.role == "klient")
                 {
                     var klient = await _context.klients.FirstOrDefaultAsync(k => k.user_id == id);
@@ -220,7 +207,6 @@ namespace paczkomat.Controllers
                 user.role = request.Role;
                 await _context.SaveChangesAsync();
 
-                // Dodaj nowy rekord roli
                 if (request.Role == "klient")
                 {
                     _context.klients.Add(new klient { user_id = id, pack_id = 0 });
@@ -240,7 +226,6 @@ namespace paczkomat.Controllers
             return Ok(new { message = "Użytkownik został zaktualizowany." });
         }
 
-        // DELETE api/users/{id} - usuń użytkownika
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

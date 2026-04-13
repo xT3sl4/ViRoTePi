@@ -8,7 +8,7 @@
         Background="#F5F5F5">
 
     <Grid>
-        <!-- Nagłówek -->
+
         <Border VerticalAlignment="Top" Height="80" Background="#FFCD00">
             <StackPanel VerticalAlignment="Center" Margin="30,0">
                 <TextBlock Text="Edytuj profil" FontSize="22" FontWeight="Bold" Foreground="#333333"/>
@@ -16,11 +16,10 @@
             </StackPanel>
         </Border>
 
-        <!-- Formularz -->
+
         <ScrollViewer Margin="0,80,0,0" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="30,20,30,30">
 
-                <!-- Imię -->
                 <TextBlock Text="Imię" FontSize="12" Foreground="#666666" FontWeight="SemiBold" Margin="0,0,0,4"/>
                 <TextBox x:Name="NameBox"
                          FontSize="14"
@@ -30,7 +29,7 @@
                          Background="White"
                          Margin="0,0,0,14"/>
 
-                <!-- Nazwisko -->
+
                 <TextBlock Text="Nazwisko" FontSize="12" Foreground="#666666" FontWeight="SemiBold" Margin="0,0,0,4"/>
                 <TextBox x:Name="SurnameBox"
                          FontSize="14"
@@ -40,7 +39,7 @@
                          Background="White"
                          Margin="0,0,0,14"/>
 
-                <!-- Email -->
+
                 <TextBlock Text="Adres e-mail" FontSize="12" Foreground="#666666" FontWeight="SemiBold" Margin="0,0,0,4"/>
                 <TextBox x:Name="EmailBox"
                          FontSize="14"
@@ -50,7 +49,7 @@
                          Background="White"
                          Margin="0,0,0,14"/>
 
-                <!-- Telefon -->
+
                 <TextBlock Text="Numer telefonu" FontSize="12" Foreground="#666666" FontWeight="SemiBold" Margin="0,0,0,4"/>
                 <TextBox x:Name="PhoneBox"
                          FontSize="14"
@@ -60,7 +59,7 @@
                          Background="White"
                          Margin="0,0,0,14"/>
 
-                <!-- Hasło -->
+
                 <TextBlock Text="Nowe hasło" FontSize="12" Foreground="#666666" FontWeight="SemiBold" Margin="0,0,0,4"/>
                 <PasswordBox x:Name="PasswordBox"
                              FontSize="14"
@@ -72,7 +71,7 @@
                 <TextBlock Text="Zostaw puste, jeśli nie chcesz zmieniać hasła"
                            FontSize="11" Foreground="#999999" Margin="0,0,0,14"/>
 
-                <!-- Błąd -->
+
                 <TextBlock x:Name="ErrorText"
                            Text=""
                            Foreground="#D32F2F"
@@ -80,7 +79,7 @@
                            TextWrapping="Wrap"
                            Margin="0,0,0,10"/>
 
-                <!-- Sukces -->
+ 
                 <TextBlock x:Name="SuccessText"
                            Text=""
                            Foreground="#2E7D32"
@@ -88,7 +87,6 @@
                            TextWrapping="Wrap"
                            Margin="0,0,0,10"/>
 
-                <!-- Przyciski -->
                 <Grid Margin="0,10,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

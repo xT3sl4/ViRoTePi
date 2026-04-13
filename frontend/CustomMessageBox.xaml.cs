@@ -30,11 +30,9 @@ namespace frontend
 
                 MapWebView.CoreWebView2.WebMessageReceived += OnMapMessageReceived;
 
-                // Szukaj map.html względem katalogu exe
                 string appDir = AppDomain.CurrentDomain.BaseDirectory;
                 string htmlPath = Path.Combine(appDir, "map.html");
 
-                // Fallback dla trybu debug (bin\Debug\net... -> projekt główny)
                 if (!File.Exists(htmlPath))
                 {
                     htmlPath = Path.GetFullPath(Path.Combine(appDir, "..", "..", "map.html"));
@@ -68,11 +66,10 @@ namespace frontend
         {
             try
             {
-                // map.html wysyła JSON.stringify(p) — odczytaj jako string
                 string json = e.TryGetWebMessageAsString();
 
                 if (string.IsNullOrEmpty(json))
-                    json = e.WebMessageAsJson; // fallback: już zdekodowany JSON
+                    json = e.WebMessageAsJson; 
 
                 var p = JsonConvert.DeserializeObject<MainWindow.PaczkomatMapaData>(json);
 

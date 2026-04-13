@@ -14,7 +14,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Nagłówek -->
         <Border Grid.Row="0" Background="#FFCD00" BorderBrush="#FF6200" BorderThickness="0,0,0,4">
             <Grid Margin="20,0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -49,7 +48,6 @@
             </Grid>
         </Border>
 
-        <!-- Statystyki -->
         <Border Grid.Row="1" Background="White" Padding="20" Margin="20,20,20,10">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -97,10 +95,8 @@
             </Grid>
         </Border>
 
-        <!-- Zakładki -->
         <TabControl Grid.Row="2" Margin="20,0,20,20" BorderThickness="0" Background="Transparent">
 
-            <!-- ===================== ZAKŁADKA: PACZKI ===================== -->
             <TabItem Header="Paczki i kurierzy" FontSize="14" FontWeight="SemiBold" Padding="16,8">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -109,7 +105,6 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Jedna lista wszystkich paczek -->
                     <Border Grid.Column="0" Background="White" CornerRadius="8">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -215,7 +210,6 @@
                         </Grid>
                     </Border>
 
-                    <!-- Panel kurierów -->
                     <Border Grid.Column="2" Background="White" CornerRadius="8">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -271,7 +265,6 @@
                 </Grid>
             </TabItem>
 
-            <!-- ===================== ZAKŁADKA: UŻYTKOWNICY ===================== -->
             <TabItem Header="Użytkownicy" FontSize="14" FontWeight="SemiBold" Padding="16,8">
                 <Border Background="White" CornerRadius="8">
                     <Grid>
@@ -281,7 +274,6 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <!-- Nagłówek zakładki -->
                         <Border Grid.Row="0" Background="#3F51B5" Padding="15" CornerRadius="8,8,0,0">
                             <Grid>
                                 <TextBlock Text="Zarządzanie użytkownikami" FontSize="18" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
@@ -309,7 +301,6 @@
                             </Grid>
                         </Border>
 
-                        <!-- Pasek filtrowania -->
                         <Border Grid.Row="1" Background="#F5F5F5" Padding="15,10" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Filtruj rolę:" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="SemiBold" Foreground="#555555"/>
@@ -327,7 +318,6 @@
                             </StackPanel>
                         </Border>
 
-                        <!-- Lista użytkowników -->
                         <DataGrid x:Name="UsersDataGrid"
                                   Grid.Row="2"
                                   AutoGenerateColumns="False"
@@ -431,7 +421,7 @@
                 </Border>
             </TabItem>
 
-            <!-- ===================== ZAKŁADKA: DOSTARCZONE ===================== -->
+
             <TabItem Header="Dostarczone paczki" FontSize="14" FontWeight="SemiBold" Padding="16,8">
                 <Border Background="White" CornerRadius="8">
                     <Grid>

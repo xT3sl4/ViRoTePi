@@ -16,13 +16,13 @@ namespace frontend
     {
         private string _prefilledEmail;
 
-        // Konstruktor domyślny — puste pola
+
         public RegisterWindow()
         {
             InitializeComponent();
         }
 
-        // Konstruktor z samym emailem (zachowany dla kompatybilności z MainWindow)
+
         public RegisterWindow(string email)
         {
             InitializeComponent();
@@ -35,8 +35,6 @@ namespace frontend
             }
         }
 
-        // Konstruktor wywoływany gdy login Google nie znajdzie konta —
-        // wypełnia email, imię i nazwisko pobrane z Google
         public RegisterWindow(string email, string firstName, string lastName)
         {
             InitializeComponent();
@@ -51,14 +49,13 @@ namespace frontend
             if (!string.IsNullOrWhiteSpace(lastName))
                 SurnameBox.Text = lastName;
 
-            // Pokaż baner informacyjny że dane przyszły z Google
+
             if (!string.IsNullOrWhiteSpace(email) || !string.IsNullOrWhiteSpace(firstName))
             {
                 GoogleInfoBanner.Visibility = Visibility.Visible;
                 GoogleInfoText.Text = $"Dane pobrane z Google ({email})";
             }
 
-            // Ustaw focus na haśle bo reszta jest już wypełniona
             PasswordBox.Focus();
         }
 
@@ -180,7 +177,7 @@ namespace frontend
             }
         }
 
-        // Przycisk "Uzupełnij z Google" — JEDNO AuthorizeAsync = jedno okno przeglądarki
+
         private async void RegisterGoogle_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -190,7 +187,7 @@ namespace frontend
                     "frontend_google_auth"
                 );
 
-                // Usuń cache — wymusza wybór konta, ale tylko JEDNO okno
+
                 if (Directory.Exists(credentialPath))
                     Directory.Delete(credentialPath, recursive: true);
 
@@ -222,7 +219,7 @@ namespace frontend
                 var googleUser = JsonSerializer.Deserialize<GoogleUserInfo>(googleJson,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                // Wypełnij formularz danymi z Google
+
                 if (!string.IsNullOrWhiteSpace(googleUser?.Email))
                     EmailBox.Text = googleUser.Email;
 
@@ -234,7 +231,6 @@ namespace frontend
                 if (!string.IsNullOrWhiteSpace(googleUser?.FamilyName))
                     SurnameBox.Text = googleUser.FamilyName;
 
-                // Pokaż baner potwierdzający
                 GoogleInfoBanner.Visibility = Visibility.Visible;
                 GoogleInfoText.Text = $"Dane pobrane z Google ({googleUser?.Email})";
 

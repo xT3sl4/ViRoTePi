@@ -10,7 +10,7 @@ namespace frontend
 {
     public partial class UserEditDialog : Window
     {
-        // Jeśli EditUserId > 0 to tryb edycji, inaczej dodawanie
+
         public int EditUserId { get; private set; } = 0;
 
         public UserEditDialog()
@@ -18,7 +18,7 @@ namespace frontend
             InitializeComponent();
             DialogTitle.Text = "Nowy użytkownik";
             SaveBtn.Content = "Dodaj";
-            // W trybie dodawania hasło jest wymagane
+
         }
 
         public UserEditDialog(AdminUserDto user)
@@ -28,13 +28,12 @@ namespace frontend
             DialogTitle.Text = "Edytuj użytkownika";
             SaveBtn.Content = "Zapisz zmiany";
 
-            // Wypełnij formularz danymi użytkownika
+
             NameBox.Text = user.Name;
             SurnameBox.Text = user.Surname;
             EmailBox.Text = user.Email;
             PhoneBox.Text = user.PhoneNumber?.ToString() ?? "";
 
-            // Ustaw odpowiedni element ComboBox
             foreach (ComboBoxItem item in RoleComboBox.Items)
             {
                 if (item.Tag?.ToString() == user.Role)
@@ -66,7 +65,6 @@ namespace frontend
             string phone = PhoneBox.Text.Trim();
             string role = (RoleComboBox.SelectedItem as ComboBoxItem)?.Tag?.ToString();
 
-            // Walidacja
             if (string.IsNullOrWhiteSpace(name)) { ErrorText.Text = "Podaj imię."; NameBox.Focus(); return; }
             if (string.IsNullOrWhiteSpace(surname)) { ErrorText.Text = "Podaj nazwisko."; SurnameBox.Focus(); return; }
             if (string.IsNullOrWhiteSpace(email)) { ErrorText.Text = "Podaj email."; EmailBox.Focus(); return; }
@@ -86,7 +84,7 @@ namespace frontend
 
                     if (EditUserId == 0)
                     {
-                        // Tryb dodawania
+
                         var request = new
                         {
                             Name = name,
@@ -102,13 +100,13 @@ namespace frontend
                     }
                     else
                     {
-                        // Tryb edycji
+
                         var request = new
                         {
                             Name = name,
                             Surname = surname,
                             Email = email,
-                            Password = password, // Puste hasło = brak zmiany (obsłużone w backendzie)
+                            Password = password,
                             Role = role,
                             PhoneNumber = phone
                         };

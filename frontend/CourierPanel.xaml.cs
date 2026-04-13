@@ -180,7 +180,6 @@ namespace frontend
                 var env = await CoreWebView2Environment.CreateAsync(null, tempPath);
                 await _courierMapWebView.EnsureCoreWebView2Async(env);
 
-                // Załaduj map.html z dysku (te same paczkomaty co w MapPickerWindow)
                 string appDir = AppDomain.CurrentDomain.BaseDirectory;
                 string htmlPath = Path.Combine(appDir, "Assets", "map.html");
                 if (!File.Exists(htmlPath))
@@ -211,20 +210,14 @@ namespace frontend
             }
         }
 
-        /// <summary>
-        /// Wstrzykuje JS do mapy: grupuje paczki po paczkomacie, podmienia
-        /// popup na każdym markerze żeby pokazywał liczbę i listę paczek.
-        /// </summary>
+
         private async Task InjectParcelMarkers()
         {
-            // Grupuj paczki po nazwie paczkomatu (PaczkomatName — np. GDA001)
+
             var grouped = ActiveParcels
                 .GroupBy(p => p.PaczkomatName ?? "")
                 .ToDictionary(g => g.Key, g => g.ToList());
 
-            // Buduj JS który:
-            // 1. Czyści stare popupy (re-binduje)
-            // 2. Dla każdego paczkomatu z map.html podmienia popup
             string js = @"
                 // Usuń oryginalne markery z map.html (przy pierwszym załadowaniu)
                 if (!window._originalMarkersRemoved) {

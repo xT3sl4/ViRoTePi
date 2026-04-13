@@ -53,7 +53,6 @@ namespace paczkomat.Controllers
             if (klientId.HasValue)
             {
                 query = query.Where(p => p.klient_id == klientId);
-                // Ukryj paczki odebrane przez klienta
                 query = query.Where(p => p.picked_up != true);
             }
 
