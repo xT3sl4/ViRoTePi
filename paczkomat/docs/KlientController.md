@@ -1,135 +1,19 @@
-﻿
----
+# KlientController (ClientsController)
 
-# 📄 Klient API
+> Uwaga: klasa kontrolera nazywa się `ClientsController`, dlatego bazowa ścieżka to `api/clients`.
 
-## **GET /api/klients**
+**Bazowa ścieżka:** `api/clients`
 
-Pobierz wszystkich klientów.
+## Endpointy
 
-**Request:** brak body
+- `GET /api/clients` — lista klientów (z relacjami: paczki, użytkownik).
+- `GET /api/clients/{id}` — pojedynczy klient.
+- `POST /api/clients` — utworzenie klienta.
+- `PUT /api/clients/{id}` — aktualizacja klienta.
+- `DELETE /api/clients/{id}` — usunięcie klienta.
 
-**Response 200 OK:**
+## Typowe odpowiedzi
 
-```json
-[
-  {
-    "klient_id": 1,
-    "user_id": 5,
-    "pack_id": null,
-    "packs": [
-      {
-        "pack_id": 12,
-        "size": "M",
-        "delivered": false,
-        "date": "2026-02-23",
-        "to_when": "2026-02-25"
-      }
-    ],
-    "user": {
-      "user_id": 5,
-      "name": "Jan Kowalski",
-      "email": "jan@example.com"
-    }
-  }
-]
-```
-
----
-
-## **GET /api/klients/{id}**
-
-Pobierz jednego klienta po ID.
-
-**Request:** brak body
-
-**Response 200 OK:**
-
-```json
-{
-  "klient_id": 1,
-  "user_id": 5,
-  "pack_id": null,
-  "packs": [],
-  "user": {
-    "user_id": 5,
-    "name": "Jan Kowalski",
-    "email": "jan@example.com"
-  }
-}
-```
-
----
-
-## **POST /api/klients**
-
-Dodaj nowego klienta.
-
-**Request Body:**
-
-```json
-{
-  "user_id": 5
-}
-```
-
-* `user_id` – wymagane, ID istniejącego użytkownika do powiązania z klientem.
-
-**Response 201 Created:**
-
-```json
-{
-  "klient_id": 10,
-  "user_id": 5,
-  "pack_id": null,
-  "packs": [],
-  "user": {
-    "user_id": 5,
-    "name": "Jan Kowalski",
-    "email": "jan@example.com"
-  }
-}
-```
-
----
-
-## **PUT /api/klients/{id}**
-
-Aktualizuj klienta.
-
-**Request Body:**
-
-```json
-{
-  "user_id": 7
-}
-```
-
-**Response 200 OK:**
-
-```json
-{
-  "klient_id": 10,
-  "user_id": 7,
-  "pack_id": null,
-  "packs": [],
-  "user": {
-    "user_id": 7,
-    "name": "Anna Nowak",
-    "email": "anna@example.com"
-  }
-}
-```
-
----
-
-## **DELETE /api/klients/{id}**
-
-Usuń klienta po ID.
-
-**Request:** brak body
-
-**Response 204 No Content:** brak body
-
----
-
+- `200 OK` / `201 Created` / `204 No Content` — sukces.
+- `400 Bad Request` — niezgodność danych wejściowych (np. ID).
+- `404 Not Found` — klient nie istnieje.

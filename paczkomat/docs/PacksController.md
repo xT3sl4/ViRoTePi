@@ -1,198 +1,39 @@
-﻿---
+# PacksController
 
-# 📦 API: Packs
+**Bazowa ścieżka:** `api/packs`
 
-### Base URL
+## Endpointy odczytu
 
-```
-/api/packs
-```
+- `GET /api/packs` — lista paczek z filtrowaniem:
+  - `size`
+  - `delivered`
+  - `klientId`
+  - `userId`
+  - `sort` (`date_asc`, `date_desc`, `size_asc`, `size_desc`)
+- `GET /api/packs/{id}` — szczegóły paczki.
+- `GET /api/packs/kurier/{kurierId}` — paczki przypisane do kuriera (`delivered` opcjonalnie).
+- `GET /api/packs/history` — historia odebranych paczek klienta (`klientId` lub `userId`).
+- `GET /api/packs/delivered` — lista paczek doręczonych.
+- `GET /api/packs/clients-list` — lista klientów (na potrzeby nadawania paczek).
 
----
+## Endpointy operacyjne
 
-## 1️⃣ GET /api/packs
+- `PUT /api/packs/{id}/deliver` — oznaczenie paczki jako doręczonej.
+- `PUT /api/packs/{id}/pickup` — odbiór paczki przez klienta (`klientId` opcjonalnie jako walidacja właściciela).
+- `POST /api/packs` — utworzenie paczki.
+- `PUT /api/packs/{id}` — aktualizacja paczki.
+- `DELETE /api/packs/{id}` — usunięcie paczki.
+- `POST /api/packs/send` — utworzenie paczki oczekującej na akceptację administratora.
 
-Pobiera listę paczek, z filtrowaniem i sortowaniem.
+## Główne pola wejściowe dla `POST /api/packs/send`
 
-### Query parameters (opcjonalne)
+- `size` (`S`, `M`, `L`)
+- `receiverPhone`
+- `receiverEmail` *(w implementacji używany do identyfikacji nadawcy)*
+- `paczkomatName`
 
-| Parametr    | Typ    | Opis                                               |
-| ----------- | ------ | -------------------------------------------------- |
-| `delivered` | bool   | Filtruje paczki po statusie dostarczenia           |
-| `klientId`  | int    | Filtruje paczki dla konkretnego klienta            |
-| `sortBy`    | string | Pole do sortowania: `date`, `to_when`, `size`      |
-| `sortDesc`  | bool   | Sortowanie malejące (`true`) lub rosnące (`false`) |
+## Typowe odpowiedzi
 
-### Request
-
-```http
-GET /api/packs?delivered=false&klientId=3&sortBy=date&sortDesc=true
-```
-
-### Response (200 OK)
-
-```json
-[
-  {
-    "pack_id": 1,
-    "size": "M",
-    "klient_id": 3,
-    "delivered": false,
-    "date": "2025-11-01",
-    "to_when": "2025-11-05",
-    "klient": {
-      "klient_id": 3,
-      "user_id": 7
-    },
-    "boxes": [
-      {
-        "box_id": 10,
-        "size": "M",
-        "pack_id": 1
-      }
-    ]
-  }
-]
-```
-
----
-
-## 2️⃣ GET /api/packs/{id}
-
-Pobiera jedną paczkę po `id`.
-
-### Request
-
-```http
-GET /api/packs/1
-```
-
-### Response (200 OK)
-
-```json
-{
-  "pack_id": 1,
-  "size": "M",
-  "klient_id": 3,
-  "delivered": false,
-  "date": "2025-11-01",
-  "to_when": "2025-11-05",
-  "klient": {
-    "klient_id": 3,
-    "user_id": 7
-  },
-  "boxes": [
-    {
-      "box_id": 10,
-      "size": "M",
-      "pack_id": 1
-    }
-  ]
-}
-```
-
-### Response (404 Not Found)
-
-```json
-{
-  "message": "Pack not found"
-}
-```
-
----
-
-## 3️⃣ POST /api/packs
-
-Tworzy nową paczkę.
-
-### Request body
-
-```json
-{
-  "size": "L",
-  "klient_id": 5,
-  "delivered": false,
-  "date": "2026-02-23",
-  "to_when": "2026-02-28"
-}
-```
-
-### Response (201 Created)
-
-```json
-{
-  "pack_id": 7,
-  "size": "L",
-  "klient_id": 5,
-  "delivered": false,
-  "date": "2026-02-23",
-  "to_when": "2026-02-28",
-  "klient": null,
-  "boxes": []
-}
-```
-
----
-
-## 4️⃣ PUT /api/packs/{id}
-
-Aktualizuje paczkę o podanym `id`.
-
-### Request body
-
-```json
-{
-  "pack_id": 7,
-  "size": "XL",
-  "klient_id": 5,
-  "delivered": true,
-  "date": "2026-02-23",
-  "to_when": "2026-03-01"
-}
-```
-
-### Response (204 No Content)
-
-* Brak treści w body, status `204` oznacza sukces.
-
-### Response (400 Bad Request)
-
-```json
-{
-  "message": "ID nie pasuje do paczki."
-}
-```
-
-### Response (404 Not Found)
-
-```json
-{
-  "message": "Pack not found"
-}
-```
-
----
-
-## 5️⃣ DELETE /api/packs/{id}
-
-Usuwa paczkę o podanym `id`.
-
-### Request
-
-```http
-DELETE /api/packs/7
-```
-
-### Response (204 No Content)
-
-* Paczka została usunięta, brak treści w body.
-
-### Response (404 Not Found)
-
-```json
-{
-  "message": "Pack not found"
-}
-```
-
----
+- `200 OK` / `201 Created` / `204 No Content` — sukces.
+- `400 Bad Request` — błąd walidacji lub nieprawidłowy stan.
+- `404 Not Found` — brak paczki lub innego zasobu.
