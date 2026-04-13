@@ -1,0 +1,199 @@
+classDiagram
+    direction TB
+
+    class user {
+        +int id  PK
+        +string name
+        +string surname
+        +string email
+        +DateOnly date_of_birth
+        +string password
+        +string role
+        +int phone_number
+        +string selfie
+        +bool sex
+    }
+
+    class admin {
+        +int admin_id  PK
+        +int user_id  FK
+    }
+
+    class klient {
+        +int klient_id  PK
+        +int user_id  FK
+        +int pack_id
+    }
+
+    class kurier {
+        +int kurier_id  PK
+        +int user_id  FK
+        +string state
+    }
+
+    class pack {
+        +int pack_id  PK
+        +string size
+        +int klient_id  FK
+        +bool delivered
+        +DateOnly date
+        +DateOnly to_when
+        +bool picked_up
+    }
+
+    class pending_pack {
+        +int pending_id  PK
+        +int sender_klient_id  FK
+        +int receiver_klient_id  FK
+        +string size
+        +int paczkomat_id  FK
+        +DateTime created_at
+        +string status
+    }
+
+    class box {
+        +int box_id  PK
+        +int pack_id  FK
+        +string size
+    }
+
+    class paczkomat {
+        +int paczkomat_id  PK
+        +string paczkomat_name
+        +string address
+    }
+
+    class kuriers_datum {
+        +int kurier_id  PK FK
+        +int pack_id  PK FK
+    }
+
+    class paczkomat_datum {
+        +int paczkomat_id  FK
+        +int box_id  FK
+    }
+
+    %% ── Relacje encji bazodanowych ──
+
+    user "1" --> "0..*" admin : ma role
+    user "1" --> "0..*" klient : ma role
+    user "1" --> "0..*" kurier : ma role
+
+    klient "1" --> "0..*" pack : posiada
+    klient "1" --> "0..*" pending_pack : nadaje (sender)
+    klient "1" --> "0..*" pending_pack : odbiera (receiver)
+
+    pack "1" --> "0..*" box : zawiera
+    box "1" --> "0..1" paczkomat_datum : umieszczony w
+    paczkomat "1" --> "0..*" paczkomat_datum : przechowuje
+
+    kurier "1" --> "0..*" kuriers_datum : przypisany
+    pack "1" --> "0..*" kuriers_datum : dostarczany przez
+
+    pending_pack "0..*" --> "1" paczkomat : docelowy
+
+    %% ── Klasy frontendowe (WPF) ──
+
+    class LoginPage {
+        -int userId
+        -int klientId
+        -int kurierId
+        +LoginBtn_Click()
+        +LoginGoogle_Click()
+        +Register_Click()
+        -LoginApiAsync()
+        -LoginGoogleApiAsync()
+    }
+
+    class MainWindow {
+        -int userId
+        -int klientId
+        -string selfie
+        +Packages_Click()
+        +SendPackage_Click()
+        +History_Click()
+        +SendToClient_Click()
+        +Help_Click()
+        +MapButton_Click()
+        +PickupPack_Click()
+        +SendButton_Click()
+        -GetPacksAsync()
+        -GetPackHistoryAsync()
+        -LoadClientsListAsync()
+    }
+
+    class AdminPanel {
+        -ObservableCollection~UnifiedPackItem~ AllPacks
+        -List~KurierInfo~ _kuriersList
+        +LoadAllPacks()
+        +LoadKuriers()
+        +LoadStats()
+        +LoadUsers()
+        +LoadDeliveredPacks()
+        +AssignBtn_Click()
+        +ReleasePackBtn_Click()
+        +RejectAnyPackBtn_Click()
+        +AddUserBtn_Click()
+        +EditUserBtn_Click()
+        +DeleteUserBtn_Click()
+    }
+
+    class CourierPanel {
+        -ObservableCollection~Parcel~ ActiveParcels
+        -int kurierId
+        -bool isAvailable
+        +LoadParcels()
+        +LoadCourierMap()
+        +InjectParcelMarkers()
+        +DeliverButton_Click()
+        +StatusToggle_Click()
+        -LoadKurierState()
+    }
+
+    class HelpWindow {
+        -List~string~ videoPaths
+        -int currentVideoIndex
+        +DiscoverVideos()
+        +LoadVideo()
+        +PrevVideo_Click()
+        +NextVideo_Click()
+        +Play_Click()
+        +Pause_Click()
+        +Stop_Click()
+    }
+
+    class RegisterWindow {
+        +RegisterBtn_Click()
+        +RegisterGoogle_Click()
+    }
+
+    class ProfileEditWindow {
+        -int userId
+        +SaveBtn_Click()
+        +CancelBtn_Click()
+    }
+
+    class MapPickerWindow {
+        +string WybranyPaczkomat
+        +InitializeMap()
+        -OnMapMessageReceived()
+        +Confirm_Click()
+    }
+
+    class UserEditDialog {
+        +int EditUserId
+        +SaveBtn_Click()
+    }
+
+    %% ── Relacje frontendowe ──
+
+    LoginPage ..> MainWindow : otwiera (klient)
+    LoginPage ..> AdminPanel : otwiera (admin)
+    LoginPage ..> CourierPanel : otwiera (kurier)
+    LoginPage ..> RegisterWindow : otwiera
+
+    MainWindow ..> HelpWindow : otwiera
+    MainWindow ..> MapPickerWindow : otwiera
+    MainWindow ..> ProfileEditWindow : otwiera
+
+    AdminPanel ..> UserEditDialog : otwiera

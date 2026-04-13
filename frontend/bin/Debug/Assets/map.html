@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Mapa Paczkomatów</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        html, body { height: 100%; margin: 0; padding: 0; }
+        #map { width: 100%; height: 100%; }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    var map = L.map('map').setView([54.40, 18.58], 13);
+    
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+    }).addTo(map);
+
+    var paczkomaty = [
+        { name: 'GDA001', lat: 54.410232, lon: 18.572983 }, 
+        { name: 'GDA002', lat: 54.411562, lon: 18.578041 }, 
+        { name: 'GDA003', lat: 54.411918, lon: 18.584829 }, 
+        { name: 'GDA004', lat: 54.408859, lon: 18.586921 }, 
+        { name: 'GDA005', lat: 54.412186, lon: 18.570029 }, 
+        { name: 'GDA006', lat: 54.409245, lon: 18.598863 }, 
+        { name: 'GDA007', lat: 54.406869, lon: 18.575030 },
+        { name: 'GDA008', lat: 54.415364, lon: 18.597077 }, 
+        { name: 'GDA009', lat: 54.418393, lon: 18.580542 }, 
+        { name: 'GDA010', lat: 54.412631, lon: 18.597639 }
+    ];
+
+    paczkomaty.forEach(p => {
+        var marker = L.marker([p.lat, p.lon]).addTo(map);
+        marker.bindPopup("<b>Paczkomat: " + p.name + "</b>");
+
+        // WYSYŁANIE DANYCH DO C#
+        marker.on('click', function() {
+            if (window.chrome && window.chrome.webview) {
+                window.chrome.webview.postMessage(JSON.stringify(p));
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -337,6 +337,46 @@
         <mxCell id="_79zXWCnHc2wtlA1qygs-32" value="wyswietl powiadomienie" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1030" y="737.5" width="120" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="Historia-odebranych-paczek" value="Historia odebranych paczek" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="360" y="780" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-Historia" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="a5dJ91-_Ea5F4a9I8LIr-4" target="Historia-odebranych-paczek" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wysylanie-do-klienta" value="Wysyłanie do klienta" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="480" y="780" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-Wysylanie-do-klienta" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="a5dJ91-_Ea5F4a9I8LIr-4" target="Wysylanie-do-klienta" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Pomoc-video" value="Pomoc (video)" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="600" y="780" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-Pomoc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="a5dJ91-_Ea5F4a9I8LIr-4" target="Pomoc-video" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Odbieranie-paczki-new" value="Odbieranie paczki" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="720" y="780" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-Odbieranie" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="a5dJ91-_Ea5F4a9I8LIr-4" target="Odbieranie-paczki-new" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Przeglad-dostarczonych" value="Przeglądanie dostarczonych paczek" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="450" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-Przeglad-admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="a5dJ91-_Ea5F4a9I8LIr-1" target="Przeglad-dostarczonych" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mapa-kurier" value="Mapa paczek do dostarczenia" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="360" y="320" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-Mapa-kurier" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="uLPrjtta-uE3l_ocZ1Le-1" target="Mapa-kurier" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="xGvn7Q2YN0yYz11WSe7q-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=block;endFill=0;" edge="1" parent="1" source="uLPrjtta-uE3l_ocZ1Le-1" target="a5dJ91-_Ea5F4a9I8LIr-1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
